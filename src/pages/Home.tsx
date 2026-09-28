@@ -21,7 +21,7 @@ const howTo = [
   {
     step: '04',
     title: 'Diccionario y textos',
-    body: 'Usá Diccionario para buscar vocabulario y Textos culturales para leer el material complementario en PDF.',
+    body: 'En Diccionario podés buscar español ↔ guaraní. En Textos están las lecturas culturales en PDF.',
   },
 ]
 

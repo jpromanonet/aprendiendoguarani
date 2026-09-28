@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { courseInfo } from '../data/classes'
-import { NivelDropdown } from './NivelDropdown'
+import { NavPills } from './NavControls'
 
 export function Layout() {
   return (
@@ -15,13 +15,7 @@ export function Layout() {
         </NavLink>
 
         <nav className="site-nav" aria-label="Principal">
-          <NivelDropdown />
-          <NavLink to="/diccionario" className="nav-link">
-            Diccionario
-          </NavLink>
-          <NavLink to="/textos" className="nav-link">
-            Textos
-          </NavLink>
+          <NavPills />
         </nav>
       </header>
 
@@ -33,7 +27,7 @@ export function Layout() {
         <div className="footer-inner">
           <strong className="guarani">{courseInfo.name}</strong>
           <p>{courseInfo.module}</p>
-          <p className="footer-note">Nivel 1 · Diccionarios · Textos culturales</p>
+          <p className="footer-note">Clases · Diccionario interactivo · Textos culturales</p>
         </div>
       </footer>
     </div>
