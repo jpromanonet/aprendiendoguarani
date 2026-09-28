@@ -1,10 +1,53 @@
+import { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { classes, getClassBySlug } from '../data/classes'
 import { SectionRenderer } from '../components/SectionRenderer'
 
+function sectionTitle(section: { type: string; title?: string }, index: number) {
+  if ('title' in section && section.title) return section.title
+  return `Sección ${index + 1}`
+}
+
 export function ClassPage() {
   const { slug } = useParams()
   const lesson = slug ? getClassBySlug(slug) : undefined
+  const [activeSection, setActiveSection] = useState(0)
+
+  const toc = useMemo(
+    () =>
+      lesson?.sections.map((section, index) => ({
+        id: `sec-${index}`,
+        title: sectionTitle(section, index),
+      })) ?? [],
+    [lesson],
+  )
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setActiveSection(0)
+  }, [slug])
+
+  useEffect(() => {
+    if (!lesson) return
+    const nodes = toc
+      .map((item) => document.getElementById(item.id))
+      .filter((node): node is HTMLElement => Boolean(node))
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (!visible) return
+        const index = toc.findIndex((item) => item.id === visible.target.id)
+        if (index >= 0) setActiveSection(index)
+      },
+      { rootMargin: '-20% 0px -55% 0px', threshold: [0.15, 0.4, 0.7] },
+    )
+
+    nodes.forEach((node) => observer.observe(node))
+    return () => observer.disconnect()
+  }, [lesson, toc])
 
   if (!lesson) {
     return <Navigate to="/" replace />
@@ -18,7 +61,17 @@ export function ClassPage() {
     <article className="class-page">
       <header className="class-hero">
         <div className="class-hero-inner">
-          <p className="eyebrow">{lesson.date}</p>
+          <div className="class-progress">
+            {classes.map((item) => (
+              <Link
+                key={item.slug}
+                to={`/clase/${item.slug}`}
+                className={`progress-dot ${item.slug === lesson.slug ? 'current' : ''} ${item.id < lesson.id ? 'done' : ''}`}
+                aria-label={item.title}
+              />
+            ))}
+          </div>
+          <p className="eyebrow light">{lesson.date}</p>
           <h1>
             <span className="class-kicker">{lesson.title}</span>
             {lesson.subtitle}
@@ -32,10 +85,32 @@ export function ClassPage() {
         </div>
       </header>
 
-      <div className="class-body">
-        {lesson.sections.map((section, i) => (
-          <SectionRenderer key={`${section.type}-${i}-${'title' in section ? section.title : i}`} section={section} />
-        ))}
+      <div className="class-layout">
+        <aside className="class-toc" aria-label="Secciones de la clase">
+          <p className="toc-label">En esta clase</p>
+          <ol>
+            {toc.map((item, i) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  className={activeSection === i ? 'active' : ''}
+                  onClick={() => setActiveSection(i)}
+                >
+                  <span>{String(i + 1).padStart(2, '0')}</span>
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </aside>
+
+        <div className="class-body">
+          {lesson.sections.map((section, i) => (
+            <div key={`${section.type}-${i}`} id={`sec-${i}`} className="section-anchor">
+              <SectionRenderer section={section} />
+            </div>
+          ))}
+        </div>
       </div>
 
       <nav className="class-pager" aria-label="Navegación entre clases">
@@ -43,6 +118,7 @@ export function ClassPage() {
           <Link to={`/clase/${prev.slug}`} className="pager-link prev">
             <span>Anterior</span>
             <strong>{prev.title}</strong>
+            <em>{prev.subtitle}</em>
           </Link>
         ) : (
           <span />
@@ -51,6 +127,7 @@ export function ClassPage() {
           <Link to={`/clase/${next.slug}`} className="pager-link next">
             <span>Siguiente</span>
             <strong>{next.title}</strong>
+            <em>{next.subtitle}</em>
           </Link>
         ) : (
           <span />

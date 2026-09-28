@@ -1,5 +1,6 @@
 import { AudioBlock } from './AudioBlock'
 import { Exercise } from './Exercise'
+import { VocabTile } from './VocabTile'
 import type { Section } from '../data/classes'
 
 export function SectionRenderer({ section }: { section: Section }) {
@@ -39,16 +40,24 @@ export function SectionRenderer({ section }: { section: Section }) {
             <h2>{section.title}</h2>
           </div>
           <div className="alphabet-grid">
-            {section.letters.map((letter) => (
-              <span key={letter} className="alpha-chip">
+            {section.letters.map((letter, index) => (
+              <span
+                key={letter}
+                className="alpha-chip"
+                style={{ animationDelay: `${index * 18}ms` }}
+              >
                 {letter}
               </span>
             ))}
           </div>
           <p className="subheading">Pu'ae — Vocales</p>
           <div className="alphabet-grid vowels">
-            {section.vowels.map((letter) => (
-              <span key={letter} className="alpha-chip vowel">
+            {section.vowels.map((letter, index) => (
+              <span
+                key={letter}
+                className="alpha-chip vowel"
+                style={{ animationDelay: `${index * 30}ms` }}
+              >
                 {letter}
               </span>
             ))}
@@ -100,11 +109,12 @@ export function SectionRenderer({ section }: { section: Section }) {
           {section.audio ? <AudioBlock src={section.audio} /> : null}
           <div className="vocab-grid">
             {section.items.map((item) => (
-              <article key={`${item.guaraní}-${item.español}`} className="vocab-item">
-                <strong className="guarani">{item.guaraní}</strong>
-                <span>{item.español}</span>
-                {item.note ? <em>{item.note}</em> : null}
-              </article>
+              <VocabTile
+                key={`${item.guaraní}-${item.español}`}
+                guaraní={item.guaraní}
+                español={item.español}
+                note={item.note}
+              />
             ))}
           </div>
         </section>
@@ -120,11 +130,7 @@ export function SectionRenderer({ section }: { section: Section }) {
           <div className="color-grid">
             {section.items.map((item) => (
               <article key={item.guaraní} className="color-item">
-                <div
-                  className="swatch"
-                  style={{ background: item.hex }}
-                  aria-hidden="true"
-                />
+                <div className="swatch" style={{ background: item.hex }} aria-hidden="true" />
                 <strong className="guarani">{item.guaraní}</strong>
                 <span>{item.español}</span>
               </article>
@@ -145,10 +151,12 @@ export function SectionRenderer({ section }: { section: Section }) {
               <p className="subheading">Papyteĩ — Singular</p>
               <div className="vocab-grid compact">
                 {section.singular.map((item) => (
-                  <article key={item.guaraní} className="vocab-item">
-                    <strong className="guarani">{item.guaraní}</strong>
-                    <span>{item.español}</span>
-                  </article>
+                  <VocabTile
+                    key={item.guaraní}
+                    guaraní={item.guaraní}
+                    español={item.español}
+                    note={item.note}
+                  />
                 ))}
               </div>
             </div>
@@ -156,11 +164,13 @@ export function SectionRenderer({ section }: { section: Section }) {
               <p className="subheading">Papyeta — Plural</p>
               <div className="vocab-grid compact">
                 {section.plural.map((item) => (
-                  <article key={item.guaraní} className="vocab-item">
-                    <strong className="guarani">{item.guaraní}</strong>
-                    <span>{item.español}</span>
-                    {item.note ? <em>{item.note}</em> : null}
-                  </article>
+                  <VocabTile
+                    key={item.guaraní}
+                    guaraní={item.guaraní}
+                    español={item.español}
+                    note={item.note}
+                    highlight
+                  />
                 ))}
               </div>
             </div>
@@ -181,10 +191,12 @@ export function SectionRenderer({ section }: { section: Section }) {
                 <p className="subheading">{group.label}</p>
                 <div className="vocab-grid compact">
                   {group.items.map((item) => (
-                    <article key={item.guaraní} className="vocab-item highlight">
-                      <strong className="guarani">{item.guaraní}</strong>
-                      <span>{item.español}</span>
-                    </article>
+                    <VocabTile
+                      key={item.guaraní}
+                      guaraní={item.guaraní}
+                      español={item.español}
+                      highlight
+                    />
                   ))}
                 </div>
               </div>
