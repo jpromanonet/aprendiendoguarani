@@ -15,9 +15,6 @@ export function Layout() {
         </NavLink>
 
         <nav className="site-nav" aria-label="Principal">
-          <NavLink to="/" end className="nav-link">
-            Inicio
-          </NavLink>
           <NivelDropdown />
           <NavLink to="/diccionario" className="nav-link">
             Diccionario
