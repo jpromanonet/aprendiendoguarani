@@ -92,38 +92,34 @@ export function ClasesDropdown() {
       </button>
       <div className="nav-menu nivel-menu" id={menuId} role="menu" hidden={!open}>
         {levels.map((nivel) => (
-          <div key={nivel.slug} className="nav-level-block">
-            <p className="nav-menu-label">{nivel.title}</p>
+          <section key={nivel.slug} className="nav-level-group">
             <Link
               to={`/${nivel.slug}`}
-              role="menuitem"
-              className="nav-menu-item nav-menu-overview"
-              style={{ '--i': 0 } as CSSProperties}
+              className="nav-level-head"
               onClick={() => setOpen(false)}
             >
-              <span className="nav-menu-num">N{nivel.id}</span>
               <span>
-                <strong>Ver {nivel.title}</strong>
+                <strong>{nivel.title}</strong>
                 <em>{nivel.subtitle}</em>
               </span>
+              <span className="nav-level-all">Ver todo</span>
             </Link>
-            {classes.map((lesson, index) => (
-              <Link
-                key={lesson.slug}
-                to={`/nivel-1/clase/${lesson.slug}`}
-                role="menuitem"
-                className="nav-menu-item"
-                style={{ '--i': index + 1 } as CSSProperties}
-                onClick={() => setOpen(false)}
-              >
-                <span className="nav-menu-num">0{lesson.id}</span>
-                <span>
-                  <strong>{lesson.title}</strong>
-                  <em>{lesson.subtitle}</em>
-                </span>
-              </Link>
-            ))}
-          </div>
+            <div className="nav-level-classes">
+              {classes.map((lesson, index) => (
+                <Link
+                  key={lesson.slug}
+                  to={`/nivel-1/clase/${lesson.slug}`}
+                  role="menuitem"
+                  className="nav-class-item"
+                  style={{ '--i': index } as CSSProperties}
+                  onClick={() => setOpen(false)}
+                >
+                  <span className="nav-class-num">{String(lesson.id).padStart(2, '0')}</span>
+                  <span className="nav-class-title">{lesson.subtitle}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </div>
