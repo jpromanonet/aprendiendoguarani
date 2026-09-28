@@ -42,6 +42,17 @@ export const courseInfo = {
     'Curso escrito y oral del idioma guaraní: alfabeto, vocabulario, pronombres, colores, números, pluralización y diminutivos.',
 }
 
+export const levels = [
+  {
+    id: 1,
+    slug: 'nivel-1',
+    title: 'Nivel 1',
+    subtitle: "Fundamentos del Avañe'ẽ",
+    description:
+      'Introducción al alfabeto, vocabulario básico, pronombres, colores, números, pluralización y diminutivos.',
+  },
+]
+
 export const classes: ClassLesson[] = [
   {
     id: 1,
@@ -546,34 +557,10 @@ export const classes: ClassLesson[] = [
   },
 ]
 
-export const resources = [
-  {
-    title: 'Diccionario Ñe\'ẽryru Guaraní–Español',
-    description: 'Diccionario bilingüe de referencia para consulta rápida.',
-    file: 'DICCIONARIO - NERYRU_GUARANI_ESPANOL_DICCIONARIO_ESP.pdf',
-  },
-  {
-    title: 'Diccionario Avañe\'ẽ',
-    description: 'Diccionario Guaraní–Español / Español–Guaraní.',
-    file: 'DICCIONARIO -Avanee-Diccionario-Guarani-Esp-Esp-Guarani.pdf',
-  },
-  {
-    title: 'Diccionario de Celso Ávalos',
-    description: 'Diccionario guaraní corregido por maurolugo.',
-    file: 'Diccionario guarani - de Celso Avalos corregido por maurolugo.pdf',
-  },
-  {
-    title: 'Ayvu Rapyta — León Cadogan (1959)',
-    description: 'Textos míticos de los Mbyá-Guaraní del Guairá.',
-    file: 'Ayvu Rapyta - Leon Cadogan 1959.pdf',
-  },
-  {
-    title: 'Guaraníes: su vida y sus mitos',
-    description: 'Material cultural complementario del módulo.',
-    file: 'Guaranies Su Vida Y Sus Mitos.pdf',
-  },
-]
-
 export function getClassBySlug(slug: string) {
   return classes.find((c) => c.slug === slug)
+}
+
+export function getLevelBySlug(slug: string) {
+  return levels.find((level) => level.slug === slug)
 }

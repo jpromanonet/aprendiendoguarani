@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { classes, getClassBySlug } from '../data/classes'
+import { classes, getClassBySlug, levels } from '../data/classes'
 import { SectionRenderer } from '../components/SectionRenderer'
 
 function sectionTitle(section: { type: string; title?: string }, index: number) {
@@ -12,6 +12,7 @@ export function ClassPage() {
   const { slug } = useParams()
   const lesson = slug ? getClassBySlug(slug) : undefined
   const [activeSection, setActiveSection] = useState(0)
+  const nivel = levels[0]
 
   const toc = useMemo(
     () =>
@@ -50,7 +51,7 @@ export function ClassPage() {
   }, [lesson, toc])
 
   if (!lesson) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/nivel-1" replace />
   }
 
   const index = classes.findIndex((c) => c.slug === lesson.slug)
@@ -61,11 +62,19 @@ export function ClassPage() {
     <article className="class-page">
       <header className="class-hero">
         <div className="class-hero-inner">
+          <nav className="breadcrumb" aria-label="Miga de pan">
+            <Link to="/">Inicio</Link>
+            <span>/</span>
+            <Link to="/nivel-1">{nivel.title}</Link>
+            <span>/</span>
+            <span>{lesson.title}</span>
+          </nav>
+
           <div className="class-progress">
             {classes.map((item) => (
               <Link
                 key={item.slug}
-                to={`/clase/${item.slug}`}
+                to={`/nivel-1/clase/${item.slug}`}
                 className={`progress-dot ${item.slug === lesson.slug ? 'current' : ''} ${item.id < lesson.id ? 'done' : ''}`}
                 aria-label={item.title}
               />
@@ -73,7 +82,9 @@ export function ClassPage() {
           </div>
           <p className="eyebrow light">{lesson.date}</p>
           <h1>
-            <span className="class-kicker">{lesson.title}</span>
+            <span className="class-kicker">
+              {nivel.title} · {lesson.title}
+            </span>
             {lesson.subtitle}
           </h1>
           <p className="lede">{lesson.summary}</p>
@@ -115,8 +126,8 @@ export function ClassPage() {
 
       <nav className="class-pager" aria-label="Navegación entre clases">
         {prev ? (
-          <Link to={`/clase/${prev.slug}`} className="pager-link prev">
-            <span>Anterior</span>
+          <Link to={`/nivel-1/clase/${prev.slug}`} className="pager-link prev">
+            <span>Anterior · {nivel.title}</span>
             <strong>{prev.title}</strong>
             <em>{prev.subtitle}</em>
           </Link>
@@ -124,8 +135,8 @@ export function ClassPage() {
           <span />
         )}
         {next ? (
-          <Link to={`/clase/${next.slug}`} className="pager-link next">
-            <span>Siguiente</span>
+          <Link to={`/nivel-1/clase/${next.slug}`} className="pager-link next">
+            <span>Siguiente · {nivel.title}</span>
             <strong>{next.title}</strong>
             <em>{next.subtitle}</em>
           </Link>

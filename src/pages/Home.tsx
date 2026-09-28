@@ -1,12 +1,12 @@
 import { type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { classes, courseInfo } from '../data/classes'
+import { classes, courseInfo, levels } from '../data/classes'
 
 const howTo = [
   {
     step: '01',
-    title: 'Elegí una clase',
-    body: 'Empezá por la 1 y seguí en orden. También podés abrirlas desde Clases en el menú.',
+    title: 'Entrá a Nivel 1',
+    body: 'Las clases del curso están dentro de Nivel 1. Empezá por la Clase 1 y seguí en orden.',
   },
   {
     step: '02',
@@ -20,12 +20,14 @@ const howTo = [
   },
   {
     step: '04',
-    title: 'Consultá el diccionario',
-    body: 'El botón Diccionario abre diccionarios y textos del módulo cuando necesites buscar algo.',
+    title: 'Diccionario y textos',
+    body: 'Usá Diccionario para buscar vocabulario y Textos culturales para leer el material complementario en PDF.',
   },
 ]
 
 export function Home() {
+  const nivel = levels[0]
+
   return (
     <div className="home home-direct">
       <section className="home-top">
@@ -33,11 +35,15 @@ export function Home() {
           <p className="home-kicker">{courseInfo.module}</p>
           <h1>
             <span className="home-brand">{courseInfo.name}</span>
-            <span className="home-title">Tus clases, acá mismo</span>
+            <span className="home-title">{nivel.title}: tus clases están acá</span>
           </h1>
           <p className="home-lead">
-            Elegí una clase para estudiar. Todo el material está escrito, con audio y ejercicios.
+            Este curso arranca por el Nivel 1. Elegí una clase, estudiá el contenido escrito y
+            escuchá los audios.
           </p>
+          <Link className="start-link on-dark" to="/nivel-1">
+            Ir a Nivel 1 →
+          </Link>
         </div>
 
         <aside className="how-panel" aria-labelledby="how-title">
@@ -61,11 +67,11 @@ export function Home() {
       <section className="home-classes" aria-labelledby="classes-title">
         <div className="home-classes-head">
           <div>
-            <p className="eyebrow">Módulo 1</p>
-            <h2 id="classes-title">Las 4 clases</h2>
+            <p className="eyebrow">{nivel.title}</p>
+            <h2 id="classes-title">Clases del Nivel 1</h2>
           </div>
-          <Link className="start-link" to="/clase/clase-1">
-            Empezar por la Clase 1 →
+          <Link className="start-link" to="/nivel-1/clase/clase-1">
+            Empezar Clase 1 →
           </Link>
         </div>
 
@@ -73,7 +79,7 @@ export function Home() {
           {classes.map((lesson, index) => (
             <Link
               key={lesson.slug}
-              to={`/clase/${lesson.slug}`}
+              to={`/nivel-1/clase/${lesson.slug}`}
               className="class-link"
               style={{ '--i': index } as CSSProperties}
             >

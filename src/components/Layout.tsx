@@ -1,12 +1,8 @@
-import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { courseInfo } from '../data/classes'
-import { ClassesDropdown } from './ClassesDropdown'
-import { DictionaryDrawer } from './DictionaryDrawer'
+import { NivelDropdown } from './NivelDropdown'
 
 export function Layout() {
-  const [dictionaryOpen, setDictionaryOpen] = useState(false)
-
   return (
     <div className="app-shell">
       <header className="site-header">
@@ -22,17 +18,13 @@ export function Layout() {
           <NavLink to="/" end className="nav-link">
             Inicio
           </NavLink>
-          <ClassesDropdown />
-          <button
-            type="button"
-            className={`dict-btn ${dictionaryOpen ? 'active' : ''}`}
-            onClick={() => setDictionaryOpen(true)}
-          >
-            <span className="dict-btn-icon" aria-hidden="true">
-              Ñe
-            </span>
+          <NivelDropdown />
+          <NavLink to="/diccionario" className="nav-link">
             Diccionario
-          </button>
+          </NavLink>
+          <NavLink to="/textos" className="nav-link">
+            Textos
+          </NavLink>
         </nav>
       </header>
 
@@ -44,11 +36,9 @@ export function Layout() {
         <div className="footer-inner">
           <strong className="guarani">{courseInfo.name}</strong>
           <p>{courseInfo.module}</p>
-          <p className="footer-note">Clases, audios y ejercicios en un solo lugar.</p>
+          <p className="footer-note">Nivel 1 · Diccionarios · Textos culturales</p>
         </div>
       </footer>
-
-      <DictionaryDrawer open={dictionaryOpen} onClose={() => setDictionaryOpen(false)} />
     </div>
   )
 }
