@@ -30,7 +30,7 @@ export function ClassQuiz({ classSlug }: Props) {
   }, [user, classSlug, quiz])
 
   const usedAttempts = attempts.length
-  const maxAttempts = quiz?.maxAttempts ?? 3
+  const maxAttempts = quiz?.maxAttempts ?? DEFAULT_QUIZ_MAX_ATTEMPTS
   const remaining = Math.max(0, maxAttempts - usedAttempts)
   const best = useMemo(
     () => (attempts.length ? Math.max(...attempts.map((a) => a.score)) : null),

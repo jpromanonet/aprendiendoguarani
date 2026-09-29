@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { classes, levels } from '../data/classes'
+import { useAuth } from '../context/AuthContext'
 
 function Chevron() {
   return (
@@ -170,6 +171,44 @@ export function NavPills({ onNavigate, expandClases }: NavPillsProps) {
           <em>PDFs y lectura</em>
         </span>
       </NavLink>
+      <UserNavButton onNavigate={onNavigate} />
     </>
+  )
+}
+
+function IconUser() {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Zm0 2.25c-3.6 0-6.75 1.8-6.75 4.05V20h13.5v-1.7c0-2.25-3.15-4.05-6.75-4.05Z"
+      />
+    </svg>
+  )
+}
+
+function UserNavButton({ onNavigate }: { onNavigate?: () => void }) {
+  const { user, profile } = useAuth()
+  const label = user ? profile?.display_name || 'Mi cuenta' : 'Cuenta'
+  const avatar = profile?.avatar_url
+
+  return (
+    <NavLink
+      to="/cuenta"
+      className={({ isActive }) => `nav-pill nav-pill-account ${isActive ? 'active' : ''} ${avatar ? 'has-avatar' : ''}`}
+      onClick={() => onNavigate?.()}
+      title={label}
+      aria-label={label}
+    >
+      {avatar ? (
+        <img className="nav-avatar" src={avatar} alt="" />
+      ) : (
+        <IconUser />
+      )}
+      <span className="nav-pill-label">
+        <strong>{user ? 'Cuenta' : 'Cuenta'}</strong>
+        <em>{user ? 'Perfil y foto' : 'Ingresá'}</em>
+      </span>
+    </NavLink>
   )
 }

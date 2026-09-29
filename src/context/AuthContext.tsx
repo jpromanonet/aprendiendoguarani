@@ -21,6 +21,7 @@ type AuthContextValue = {
   signUp: (email: string, password: string, displayName?: string) => Promise<{ error: string | null }>
   signOut: () => Promise<void>
   refreshProfile: () => Promise<void>
+  updateAvatar: (file: File) => Promise<{ error: string | null }>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -96,8 +97,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setProfile(null)
       },
       refreshProfile,
+      async updateAvatar(file: File) {
+        if (!supabase || !session?.user) return { error: 'Tenés que iniciar sesión.' }
+        const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
+        const path = `${session.user.id}/avatar.${ext}`
+        const { error: uploadError } = await supabase.storage.from('avatars').upload(path, file, {
+          upsert: true,
+          contentType: file.type || 'image/jpeg',
+        })
+        if (uploadError) return { error: uploadError.message }
+
+        const { data } = supabase.storage.from('avatars').getPublicUrl(path)
+        const avatarUrl = `${data.publicUrl}?t=${Date.now()}`
+        const { error: updateError } = await supabase
+          .from('profiles')
+          .update({ avatar_url: avatarUrl, updated_at: new Date().toISOString() })
+          .eq('id', session.user.id)
+        if (updateError) return { error: updateError.message }
+
+        await loadProfile(session.user.id)
+        return { error: null }
+      },
     }),
-    [loading, session, profile, refreshProfile],
+    [loading, session, profile, refreshProfile, loadProfile],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

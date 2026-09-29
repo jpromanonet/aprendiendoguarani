@@ -1,9 +1,18 @@
-import { useState, type FormEvent } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 export function CuentaPage() {
-  const { configured, loading, user, profile, signInWithPassword, signUp, signOut } = useAuth()
+  const {
+    configured,
+    loading,
+    user,
+    profile,
+    signInWithPassword,
+    signUp,
+    signOut,
+    updateAvatar,
+  } = useAuth()
   const [mode, setMode] = useState<'login' | 'register'>('login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -11,6 +20,9 @@ export function CuentaPage() {
   const [error, setError] = useState<string | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const [photoBusy, setPhotoBusy] = useState(false)
+  const cameraRef = useRef<HTMLInputElement>(null)
+  const galleryRef = useRef<HTMLInputElement>(null)
 
   if (!configured) {
     return (
@@ -34,6 +46,20 @@ export function CuentaPage() {
     )
   }
 
+  async function onPickPhoto(file: File | undefined) {
+    if (!file) return
+    setPhotoBusy(true)
+    setError(null)
+    setMessage(null)
+    const result = await updateAvatar(file)
+    setPhotoBusy(false)
+    if (result.error) {
+      setError(result.error)
+      return
+    }
+    setMessage('Foto de perfil actualizada.')
+  }
+
   if (user) {
     return (
       <div className="account-page">
@@ -41,6 +67,55 @@ export function CuentaPage() {
           <h1>Hola, {profile?.display_name || 'alumno/a'}</h1>
           <p className="lede">{profile?.email || user.email}</p>
         </header>
+
+        <section className="profile-photo-card">
+          <div className="profile-photo-preview">
+            {profile?.avatar_url ? (
+              <img src={profile.avatar_url} alt="Tu foto de perfil" />
+            ) : (
+              <span className="profile-photo-fallback" aria-hidden="true" />
+            )}
+          </div>
+          <div className="profile-photo-actions">
+            <p className="lede">Sacá una foto o elegí una imagen para tu perfil.</p>
+            <div className="account-actions">
+              <button
+                type="button"
+                className="primary-btn"
+                disabled={photoBusy}
+                onClick={() => cameraRef.current?.click()}
+              >
+                {photoBusy ? 'Subiendo…' : 'Tomar foto'}
+              </button>
+              <button
+                type="button"
+                className="ghost-btn"
+                disabled={photoBusy}
+                onClick={() => galleryRef.current?.click()}
+              >
+                Elegir imagen
+              </button>
+            </div>
+            <input
+              ref={cameraRef}
+              className="sr-only"
+              type="file"
+              accept="image/*"
+              capture="user"
+              onChange={(e) => void onPickPhoto(e.target.files?.[0])}
+            />
+            <input
+              ref={galleryRef}
+              className="sr-only"
+              type="file"
+              accept="image/*"
+              onChange={(e) => void onPickPhoto(e.target.files?.[0])}
+            />
+            {error ? <p className="quiz-error">{error}</p> : null}
+            {message ? <p className="quiz-passed">{message}</p> : null}
+          </div>
+        </section>
+
         <div className="account-actions">
           <Link className="primary-btn" to="/progreso">
             Ver mi progreso

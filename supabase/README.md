@@ -2,6 +2,7 @@
 
 1. Creá un proyecto en https://supabase.com
 2. En SQL Editor, corré el archivo `supabase/schema.sql`
+   (incluye tablas, RLS y bucket `avatars` para la foto de perfil)
 3. En Project Settings → API, copiá:
    - Project URL → `VITE_SUPABASE_URL`
    - `anon` `public` key → `VITE_SUPABASE_ANON_KEY`
