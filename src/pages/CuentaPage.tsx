@@ -332,7 +332,6 @@ export function CuentaPage() {
                   >
                     <span className="level-accordion-copy">
                       <strong>{nivel.title}</strong>
-                      <em>{nivel.subtitle}</em>
                     </span>
                     <span className="level-accordion-meta">
                       {nivel.available ? (

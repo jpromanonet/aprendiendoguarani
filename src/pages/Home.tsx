@@ -55,8 +55,7 @@ export function Home() {
           <div className="level-cut">
             <div className="level-cut-head">
               <div>
-                <p className="level-cut-label">{nivel.title}</p>
-                <h3>{nivel.subtitle}</h3>
+                <h3>{nivel.title}</h3>
               </div>
               <Link className="level-cut-link" to={`/${nivel.slug}`}>
                 Ver nivel →

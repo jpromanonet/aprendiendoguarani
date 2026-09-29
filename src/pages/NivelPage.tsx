@@ -15,8 +15,8 @@ export function NivelPage() {
     return (
       <div className="home home-direct">
         <section className="nivel-hero">
-          <p className="eyebrow">{nivel.title}</p>
-          <h1>{nivel.subtitle}</h1>
+          <p className="eyebrow">Curso Avañe'ẽ</p>
+          <h1>{nivel.title}</h1>
           <p className="lede">{nivel.description}</p>
           <div className="nivel-actions">
             <span className="soon-pill">Próximamente</span>
@@ -32,8 +32,8 @@ export function NivelPage() {
   return (
     <div className="home home-direct">
       <section className="nivel-hero">
-        <p className="eyebrow">{nivel.title}</p>
-        <h1>{nivel.subtitle}</h1>
+        <p className="eyebrow">Curso Avañe'ẽ</p>
+        <h1>{nivel.title}</h1>
         <p className="lede">{nivel.description}</p>
         <div className="nivel-actions">
           <Link className="start-link" to={`/${nivel.slug}/clase/clase-1`}>

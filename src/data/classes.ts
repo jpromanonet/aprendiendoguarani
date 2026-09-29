@@ -45,7 +45,7 @@ export type LevelInfo = {
   id: number
   slug: string
   title: string
-  subtitle: string
+  subtitle?: string
   description: string
   available: boolean
 }
@@ -55,7 +55,6 @@ export const levels: LevelInfo[] = [
     id: 1,
     slug: 'nivel-1',
     title: 'Nivel 1',
-    subtitle: "Fundamentos del Avañe'ẽ",
     description:
       'Introducción al alfabeto, vocabulario básico, pronombres, colores, números, pluralización y diminutivos.',
     available: true,
@@ -64,24 +63,21 @@ export const levels: LevelInfo[] = [
     id: 2,
     slug: 'nivel-2',
     title: 'Nivel 2',
-    subtitle: 'Conversación y estructuras',
-    description: 'Próximamente: diálogos, estructuras más complejas y práctica oral.',
+    description: 'Próximamente.',
     available: false,
   },
   {
     id: 3,
     slug: 'nivel-3',
     title: 'Nivel 3',
-    subtitle: 'Narración y lectura',
-    description: 'Próximamente: textos, narración y comprensión más avanzada.',
+    description: 'Próximamente.',
     available: false,
   },
   {
     id: 4,
     slug: 'nivel-4',
     title: 'Nivel 4',
-    subtitle: 'Fluidez y cultura',
-    description: 'Próximamente: fluidez, cultura y usos cotidianos del idioma.',
+    description: 'Próximamente.',
     available: false,
   },
 ]

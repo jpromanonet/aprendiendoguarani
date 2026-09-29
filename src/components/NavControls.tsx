@@ -122,7 +122,6 @@ export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
                 >
                   <span>
                     <strong>{nivel.title}</strong>
-                    <em>{nivel.subtitle}</em>
                   </span>
                   <span className="nav-level-all">Ver todo</span>
                 </Link>
@@ -130,7 +129,6 @@ export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
                 <div className="nav-level-head locked">
                   <span>
                     <strong>{nivel.title}</strong>
-                    <em>{nivel.subtitle}</em>
                   </span>
                   <span className="nav-level-all soon">Próximamente</span>
                 </div>
