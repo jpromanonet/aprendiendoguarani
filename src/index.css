@@ -3001,50 +3001,48 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.15rem 0.15rem;
+  gap: 0.45rem;
   margin-top: 0.85rem;
 }
 
 .profile-text-action {
-  border: 0;
-  background: transparent;
-  color: rgba(239, 195, 85, 0.95);
-  font-size: 0.84rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  color: #f4fff8;
+  font-size: 0.8rem;
   font-weight: 700;
-  padding: 0.25rem 0.55rem;
+  padding: 0.42rem 0.8rem;
+  border-radius: 999px;
   cursor: pointer;
-  position: relative;
-}
-
-.profile-text-action:not(:last-child)::after {
-  content: '·';
-  position: absolute;
-  right: -0.05rem;
-  color: rgba(244, 255, 248, 0.35);
-  pointer-events: none;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .profile-text-action:hover:not(:disabled) {
-  color: #ffd978;
-}
-
-.profile-text-action.muted {
-  color: rgba(244, 255, 248, 0.72);
-}
-
-.profile-text-action.muted:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.28);
   color: #fff;
 }
 
 .profile-text-action.solid {
   color: #1d2a16;
   background: #efc355;
-  border-radius: 999px;
-  padding: 0.4rem 0.85rem;
+  border-color: rgba(239, 195, 85, 0.55);
 }
 
-.profile-text-action.solid::after {
-  display: none;
+.profile-text-action.solid:hover:not(:disabled) {
+  background: #ffd978;
+  color: #1d2a16;
+}
+
+.profile-text-action.danger {
+  color: #fff1f0;
+  background: rgba(185, 48, 48, 0.88);
+  border-color: rgba(255, 170, 160, 0.35);
+}
+
+.profile-text-action.danger:hover:not(:disabled) {
+  background: rgb(205, 58, 58);
+  color: #fff;
 }
 
 .profile-text-action:disabled {
