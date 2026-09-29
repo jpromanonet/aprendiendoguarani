@@ -2238,6 +2238,19 @@ h3 {
   background: linear-gradient(135deg, #244038, #3a5f52);
   color: #f4fff8;
   box-shadow: 0 8px 22px rgba(36, 64, 56, 0.25);
+  position: relative;
+  margin-left: 0.9rem;
+}
+
+.nav-pill-account::before {
+  content: '';
+  position: absolute;
+  left: -0.75rem;
+  top: 18%;
+  bottom: 18%;
+  width: 1px;
+  background: rgba(7, 52, 40, 0.24);
+  border-radius: 999px;
 }
 
 .nav-pill-progress {
@@ -2423,6 +2436,8 @@ h3 {
   background: linear-gradient(135deg, #244038, #3a5f52);
   color: #f4fff8;
   box-shadow: 0 8px 22px rgba(36, 64, 56, 0.25);
+  position: relative;
+  margin-left: 0.9rem;
 }
 
 .nav-pill-account.has-avatar {
