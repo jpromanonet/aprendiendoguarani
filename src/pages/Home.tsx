@@ -16,22 +16,31 @@ export function Home() {
         <div className="home-hero-bg" aria-hidden="true">
           <span className="hero-orb hero-orb-a" />
           <span className="hero-orb hero-orb-b" />
-          <span className="hero-orb hero-orb-c" />
         </div>
         <div className="home-hero-inner">
-          <p className="home-kicker">{courseInfo.module}</p>
-          <h1 className="home-hero-brand">{courseInfo.name}</h1>
-          <p className="home-hero-line">
-            Aprendé guaraní con clases escritas, audio y un diccionario para buscar al instante.
-          </p>
-          <div className="home-hero-actions">
-            <Link className="primary-btn" to="/nivel-1/clase/clase-1">
-              Empezar Clase 1
-            </Link>
-            <a className="secondary-btn" href="#clases">
-              Ver clases
-            </a>
+          <div className="home-hero-copy">
+            <h1 className="home-hero-brand">{courseInfo.name}</h1>
+            <p className="home-hero-line">
+              Aprendé guaraní con clases escritas, audio y un diccionario para buscar al instante.
+            </p>
+            <div className="home-hero-actions">
+              <Link className="primary-btn" to="/nivel-1/clase/clase-1">
+                Empezar Clase 1
+              </Link>
+              <a className="secondary-btn" href="#clases">
+                Ver clases
+              </a>
+            </div>
           </div>
+          <figure className="home-hero-art">
+            <img
+              src="/images/yaguarete.webp"
+              alt="Dibujo de un yaguareté"
+              width={640}
+              height={900}
+            />
+            <figcaption>Yaguareté</figcaption>
+          </figure>
         </div>
       </section>
 

@@ -563,24 +563,20 @@ img {
 .home-hero-inner {
   position: relative;
   z-index: 1;
-  width: min(980px, calc(100% - 2.4rem));
+  width: min(1120px, calc(100% - 2.4rem));
   margin: 0 auto;
-  padding: clamp(5.5rem, 12vh, 7.5rem) 0 clamp(3rem, 7vh, 4.2rem);
+  padding: clamp(4.5rem, 10vh, 6.5rem) 0 clamp(2.8rem, 6vh, 4rem);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: end;
   animation: rise 0.8s var(--ease-out) both;
-}
-
-.home-kicker {
-  margin: 0 0 1rem;
-  font-size: 0.74rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(244, 255, 248, 0.68);
 }
 
 .home-hero-brand {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(4rem, 12vw, 7.2rem);
+  font-size: clamp(3.6rem, 10vw, 6.8rem);
   line-height: 0.92;
   letter-spacing: -0.03em;
   background: linear-gradient(120deg, #fff 12%, #efc355 48%, #b8f0d8 82%, #fff 100%);
@@ -593,7 +589,7 @@ img {
 
 .home-hero-line {
   margin: 1.25rem 0 0;
-  max-width: 34rem;
+  max-width: 32rem;
   font-size: clamp(1.05rem, 2.3vw, 1.25rem);
   line-height: 1.55;
   color: rgba(244, 255, 248, 0.86);
@@ -604,6 +600,34 @@ img {
   flex-wrap: wrap;
   gap: 0.8rem;
   margin-top: 1.8rem;
+}
+
+.home-hero-art {
+  margin: 0;
+  position: relative;
+  justify-self: end;
+  width: min(100%, 420px);
+  animation: riseSoft 0.9s var(--ease-out) both;
+  animation-delay: 0.12s;
+}
+
+.home-hero-art img {
+  width: 100%;
+  height: auto;
+  max-height: min(58vh, 520px);
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
+}
+
+.home-hero-art figcaption {
+  position: absolute;
+  right: 0.2rem;
+  bottom: 0.2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(244, 255, 248, 0.55);
 }
 
 .home-direct {
@@ -1705,6 +1729,21 @@ h3 {
 
   .class-toc a {
     min-width: 10rem;
+  }
+
+  .home-hero-inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .home-hero-art {
+    justify-self: center;
+    order: -1;
+    width: min(100%, 280px);
+  }
+
+  .home-hero-art img {
+    max-height: 280px;
   }
 
   .how-strip {

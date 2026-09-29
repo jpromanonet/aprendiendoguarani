@@ -37,7 +37,6 @@ export type ClassLesson = {
 export const courseInfo = {
   name: "Avañe'ẽ",
   tagline: 'Aprendiendo guaraní',
-  module: 'Módulo 1 — Unión de Pueblos Originarios · Municipio de Tigre',
   description:
     'Curso escrito y oral del idioma guaraní: alfabeto, vocabulario, pronombres, colores, números, pluralización y diminutivos.',
 }
