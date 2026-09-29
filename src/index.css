@@ -2054,6 +2054,11 @@ h3 {
 
   .site-nav .nav-dropdown {
     width: 100%;
+    display: block;
+  }
+
+  .site-nav .nav-dropdown .nav-pill {
+    width: 100%;
   }
 
   .site-nav .nav-menu {
