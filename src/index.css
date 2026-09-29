@@ -3006,6 +3006,9 @@ h3 {
 }
 
 .profile-text-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.1);
   color: #f4fff8;
@@ -3205,9 +3208,35 @@ h3 {
     text-align: center;
   }
 
-  .profile-actions,
+  .profile-copy {
+    width: 100%;
+  }
+
+  .profile-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .profile-actions .profile-text-action {
+    width: 100%;
+    min-height: 2.55rem;
+    padding: 0.55rem 0.7rem;
+  }
+
+  .profile-actions .profile-logout {
+    grid-column: 1 / -1;
+  }
+
   .profile-name-actions {
     justify-content: center;
+  }
+
+  .profile-name-edit {
+    max-width: none;
+    width: 100%;
   }
 
   .profile-panel-head {
