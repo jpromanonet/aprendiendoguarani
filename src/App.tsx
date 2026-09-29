@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes, useParams } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import { Analytics } from './components/Analytics'
 import { Layout } from './components/Layout'
 import { Home } from './pages/Home'
 import { ClassPage } from './pages/ClassPage'
@@ -13,6 +14,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <Analytics />
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
