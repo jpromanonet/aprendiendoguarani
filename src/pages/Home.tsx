@@ -1,6 +1,7 @@
 import { type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { classes, courseInfo, levels } from '../data/classes'
+import { YaguareteHero } from '../components/YaguareteHero'
 
 const howTo = [
   { step: '01', title: 'Elegí una clase', body: 'Empezá por la primera y seguí en orden.' },
@@ -16,7 +17,7 @@ export function Home() {
     <div className="home">
       <section className="home-hero">
         <div className="home-hero-media" aria-hidden="true">
-          <img src="/images/yaguarete.svg" alt="" className="home-hero-svg" />
+          <YaguareteHero />
         </div>
         <div className="home-hero-scrim" aria-hidden="true" />
         <div className="home-hero-inner">
