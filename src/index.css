@@ -3266,8 +3266,19 @@ h3 {
     text-align: center;
   }
 
-  .profile-badges {
+  .profile-badges,
+  .profile-toolbar,
+  .profile-name-row {
     justify-content: center;
+  }
+
+  .profile-hero {
+    padding-top: 3.2rem;
+  }
+
+  .profile-hero > .profile-logout-btn {
+    top: 0.85rem;
+    right: 0.85rem;
   }
 
   .profile-panel-head {
