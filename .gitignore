@@ -28,3 +28,8 @@ _extracted/
 _tools/
 
 .vercel
+
+# Env
+.env
+.env.local
+.env.*.local

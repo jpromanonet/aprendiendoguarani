@@ -130,6 +130,20 @@ export function Layout() {
           </div>
           <div className="mobile-nav-links">
             <NavPills onNavigate={() => setMenuOpen(false)} expandClases={menuOpen} />
+            <NavLink
+              to="/cuenta"
+              className={({ isActive }) => `nav-pill nav-pill-account ${isActive ? 'active' : ''}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              Cuenta
+            </NavLink>
+            <NavLink
+              to="/progreso"
+              className={({ isActive }) => `nav-pill nav-pill-progress ${isActive ? 'active' : ''}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              Progreso
+            </NavLink>
           </div>
           <div className="mobile-nav-foot">
             <p>

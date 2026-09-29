@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { classes, getClassBySlug, levels } from '../data/classes'
 import { SectionRenderer } from '../components/SectionRenderer'
+import { ClassQuiz } from '../components/ClassQuiz'
+import { useAuth } from '../context/AuthContext'
+import { markClassCompleted, markClassSeen } from '../lib/progress'
 
 function sectionTitle(section: { type: string; title?: string }, index: number) {
   if ('title' in section && section.title) return section.title
@@ -12,6 +15,9 @@ export function ClassPage() {
   const { slug } = useParams()
   const lesson = slug ? getClassBySlug(slug) : undefined
   const [activeSection, setActiveSection] = useState(0)
+  const [saving, setSaving] = useState(false)
+  const [savedNote, setSavedNote] = useState<string | null>(null)
+  const { user } = useAuth()
   const nivel = levels[0]
 
   const toc = useMemo(
@@ -26,7 +32,13 @@ export function ClassPage() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     setActiveSection(0)
+    setSavedNote(null)
   }, [slug])
+
+  useEffect(() => {
+    if (!user || !lesson) return
+    void markClassSeen(user.id, lesson.slug).catch(() => undefined)
+  }, [user, lesson])
 
   useEffect(() => {
     if (!lesson) return
@@ -57,6 +69,23 @@ export function ClassPage() {
   const index = classes.findIndex((c) => c.slug === lesson.slug)
   const prev = classes[index - 1]
   const next = classes[index + 1]
+
+  async function completeClass() {
+    if (!lesson) return
+    if (!user) {
+      setSavedNote('Iniciá sesión para guardar el progreso.')
+      return
+    }
+    setSaving(true)
+    try {
+      await markClassCompleted(user.id, lesson.slug)
+      setSavedNote('Clase marcada como completada.')
+    } catch {
+      setSavedNote('No se pudo guardar. Probá de nuevo.')
+    } finally {
+      setSaving(false)
+    }
+  }
 
   return (
     <article className="class-page">
@@ -121,6 +150,20 @@ export function ClassPage() {
               <SectionRenderer section={section} />
             </div>
           ))}
+
+          <ClassQuiz classSlug={lesson.slug} />
+
+          <div className="class-complete">
+            <button type="button" className="primary-btn" onClick={() => void completeClass()} disabled={saving}>
+              {saving ? 'Guardando…' : 'Marcar clase como completada'}
+            </button>
+            {savedNote ? <p className="lede">{savedNote}</p> : null}
+            {!user ? (
+              <p className="lede">
+                <Link to="/cuenta">Ingresá</Link> para guardar progreso y hacer la autoevaluación.
+              </p>
+            ) : null}
+          </div>
         </div>
       </div>
 
