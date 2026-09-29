@@ -33,3 +33,6 @@ _tools/
 .env
 .env.local
 .env.*.local
+
+# Supabase CLI local
+supabase/.temp/
