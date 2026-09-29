@@ -18,15 +18,28 @@ export function ClassQuiz({ classSlug }: Props) {
   const [loading, setLoading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [result, setResult] = useState<ReturnType<typeof scoreQuiz> | null>(null)
+  const [taking, setTaking] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
     if (!user || !quiz) return
     setLoading(true)
+    setHydrated(false)
+    setResult(null)
+    setAnswers({})
     fetchAssessments(user.id, classSlug)
-      .then(setAttempts)
+      .then((rows) => {
+        setAttempts(rows)
+        const passed = rows.some((a) => a.passed)
+        const remaining = Math.max(0, (quiz.maxAttempts ?? DEFAULT_QUIZ_MAX_ATTEMPTS) - rows.length)
+        setTaking(!passed && remaining > 0)
+      })
       .catch((err: Error) => setError(err.message))
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setLoading(false)
+        setHydrated(true)
+      })
   }, [user, classSlug, quiz])
 
   const usedAttempts = attempts.length
@@ -38,6 +51,14 @@ export function ClassQuiz({ classSlug }: Props) {
   )
   const passedAny = attempts.some((a) => a.passed)
   const exhausted = remaining === 0
+  const canRetake = remaining > 0
+
+  function startRetake() {
+    setAnswers({})
+    setResult(null)
+    setError(null)
+    setTaking(true)
+  }
 
   if (!quiz) return null
 
@@ -89,12 +110,15 @@ export function ClassQuiz({ classSlug }: Props) {
       })
       setAttempts((prev) => [...prev, saved])
       setResult(scored)
+      setTaking(false)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'No se pudo guardar el intento.')
     } finally {
       setSubmitting(false)
     }
   }
+
+  const showForm = hydrated && taking && !exhausted
 
   return (
     <section className="section-block quiz-block">
@@ -103,27 +127,24 @@ export function ClassQuiz({ classSlug }: Props) {
       </div>
       <p className="quiz-meta">
         Intentos: <strong>{usedAttempts}</strong> / {maxAttempts}
-        {best != null ? <> · Mejor puntaje: <strong>{best}%</strong></> : null}
-        {passedAny ? <> · <span className="quiz-passed">Aprobada</span></> : null}
+        {best != null ? (
+          <>
+            {' '}
+            · Mejor puntaje: <strong>{best}%</strong>
+          </>
+        ) : null}
+        {passedAny ? (
+          <>
+            {' '}
+            · <span className="quiz-passed">Aprobada</span>
+          </>
+        ) : null}
       </p>
 
       {loading ? <p>Cargando intentos…</p> : null}
       {error ? <p className="quiz-error">{error}</p> : null}
 
-      {exhausted || passedAny ? (
-        <div className="quiz-locked">
-          {passedAny ? (
-            <p>¡Listo! Ya aprobaste esta autoevaluación.</p>
-          ) : (
-            <p>Agotaste los {maxAttempts} intentos absolutos de esta autoevaluación.</p>
-          )}
-          {result ? (
-            <p>
-              Último envío: {result.correct}/{result.total} ({result.score}%)
-            </p>
-          ) : null}
-        </div>
-      ) : (
+      {showForm ? (
         <form className="quiz-form" onSubmit={onSubmit}>
           {quiz.questions.map((question, index) => (
             <fieldset key={question.id} className="quiz-question">
@@ -150,7 +171,28 @@ export function ClassQuiz({ classSlug }: Props) {
             {submitting ? 'Enviando…' : `Enviar intento (${remaining} restantes)`}
           </button>
         </form>
-      )}
+      ) : hydrated && !loading ? (
+        <div className="quiz-locked">
+          {result ? (
+            <p>
+              Último envío: {result.correct}/{result.total} ({result.score}%)
+              {result.passed ? ' · Aprobado' : ' · No alcanzado'}
+            </p>
+          ) : passedAny ? (
+            <p>¡Listo! Ya aprobaste esta autoevaluación.</p>
+          ) : exhausted ? (
+            <p>Agotaste los {maxAttempts} intentos absolutos de esta autoevaluación.</p>
+          ) : (
+            <p>Podés empezar cuando quieras.</p>
+          )}
+
+          {canRetake ? (
+            <button type="button" className="primary-btn" onClick={startRetake}>
+              {passedAny || result ? 'Retomar quiz' : 'Empezar'}
+            </button>
+          ) : null}
+        </div>
+      ) : null}
     </section>
   )
 }

@@ -22,7 +22,7 @@ export type ClassQuiz = {
 
 import { DEFAULT_QUIZ_MAX_ATTEMPTS, QUIZ_PASS_SCORE } from './nivel1'
 
-/** Quizzes por clase. Se van sumando a medida que llegue el contenido. */
+/** Quizzes por clase publicada (Nivel 1). */
 export const quizzes: Record<string, ClassQuiz> = {
   'clase-1': {
     classSlug: 'clase-1',
@@ -107,6 +107,122 @@ export const quizzes: Record<string, ClassQuiz> = {
           { id: 'c', label: 'Jaguar' },
         ],
         correctOptionId: 'c',
+      },
+    ],
+  },
+  'clase-3': {
+    classSlug: 'clase-3',
+    title: 'Autoevaluación — Clase 3',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c3-q1',
+        prompt: '¿Qué significa Ñande?',
+        options: [
+          { id: 'a', label: 'Nosotros/as (excluyente)' },
+          { id: 'b', label: 'Nosotros/as (incluyente)' },
+          { id: 'c', label: 'Ustedes' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c3-q2',
+        prompt: '¿Cómo se dice “verde” en guaraní?',
+        options: [
+          { id: 'a', label: 'Hovy' },
+          { id: 'b', label: 'Hovyũ' },
+          { id: 'c', label: 'Pytã' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c3-q3',
+        prompt: '¿Qué indica el sufijo -ngy en colores?',
+        options: [
+          { id: 'a', label: 'Atenúa: semi / medio / algo' },
+          { id: 'b', label: 'Hace el color más intenso' },
+          { id: 'c', label: 'Indica plural' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c3-q4',
+        prompt: "¿Qué significa Ko'ẽrõ?",
+        options: [
+          { id: 'a', label: 'Ayer' },
+          { id: 'b', label: 'Hoy' },
+          { id: 'c', label: 'Mañana (si amanece)' },
+        ],
+        correctOptionId: 'c',
+      },
+      {
+        id: 'c3-q5',
+        prompt: '¿Qué número es Po?',
+        options: [
+          { id: 'a', label: '3' },
+          { id: 'b', label: '5' },
+          { id: 'c', label: '10' },
+        ],
+        correctOptionId: 'b',
+      },
+    ],
+  },
+  'clase-4': {
+    classSlug: 'clase-4',
+    title: 'Autoevaluación — Clase 4',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c4-q1',
+        prompt: '¿Cuándo se usa kuéra?',
+        options: [
+          { id: 'a', label: 'Si el sustantivo termina en vocal nasal' },
+          { id: 'b', label: 'Si termina en sílaba oral (o m/mb/nd/ng/nt)' },
+          { id: 'c', label: 'Siempre, sin excepción' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c4-q2',
+        prompt: '¿Cuál es el plural de Kuña?',
+        options: [
+          { id: 'a', label: 'Kuñakuéra' },
+          { id: 'b', label: 'Kuñanguéra' },
+          { id: 'c', label: "Kuña'i" },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c4-q3',
+        prompt: 'En “Mokõi tapiti”, ¿por qué no hace falta sufijo de plural?',
+        options: [
+          { id: 'a', label: 'Porque tapiti ya es plural' },
+          { id: 'b', label: 'Porque el número (Mokõi) ya indica plural' },
+          { id: 'c', label: 'Porque es un error' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c4-q4',
+        prompt: "¿Qué significa Jagua'i?",
+        options: [
+          { id: 'a', label: 'Perros' },
+          { id: 'b', label: 'Perrito' },
+          { id: 'c', label: 'Perritos' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c4-q5',
+        prompt: '¿Qué es Panambi?',
+        options: [
+          { id: 'a', label: 'Mariposa' },
+          { id: 'b', label: 'Abeja' },
+          { id: 'c', label: 'Hormiga' },
+        ],
+        correctOptionId: 'a',
       },
     ],
   },

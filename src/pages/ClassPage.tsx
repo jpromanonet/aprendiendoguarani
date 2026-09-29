@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { classes, getClassBySlug, levels } from '../data/classes'
+import { getQuiz } from '../data/quizzes'
 import { SectionRenderer } from '../components/SectionRenderer'
 import { ClassQuiz } from '../components/ClassQuiz'
 import { useAuth } from '../context/AuthContext'
@@ -11,14 +12,17 @@ function sectionTitle(section: { type: string; title?: string }, index: number) 
   return `Sección ${index + 1}`
 }
 
+const QUIZ_ANCHOR_ID = 'class-quiz'
+
 export function ClassPage() {
   const { slug } = useParams()
   const lesson = slug ? getClassBySlug(slug) : undefined
-  const [activeSection, setActiveSection] = useState(0)
+  const [activeId, setActiveId] = useState('sec-0')
   const [saving, setSaving] = useState(false)
   const [savedNote, setSavedNote] = useState<string | null>(null)
   const { user } = useAuth()
   const nivel = levels[0]
+  const quiz = lesson ? getQuiz(lesson.slug) : null
 
   const toc = useMemo(
     () =>
@@ -31,7 +35,7 @@ export function ClassPage() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    setActiveSection(0)
+    setActiveId('sec-0')
     setSavedNote(null)
   }, [slug])
 
@@ -42,8 +46,9 @@ export function ClassPage() {
 
   useEffect(() => {
     if (!lesson) return
-    const nodes = toc
-      .map((item) => document.getElementById(item.id))
+    const ids = [...toc.map((item) => item.id), ...(quiz ? [QUIZ_ANCHOR_ID] : [])]
+    const nodes = ids
+      .map((id) => document.getElementById(id))
       .filter((node): node is HTMLElement => Boolean(node))
 
     const observer = new IntersectionObserver(
@@ -52,15 +57,14 @@ export function ClassPage() {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
         if (!visible) return
-        const index = toc.findIndex((item) => item.id === visible.target.id)
-        if (index >= 0) setActiveSection(index)
+        setActiveId(visible.target.id)
       },
       { rootMargin: '-20% 0px -55% 0px', threshold: [0.15, 0.4, 0.7] },
     )
 
     nodes.forEach((node) => observer.observe(node))
     return () => observer.disconnect()
-  }, [lesson, toc])
+  }, [lesson, toc, quiz])
 
   if (!lesson) {
     return <Navigate to="/nivel-1" replace />
@@ -133,8 +137,8 @@ export function ClassPage() {
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
-                  className={activeSection === i ? 'active' : ''}
-                  onClick={() => setActiveSection(i)}
+                  className={activeId === item.id ? 'active' : ''}
+                  onClick={() => setActiveId(item.id)}
                 >
                   <span>{String(i + 1).padStart(2, '0')}</span>
                   {item.title}
@@ -142,6 +146,15 @@ export function ClassPage() {
               </li>
             ))}
           </ol>
+          {quiz ? (
+            <a
+              href={`#${QUIZ_ANCHOR_ID}`}
+              className={`toc-quiz-btn ${activeId === QUIZ_ANCHOR_ID ? 'active' : ''}`}
+              onClick={() => setActiveId(QUIZ_ANCHOR_ID)}
+            >
+              Autoevaluación
+            </a>
+          ) : null}
         </aside>
 
         <div className="class-body">
@@ -151,7 +164,9 @@ export function ClassPage() {
             </div>
           ))}
 
-          <ClassQuiz classSlug={lesson.slug} />
+          <div id={QUIZ_ANCHOR_ID} className="section-anchor quiz-anchor">
+            <ClassQuiz classSlug={lesson.slug} />
+          </div>
 
           <div className="class-complete">
             <button type="button" className="primary-btn" onClick={() => void completeClass()} disabled={saving}>
