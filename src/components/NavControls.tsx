@@ -148,30 +148,34 @@ export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
 export function NavPills({ onNavigate, expandClases }: NavPillsProps) {
   return (
     <>
-      <ClasesDropdown onNavigate={onNavigate} expandClases={expandClases} />
-      <NavLink
-        to="/diccionario"
-        className={({ isActive }) => `nav-pill nav-pill-dict ${isActive ? 'active' : ''}`}
-        onClick={() => onNavigate?.()}
-      >
-        <IconSearch />
-        <span className="nav-pill-label">
-          <strong>Diccionario</strong>
-          <em>Buscá ES ↔ GN</em>
-        </span>
-      </NavLink>
-      <NavLink
-        to="/textos"
-        className={({ isActive }) => `nav-pill nav-pill-text ${isActive ? 'active' : ''}`}
-        onClick={() => onNavigate?.()}
-      >
-        <IconScroll />
-        <span className="nav-pill-label">
-          <strong>Textos</strong>
-          <em>PDFs y lectura</em>
-        </span>
-      </NavLink>
-      <UserNavButton onNavigate={onNavigate} />
+      <div className="nav-cluster" aria-label="Contenido">
+        <ClasesDropdown onNavigate={onNavigate} expandClases={expandClases} />
+        <NavLink
+          to="/diccionario"
+          className={({ isActive }) => `nav-pill nav-pill-dict ${isActive ? 'active' : ''}`}
+          onClick={() => onNavigate?.()}
+        >
+          <IconSearch />
+          <span className="nav-pill-label">
+            <strong>Diccionario</strong>
+            <em>Buscá ES ↔ GN</em>
+          </span>
+        </NavLink>
+        <NavLink
+          to="/textos"
+          className={({ isActive }) => `nav-pill nav-pill-text ${isActive ? 'active' : ''}`}
+          onClick={() => onNavigate?.()}
+        >
+          <IconScroll />
+          <span className="nav-pill-label">
+            <strong>Textos</strong>
+            <em>PDFs y lectura</em>
+          </span>
+        </NavLink>
+      </div>
+      <div className="nav-account-slot">
+        <UserNavButton onNavigate={onNavigate} />
+      </div>
     </>
   )
 }
