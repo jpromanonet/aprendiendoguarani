@@ -231,7 +231,7 @@ export function CuentaPage() {
                   >
                     Galería
                   </button>
-                  <button type="button" className="profile-text-action danger" onClick={() => void signOut()}>
+                  <button type="button" className="profile-text-action profile-logout" onClick={() => void signOut()}>
                     Cerrar sesión
                   </button>
                 </div>

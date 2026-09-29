@@ -3034,15 +3034,17 @@ h3 {
   color: #1d2a16;
 }
 
-.profile-text-action.danger {
-  color: #fff1f0;
-  background: rgba(185, 48, 48, 0.88);
-  border-color: rgba(255, 170, 160, 0.35);
+.profile-actions .profile-text-action.profile-logout {
+  color: #fff;
+  background: #e11d48;
+  border-color: #fb7185;
+  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.28);
 }
 
-.profile-text-action.danger:hover:not(:disabled) {
-  background: rgb(205, 58, 58);
+.profile-actions .profile-text-action.profile-logout:hover:not(:disabled) {
   color: #fff;
+  background: #be123c;
+  border-color: #fda4af;
 }
 
 .profile-text-action:disabled {
