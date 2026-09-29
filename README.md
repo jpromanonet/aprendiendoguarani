@@ -20,4 +20,4 @@ npm run preview
 
 ## Contenido
 
-El material original está en `contenido_clases/` (PDFs y audios). El contenido publicado en el sitio vive en `src/data/classes.ts` y los audios en `public/audio/`.
+El contenido del sitio vive en `src/data/classes.ts`, los audios en `public/audio/` y los textos en `public/recursos/`.

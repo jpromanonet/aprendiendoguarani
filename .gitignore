@@ -27,8 +27,4 @@ dist-ssr
 _extracted/
 _tools/
 
-# Large reference PDFs (kept locally)
-contenido_clases/Ayvu Rapyta*.pdf
-contenido_clases/DICCIONARIO -Avanee*.pdf
-
 .vercel
