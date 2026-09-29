@@ -226,6 +226,64 @@ export const quizzes: Record<string, ClassQuiz> = {
       },
     ],
   },
+  'clase-5': {
+    classSlug: 'clase-5',
+    title: 'Autoevaluación — Clase 5',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c5-q1',
+        prompt: 'Para verbos orales, ¿qué prefijo usa Ñande?',
+        options: [
+          { id: 'a', label: 'ña-' },
+          { id: 'b', label: 'ja-' },
+          { id: 'c', label: 'ro-' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c5-q2',
+        prompt: "¿Cómo se dice “yo hablo” con ñe'ẽ?",
+        options: [
+          { id: 'a', label: "Che añe'ẽ" },
+          { id: 'b', label: "Che jañe'ẽ" },
+          { id: 'c', label: "Che oñe'ẽ" },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c5-q3',
+        prompt: '¿Cuándo se usa la partícula kuri?',
+        options: [
+          { id: 'a', label: 'Cuando el hablante fue testigo de la acción' },
+          { id: 'b', label: 'Solo para futuro' },
+          { id: 'c', label: 'Cuando hay sorpresa y no se fue testigo' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c5-q4',
+        prompt: "¿Qué expresa ra'e?",
+        options: [
+          { id: 'a', label: 'Un mandato' },
+          { id: 'b', label: 'Pasado sin ser testigo, o sorpresa' },
+          { id: 'c', label: 'El plural de los verbos' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c5-q5',
+        prompt: '¿Qué significa Purahéi?',
+        options: [
+          { id: 'a', label: 'Bailar' },
+          { id: 'b', label: 'Cantar' },
+          { id: 'c', label: 'Correr' },
+        ],
+        correctOptionId: 'b',
+      },
+    ],
+  },
 }
 
 export function getQuiz(classSlug: string) {
