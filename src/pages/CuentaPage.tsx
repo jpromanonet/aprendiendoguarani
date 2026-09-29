@@ -145,15 +145,7 @@ export function CuentaPage() {
                   )}
                 </div>
                 <input
-                  ref={cameraRef}
-                  className="sr-only"
-                  type="file"
-                  accept="image/*"
-                  capture="user"
-                  onChange={(e) => void onPickPhoto(e.target.files?.[0])}
-                />
-                <input
-                  ref={galleryRef}
+                  ref={photoRef}
                   className="sr-only"
                   type="file"
                   accept="image/*"
@@ -218,17 +210,9 @@ export function CuentaPage() {
                     type="button"
                     className="profile-text-action"
                     disabled={photoBusy}
-                    onClick={() => cameraRef.current?.click()}
+                    onClick={() => photoRef.current?.click()}
                   >
-                    {photoBusy ? 'Subiendo…' : 'Tomar foto'}
-                  </button>
-                  <button
-                    type="button"
-                    className="profile-text-action"
-                    disabled={photoBusy}
-                    onClick={() => galleryRef.current?.click()}
-                  >
-                    Galería
+                    {photoBusy ? 'Subiendo…' : 'Subir foto'}
                   </button>
                   <button type="button" className="profile-text-action profile-logout" onClick={() => void signOut()}>
                     Cerrar sesión
