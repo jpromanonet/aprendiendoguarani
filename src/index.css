@@ -2815,3 +2815,60 @@ h3 {
     flex-direction: column;
   }
 }
+
+.google-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 2.9rem;
+  margin-top: 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(7, 52, 40, 0.14);
+  background: #fff;
+  color: #1f1f1f;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(7, 52, 40, 0.08);
+}
+
+.google-btn:hover {
+  background: #f8fbf9;
+}
+
+.google-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.login-divider {
+  display: grid;
+  place-items: center;
+  margin: 1rem 0 0.35rem;
+  position: relative;
+}
+
+.login-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(7, 52, 40, 0.12);
+}
+
+.login-divider span {
+  position: relative;
+  z-index: 1;
+  padding: 0 0.7rem;
+  background: linear-gradient(160deg, #fff, #f3faf6);
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.account-login-card .account-form {
+  margin-top: 0.4rem;
+}

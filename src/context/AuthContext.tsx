@@ -18,6 +18,7 @@ type AuthContextValue = {
   user: User | null
   profile: Profile | null
   signInWithPassword: (email: string, password: string) => Promise<{ error: string | null }>
+  signInWithGoogle: () => Promise<{ error: string | null }>
   signUp: (email: string, password: string, displayName?: string) => Promise<{ error: string | null }>
   signOut: () => Promise<void>
   refreshProfile: () => Promise<void>
@@ -31,15 +32,45 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
 
-  const loadProfile = useCallback(async (userId: string) => {
+  const loadProfile = useCallback(async (userId: string, user?: User | null) => {
     if (!supabase) return
     const { data } = await supabase.from('profiles').select('*').eq('id', userId).maybeSingle()
+
+    // Si viene de Google y el perfil está vacío, sincronizar nombre/foto
+    const meta = user?.user_metadata
+    if (data && meta && (!data.display_name || !data.avatar_url)) {
+      const nextName =
+        data.display_name ||
+        (meta.full_name as string | undefined) ||
+        (meta.name as string | undefined) ||
+        null
+      const nextAvatar =
+        data.avatar_url ||
+        (meta.avatar_url as string | undefined) ||
+        (meta.picture as string | undefined) ||
+        null
+      if (nextName !== data.display_name || nextAvatar !== data.avatar_url) {
+        const { data: updated } = await supabase
+          .from('profiles')
+          .update({
+            display_name: nextName,
+            avatar_url: nextAvatar,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', userId)
+          .select()
+          .maybeSingle()
+        setProfile(updated ?? data)
+        return
+      }
+    }
+
     setProfile(data)
   }, [])
 
   const refreshProfile = useCallback(async () => {
     if (!session?.user) return
-    await loadProfile(session.user.id)
+    await loadProfile(session.user.id, session.user)
   }, [loadProfile, session?.user])
 
   useEffect(() => {
@@ -52,7 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return
       setSession(data.session)
-      if (data.session?.user) void loadProfile(data.session.user.id)
+      if (data.session?.user) void loadProfile(data.session.user.id, data.session.user)
       setLoading(false)
     })
 
@@ -60,7 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, next) => {
       setSession(next)
-      if (next?.user) void loadProfile(next.user.id)
+      if (next?.user) void loadProfile(next.user.id, next.user)
       else setProfile(null)
     })
 
@@ -80,6 +111,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async signInWithPassword(email, password) {
         if (!supabase) return { error: 'Supabase no está configurado.' }
         const { error } = await supabase.auth.signInWithPassword({ email, password })
+        return { error: error?.message ?? null }
+      },
+      async signInWithGoogle() {
+        if (!supabase) return { error: 'Supabase no está configurado.' }
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: `${window.location.origin}/cuenta`,
+            queryParams: {
+              access_type: 'offline',
+              prompt: 'select_account',
+            },
+          },
+        })
         return { error: error?.message ?? null }
       },
       async signUp(email, password, displayName) {
@@ -115,7 +160,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           .eq('id', session.user.id)
         if (updateError) return { error: updateError.message }
 
-        await loadProfile(session.user.id)
+        await loadProfile(session.user.id, session.user)
         return { error: null }
       },
     }),

@@ -14,6 +14,7 @@ export function CuentaPage() {
     user,
     profile,
     signInWithPassword,
+    signInWithGoogle,
     signUp,
     signOut,
     updateAvatar,
@@ -312,6 +313,46 @@ export function CuentaPage() {
         <p className="profile-kicker">Avañe'ẽ</p>
         <h1>{mode === 'login' ? 'Login' : 'Crear cuenta'}</h1>
         <p className="lede">Entrá para guardar progreso, foto de perfil y autoevaluaciones.</p>
+
+        <button
+          type="button"
+          className="google-btn"
+          disabled={busy}
+          onClick={() => {
+            setBusy(true)
+            setError(null)
+            void signInWithGoogle().then((result) => {
+              if (result.error) {
+                setError(result.error)
+                setBusy(false)
+              }
+            })
+          }}
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path
+              fill="#EA4335"
+              d="M12 10.2v3.6h5.1c-.2 1.2-.9 2.2-1.9 2.9l3.1 2.4c1.8-1.7 2.9-4.1 2.9-7 0-.7-.1-1.4-.2-2H12z"
+            />
+            <path
+              fill="#34A853"
+              d="M6.6 14.3l-.5.4-2.4 1.9C5.4 19.1 8.5 21 12 21c2.3 0 4.3-.8 5.7-2.1l-3.1-2.4c-.8.6-1.9.9-3.1.9-2.4 0-4.4-1.6-5.1-3.8z"
+            />
+            <path
+              fill="#4A90E2"
+              d="M3.7 7.4C3.3 8.3 3 9.4 3 10.5s.3 2.2.7 3.1C5.1 16.4 7.1 18 9.5 18c1.2 0 2.3-.3 3.1-.9l-3.1-2.4c-.9.6-2.1.5-2.9-.3-.7-.7-1.1-1.7-1.1-2.8 0-1 .4-2 1.1-2.8.8-.8 2-.9 2.9-.3l3.1-2.4C12.8 5.1 11.2 4.5 9.5 4.5 6.6 4.5 4.1 6.2 3.7 7.4z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M12 4.5c1.7 0 3.3.6 4.5 1.8l2.7-2.7C17.3 1.7 14.9.5 12 .5 8.5.5 5.4 2.4 3.7 5.4l3.1 2.4C7.6 6.1 9.6 4.5 12 4.5z"
+            />
+          </svg>
+          Continuar con Google
+        </button>
+
+        <div className="login-divider" aria-hidden="true">
+          <span>o con email</span>
+        </div>
 
         <form className="account-form" onSubmit={onSubmit}>
           {mode === 'register' ? (

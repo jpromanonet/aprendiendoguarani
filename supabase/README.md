@@ -11,6 +11,19 @@
 6. (Opcional) Auth → Settings → desactivá "Confirm email" mientras probás en local
 7. `npm run dev`
 
+## Login con Google
+
+1. Google Cloud Console → APIs & Services → Credentials → Create OAuth client (Web)
+2. Authorized redirect URI:
+   `https://uxtjvnbqpbkjjtzdeecd.supabase.co/auth/v1/callback`
+3. Supabase → Authentication → Providers → Google → Enable
+4. Pegá Client ID y Client Secret
+5. Authentication → URL Configuration:
+   - Site URL: `https://aprendiendoguarani.vercel.app`
+   - Redirect URLs:
+     - `https://aprendiendoguarani.vercel.app/**`
+     - `http://localhost:5173/**`
+
 ## Reglas de negocio
 
 - Nivel 1 = **15 clases** → certificado
