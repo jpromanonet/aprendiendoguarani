@@ -147,7 +147,7 @@ export function Layout() {
       </main>
 
       <footer className="site-footer">
-        <div className="footer-inner footer-social">
+        <div className="footer-inner footer-row">
           <div className="footer-credits">
             <p className="footer-credits-label">Contenido pedagógico</p>
             <ul className="footer-credits-list">
@@ -171,30 +171,33 @@ export function Layout() {
               ))}
             </ul>
           </div>
-          <p className="footer-love">
-            Hecho con amor <span className="footer-heart" aria-hidden="true">♥</span>
-          </p>
-          <a
-            className="footer-repo"
-            href="https://github.com/jpromanonet/aprendiendoguarani"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Ver el repo en GitHub
-          </a>
-          <div className="footer-icons" aria-label="Redes">
-            {socials.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={item.label}
-                title={item.label}
-              >
-                {item.icon}
-              </a>
-            ))}
+
+          <div className="footer-meta">
+            <p className="footer-love">
+              Hecho con amor <span className="footer-heart" aria-hidden="true">♥</span>
+            </p>
+            <a
+              className="footer-repo"
+              href="https://github.com/jpromanonet/aprendiendoguarani"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ver el repo en GitHub
+            </a>
+            <div className="footer-icons" aria-label="Redes">
+              {socials.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={item.label}
+                  title={item.label}
+                >
+                  {item.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </footer>
