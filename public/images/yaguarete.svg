@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" fill="none" role="img" aria-label="Yaguareté">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#083227"/>
+      <stop offset="55%" stop-color="#0f4d3a"/>
+      <stop offset="100%" stop-color="#1a6a52"/>
+    </linearGradient>
+    <linearGradient id="fur" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8b45a"/>
+      <stop offset="50%" stop-color="#d4923a"/>
+      <stop offset="100%" stop-color="#b56f22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#efc355" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#efc355" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#sky)"/>
+  <circle cx="860" cy="280" r="260" fill="url(#glow)"/>
+
+  <!-- ground / river hint -->
+  <path d="M0 560 C220 520 420 610 640 560 C860 510 1040 580 1200 540 L1200 700 L0 700 Z" fill="#06251d" opacity="0.9"/>
+  <path d="M0 600 C260 575 520 640 780 590 C980 555 1100 610 1200 585" stroke="#2f8f86" stroke-width="8" opacity="0.35" fill="none"/>
+
+  <!-- foliage silhouettes -->
+  <path d="M40 700 C80 420 180 360 250 700 Z" fill="#041c16" opacity="0.75"/>
+  <path d="M980 700 C1040 430 1140 380 1200 700 Z" fill="#041c16" opacity="0.8"/>
+  <ellipse cx="180" cy="180" rx="90" ry="50" fill="#0b3d2e" opacity="0.5"/>
+  <ellipse cx="1080" cy="150" rx="110" ry="60" fill="#0b3d2e" opacity="0.45"/>
+
+  <!-- jaguar body -->
+  <g transform="translate(430 210)">
+    <!-- hind leg -->
+    <path d="M250 250 C270 290 285 330 275 360 C255 370 240 350 235 320 C225 290 230 265 250 250 Z" fill="url(#fur)"/>
+    <!-- body -->
+    <ellipse cx="210" cy="210" rx="170" ry="95" fill="url(#fur)"/>
+    <!-- front leg -->
+    <path d="M95 230 C90 290 80 340 95 375 C120 380 135 350 140 300 C145 260 125 235 95 230 Z" fill="#c9842f"/>
+    <!-- chest -->
+    <path d="M40 160 C10 190 20 250 70 270 C120 250 130 190 100 155 Z" fill="#e0a84d"/>
+    <!-- neck + head -->
+    <path d="M20 140 C-10 120 -20 80 10 55 C45 30 95 40 115 75 C135 110 95 155 55 160 Z" fill="url(#fur)"/>
+    <!-- ear -->
+    <path d="M55 45 L75 10 L95 48 Z" fill="#c9842f"/>
+    <path d="M62 42 L75 22 L86 45 Z" fill="#2a1a10"/>
+    <!-- muzzle -->
+    <ellipse cx="18" cy="105" rx="34" ry="28" fill="#f0d19a"/>
+    <ellipse cx="8" cy="100" rx="7" ry="5" fill="#1a120c"/>
+    <ellipse cx="28" cy="100" rx="7" ry="5" fill="#1a120c"/>
+    <path d="M10 118 C18 126 26 126 34 118" stroke="#1a120c" stroke-width="3" stroke-linecap="round"/>
+    <!-- eye -->
+    <ellipse cx="55" cy="78" rx="10" ry="8" fill="#1d2a16"/>
+    <circle cx="58" cy="76" r="3" fill="#efc355"/>
+    <!-- tail -->
+    <path d="M360 190 C430 160 470 220 455 280 C445 250 410 210 360 220 Z" fill="url(#fur)"/>
+
+    <!-- rosettes -->
+    <g fill="#1a120c" opacity="0.85">
+      <ellipse cx="160" cy="175" rx="10" ry="7"/>
+      <ellipse cx="195" cy="160" rx="9" ry="6"/>
+      <ellipse cx="230" cy="180" rx="11" ry="7"/>
+      <ellipse cx="265" cy="165" rx="8" ry="6"/>
+      <ellipse cx="145" cy="210" rx="8" ry="5"/>
+      <ellipse cx="210" cy="215" rx="10" ry="6"/>
+      <ellipse cx="255" cy="205" rx="9" ry="5"/>
+      <ellipse cx="90" cy="185" rx="7" ry="5"/>
+      <ellipse cx="70" cy="150" rx="6" ry="4"/>
+      <ellipse cx="105" cy="130" rx="5" ry="4"/>
+      <ellipse cx="400" cy="210" rx="7" ry="5"/>
+      <ellipse cx="430" cy="235" rx="6" ry="4"/>
+      <circle cx="163" cy="175" r="2.5" fill="#d4923a"/>
+      <circle cx="233" cy="180" r="2.5" fill="#d4923a"/>
+      <circle cx="213" cy="215" r="2.2" fill="#d4923a"/>
+    </g>
+  </g>
+
+  <!-- soft vignette -->
+  <rect width="1200" height="700" fill="url(#glow)" opacity="0.35"/>
+  <path d="M0 0 H520 C420 180 360 320 0 420 Z" fill="#04261e" opacity="0.55"/>
+</svg>

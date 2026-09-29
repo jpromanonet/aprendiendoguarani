@@ -498,66 +498,33 @@ img {
 .home-hero {
   position: relative;
   overflow: hidden;
-  min-height: min(72vh, 620px);
+  min-height: min(78vh, 680px);
   display: grid;
   align-items: end;
   color: #f4fff8;
   background: #04261e;
 }
 
-.home-hero-bg {
+.home-hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.home-hero-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% center;
+  display: block;
+}
+
+.home-hero-scrim {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 18% 70%, rgba(36, 131, 140, 0.4), transparent 30%),
-    radial-gradient(circle at 82% 18%, rgba(239, 195, 85, 0.24), transparent 28%),
-    linear-gradient(155deg, #04261e 0%, #0b3d2e 42%, #14523e 74%, #1a6a52 100%);
-}
-
-.home-hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 52px 52px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 88%);
-  opacity: 0.45;
-}
-
-.hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(2px);
-  opacity: 0.55;
-  animation: floaty 11s ease-in-out infinite;
-}
-
-.hero-orb-a {
-  width: 16rem;
-  height: 16rem;
-  left: -3rem;
-  bottom: 8%;
-  background: radial-gradient(circle, rgba(56, 170, 150, 0.5), transparent 70%);
-}
-
-.hero-orb-b {
-  width: 11rem;
-  height: 11rem;
-  right: 10%;
-  top: 14%;
-  background: radial-gradient(circle, rgba(239, 195, 85, 0.42), transparent 70%);
-  animation-delay: -3s;
-}
-
-.hero-orb-c {
-  width: 7rem;
-  height: 7rem;
-  right: 30%;
-  bottom: 24%;
-  background: radial-gradient(circle, rgba(143, 214, 196, 0.35), transparent 70%);
-  animation-delay: -6s;
+    linear-gradient(90deg, rgba(4, 38, 30, 0.88) 0%, rgba(4, 38, 30, 0.55) 42%, rgba(4, 38, 30, 0.18) 70%, rgba(4, 38, 30, 0.35) 100%),
+    linear-gradient(180deg, rgba(4, 38, 30, 0.2) 0%, rgba(4, 38, 30, 0.15) 50%, rgba(4, 38, 30, 0.72) 100%);
+  pointer-events: none;
 }
 
 .home-hero-inner {
@@ -565,18 +532,16 @@ img {
   z-index: 1;
   width: min(1120px, calc(100% - 2.4rem));
   margin: 0 auto;
-  padding: clamp(4.5rem, 10vh, 6.5rem) 0 clamp(2.8rem, 6vh, 4rem);
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: end;
+  padding: clamp(5rem, 12vh, 7rem) 0 clamp(3rem, 7vh, 4.5rem);
+  max-width: 36rem;
+  margin-left: max(1.2rem, calc((100% - min(1120px, 100% - 2.4rem)) / 2));
   animation: rise 0.8s var(--ease-out) both;
 }
 
 .home-hero-brand {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(3.6rem, 10vw, 6.8rem);
+  font-size: clamp(3.8rem, 11vw, 7rem);
   line-height: 0.92;
   letter-spacing: -0.03em;
   background: linear-gradient(120deg, #fff 12%, #efc355 48%, #b8f0d8 82%, #fff 100%);
@@ -592,7 +557,7 @@ img {
   max-width: 32rem;
   font-size: clamp(1.05rem, 2.3vw, 1.25rem);
   line-height: 1.55;
-  color: rgba(244, 255, 248, 0.86);
+  color: rgba(244, 255, 248, 0.9);
 }
 
 .home-hero-actions {
@@ -600,34 +565,6 @@ img {
   flex-wrap: wrap;
   gap: 0.8rem;
   margin-top: 1.8rem;
-}
-
-.home-hero-art {
-  margin: 0;
-  position: relative;
-  justify-self: end;
-  width: min(100%, 420px);
-  animation: riseSoft 0.9s var(--ease-out) both;
-  animation-delay: 0.12s;
-}
-
-.home-hero-art img {
-  width: 100%;
-  height: auto;
-  max-height: min(58vh, 520px);
-  object-fit: contain;
-  object-position: bottom center;
-  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
-}
-
-.home-hero-art figcaption {
-  position: absolute;
-  right: 0.2rem;
-  bottom: 0.2rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(244, 255, 248, 0.55);
 }
 
 .home-direct {
@@ -1732,18 +1669,13 @@ h3 {
   }
 
   .home-hero-inner {
-    grid-template-columns: 1fr;
-    align-items: start;
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .home-hero-art {
-    justify-self: center;
-    order: -1;
-    width: min(100%, 280px);
-  }
-
-  .home-hero-art img {
-    max-height: 280px;
+  .home-hero-svg {
+    object-position: 70% center;
   }
 
   .how-strip {
