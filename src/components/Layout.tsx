@@ -148,6 +148,13 @@ export function Layout() {
 
       <footer className="site-footer">
         <div className="footer-inner footer-social">
+          <div className="footer-credits">
+            <p className="footer-credits-label">Contenido pedagógico</p>
+            <p className="footer-credits-names">
+              Verónica Mabel Gómez · Ercilia Noemí Ocampos · Liliana Bernal · Yéssica
+              Rodríguez
+            </p>
+          </div>
           <p className="footer-love">
             Hecho con amor <span className="footer-heart" aria-hidden="true">♥</span>
           </p>

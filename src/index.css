@@ -2000,6 +2000,30 @@ h3 {
   text-align: center;
 }
 
+.footer-credits {
+  max-width: 36rem;
+  margin: 0 0 0.35rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(7, 52, 40, 0.08);
+}
+
+.footer-credits-label {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(69, 100, 87, 0.72);
+}
+
+.footer-credits-names {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: rgba(69, 100, 87, 0.88);
+  font-weight: 500;
+}
+
 .footer-love {
   margin: 0;
   font-family: var(--font-display);
