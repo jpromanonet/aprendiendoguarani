@@ -50,7 +50,11 @@ function IconScroll() {
   )
 }
 
-export function ClasesDropdown() {
+type NavPillsProps = {
+  onNavigate?: () => void
+}
+
+export function ClasesDropdown({ onNavigate }: NavPillsProps) {
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
   const menuId = useId()
@@ -96,7 +100,10 @@ export function ClasesDropdown() {
             <Link
               to={`/${nivel.slug}`}
               className="nav-level-head"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false)
+                onNavigate?.()
+              }}
             >
               <span>
                 <strong>{nivel.title}</strong>
@@ -112,7 +119,10 @@ export function ClasesDropdown() {
                   role="menuitem"
                   className="nav-class-item"
                   style={{ '--i': index } as CSSProperties}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false)
+                    onNavigate?.()
+                  }}
                 >
                   <span className="nav-class-num">{String(lesson.id).padStart(2, '0')}</span>
                   <span className="nav-class-title">{lesson.subtitle}</span>
@@ -126,15 +136,23 @@ export function ClasesDropdown() {
   )
 }
 
-export function NavPills() {
+export function NavPills({ onNavigate }: NavPillsProps) {
   return (
     <>
-      <ClasesDropdown />
-      <NavLink to="/diccionario" className={({ isActive }) => `nav-pill nav-pill-dict ${isActive ? 'active' : ''}`}>
+      <ClasesDropdown onNavigate={onNavigate} />
+      <NavLink
+        to="/diccionario"
+        className={({ isActive }) => `nav-pill nav-pill-dict ${isActive ? 'active' : ''}`}
+        onClick={() => onNavigate?.()}
+      >
         <IconSearch />
         Diccionario
       </NavLink>
-      <NavLink to="/textos" className={({ isActive }) => `nav-pill nav-pill-text ${isActive ? 'active' : ''}`}>
+      <NavLink
+        to="/textos"
+        className={({ isActive }) => `nav-pill nav-pill-text ${isActive ? 'active' : ''}`}
+        onClick={() => onNavigate?.()}
+      >
         <IconScroll />
         Textos
       </NavLink>

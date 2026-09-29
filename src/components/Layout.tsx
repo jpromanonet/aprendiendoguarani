@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { useEffect, useId, useState } from 'react'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { courseInfo } from '../data/classes'
 import { NavPills } from './NavControls'
 
@@ -66,10 +67,31 @@ const socials = [
 ]
 
 export function Layout() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const location = useLocation()
+  const navId = useId()
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    document.body.classList.add('nav-open')
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.classList.remove('nav-open')
+    }
+  }, [menuOpen])
+
   return (
     <div className="app-shell">
-      <header className="site-header">
-        <NavLink to="/" className="brand" end>
+      <header className={`site-header ${menuOpen ? 'menu-open' : ''}`}>
+        <NavLink to="/" className="brand" end onClick={() => setMenuOpen(false)}>
           <span className="brand-mark" aria-hidden="true" />
           <span className="brand-text">
             <strong>{courseInfo.name}</strong>
@@ -77,8 +99,32 @@ export function Layout() {
           </span>
         </NavLink>
 
-        <nav className="site-nav" aria-label="Principal">
-          <NavPills />
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-expanded={menuOpen}
+          aria-controls={navId}
+          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          onClick={() => setMenuOpen((value) => !value)}
+        >
+          <span className="menu-toggle-bars" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </span>
+        </button>
+
+        <button
+          type="button"
+          className="nav-backdrop"
+          aria-label="Cerrar menú"
+          tabIndex={menuOpen ? 0 : -1}
+          hidden={!menuOpen}
+          onClick={() => setMenuOpen(false)}
+        />
+
+        <nav className="site-nav" id={navId} aria-label="Principal" data-open={menuOpen || undefined}>
+          <NavPills onNavigate={() => setMenuOpen(false)} />
         </nav>
       </header>
 
