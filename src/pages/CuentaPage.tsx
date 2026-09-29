@@ -29,8 +29,13 @@ export function CuentaPage() {
   const [photoBusy, setPhotoBusy] = useState(false)
   const [rows, setRows] = useState<LessonProgress[]>([])
   const [assessments, setAssessments] = useState<SelfAssessment[]>([])
+  const [openLevels, setOpenLevels] = useState<Record<string, boolean>>({ 'nivel-1': true })
   const cameraRef = useRef<HTMLInputElement>(null)
   const galleryRef = useRef<HTMLInputElement>(null)
+
+  function toggleLevel(slug: string) {
+    setOpenLevels((prev) => ({ ...prev, [slug]: !prev[slug] }))
+  }
 
   useEffect(() => {
     if (!user || !supabase) return
@@ -217,11 +222,13 @@ export function CuentaPage() {
           </article>
         </section>
 
-        <section className="profile-panel">
+        <div className="profile-cut" aria-hidden="true" />
+
+        <section className="profile-panel levels-journey" aria-label="Niveles del curso">
           <div className="profile-panel-head">
             <div>
-              <p className="eyebrow">Tu experiencia</p>
-              <h2>Recorrido del Nivel 1</h2>
+              <p className="eyebrow">Camino completo</p>
+              <h2>Niveles del curso</h2>
             </div>
             <button type="button" className="ghost-btn" onClick={() => void signOut()}>
               Cerrar sesión
@@ -234,80 +241,114 @@ export function CuentaPage() {
             </div>
             <p className="lede">
               {readyForCert
-                ? 'Cumpliste las 15 clases. El certificado se habilita en la próxima etapa.'
-                : `Te faltan ${NIVEL_1_TOTAL_CLASSES - completedCount} clases para el certificado.`}
+                ? 'Cumpliste las 15 clases del Nivel 1. El certificado se habilita en la próxima etapa.'
+                : `Nivel 1: te faltan ${NIVEL_1_TOTAL_CLASSES - completedCount} clases para el certificado.`}
             </p>
           </div>
 
-          <ul className="progress-list rich">
-            {allNivel1Slugs().map((slug, index) => {
-              const id = index + 1
-              const published = classes.find((c) => c.slug === slug)
-              const row = bySlug.get(slug)
-              const classAssess = assessments.filter((a) => a.class_slug === slug)
-              const passed = classAssess.some((a) => a.passed)
-              const status = row?.completed
-                ? 'Completada'
-                : row
-                  ? 'En curso'
-                  : published
-                    ? 'Sin empezar'
-                    : 'Próximamente'
+          <div className="level-accordions">
+            {levels.map((nivel) => {
+              const isOpen = Boolean(openLevels[nivel.slug])
+              const panelId = `level-panel-${nivel.slug}`
+              const nivelClasses = nivel.available ? allNivel1Slugs() : []
+
               return (
-                <li key={slug} className={row?.completed ? 'done' : row ? 'active' : ''}>
-                  <div className="progress-item-main">
-                    <span className="progress-num">{String(id).padStart(2, '0')}</span>
-                    <div>
-                      <strong>
-                        {published ? published.subtitle : `Clase ${id}`}
-                      </strong>
-                      <span>
-                        {status}
-                        {passed ? ' · Autoeval OK' : classAssess.length ? ` · ${classAssess.length} intento(s)` : ''}
-                      </span>
-                    </div>
+                <div
+                  key={nivel.slug}
+                  className={`level-accordion ${nivel.available ? 'available' : 'locked'} ${isOpen ? 'is-open' : ''}`}
+                >
+                  <button
+                    type="button"
+                    className="level-accordion-trigger"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => toggleLevel(nivel.slug)}
+                  >
+                    <span className="level-accordion-copy">
+                      <strong>{nivel.title}</strong>
+                      <em>{nivel.subtitle}</em>
+                    </span>
+                    <span className="level-accordion-meta">
+                      {nivel.available ? (
+                        <span className="level-accordion-count">
+                          {completedCount}/{NIVEL_1_TOTAL_CLASSES}
+                        </span>
+                      ) : (
+                        <span className="soon-pill">Próximamente</span>
+                      )}
+                      <span className="level-accordion-chevron" aria-hidden="true" />
+                    </span>
+                  </button>
+
+                  <div
+                    id={panelId}
+                    className="level-accordion-panel"
+                    role="region"
+                    hidden={!isOpen}
+                  >
+                    <p className="level-accordion-desc">{nivel.description}</p>
+
+                    {nivel.available ? (
+                      <>
+                        <ul className="progress-list rich">
+                          {nivelClasses.map((slug, index) => {
+                            const id = index + 1
+                            const published = classes.find((c) => c.slug === slug)
+                            const row = bySlug.get(slug)
+                            const classAssess = assessments.filter((a) => a.class_slug === slug)
+                            const passed = classAssess.some((a) => a.passed)
+                            const status = row?.completed
+                              ? 'Completada'
+                              : row
+                                ? 'En curso'
+                                : published
+                                  ? 'Sin empezar'
+                                  : 'Próximamente'
+                            return (
+                              <li key={slug} className={row?.completed ? 'done' : row ? 'active' : ''}>
+                                <div className="progress-item-main">
+                                  <span className="progress-num">{String(id).padStart(2, '0')}</span>
+                                  <div>
+                                    <strong>{published ? published.subtitle : `Clase ${id}`}</strong>
+                                    <span>
+                                      {status}
+                                      {passed
+                                        ? ' · Autoeval OK'
+                                        : classAssess.length
+                                          ? ` · ${classAssess.length} intento(s)`
+                                          : ''}
+                                    </span>
+                                  </div>
+                                </div>
+                                {published ? (
+                                  <Link to={`/${nivel.slug}/clase/${slug}`}>
+                                    {row?.completed ? 'Repasar' : 'Entrar'} →
+                                  </Link>
+                                ) : (
+                                  <span className="muted">—</span>
+                                )}
+                              </li>
+                            )
+                          })}
+                        </ul>
+                        {startedCount === 0 ? (
+                          <p className="profile-empty">
+                            Todavía no empezaste. Entrá a la{' '}
+                            <Link to={`/${nivel.slug}/clase/clase-1`}>Clase 1</Link> y tu progreso
+                            aparece acá.
+                          </p>
+                        ) : null}
+                      </>
+                    ) : (
+                      <p className="level-accordion-empty">
+                        Las clases de este nivel se publicarán pronto.
+                      </p>
+                    )}
                   </div>
-                  {published ? (
-                    <Link to={`/nivel-1/clase/${slug}`}>{row?.completed ? 'Repasar' : 'Entrar'} →</Link>
-                  ) : (
-                    <span className="muted">—</span>
-                  )}
-                </li>
+                </div>
               )
             })}
-          </ul>
-
-          {startedCount === 0 ? (
-            <p className="profile-empty">
-              Todavía no empezaste. Entrá a la{' '}
-              <Link to="/nivel-1/clase/clase-1">Clase 1</Link> y tu progreso aparece acá.
-            </p>
-          ) : null}
-        </section>
-
-        <section className="profile-panel levels-roadmap" aria-label="Próximos niveles">
-          <div className="profile-panel-head">
-            <div>
-              <p className="eyebrow">Camino completo</p>
-              <h2>Niveles del curso</h2>
-            </div>
           </div>
-          <ul className="levels-roadmap-list">
-            {levels.map((nivel) => (
-              <li key={nivel.slug} className={nivel.available ? 'open' : 'locked'}>
-                <div>
-                  <strong>{nivel.title}</strong>
-                  <span>{nivel.subtitle}</span>
-                  <p>{nivel.description}</p>
-                </div>
-                {nivel.available ? (
-                  <Link to={`/${nivel.slug}`}>Ver clases →</Link>
-                ) : (
-                  <span className="soon-pill">Próximamente</span>
-                )}
-              </li>
-            ))}
-          </ul>
         </section>
       </div>
     )
