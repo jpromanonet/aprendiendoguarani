@@ -135,9 +135,6 @@ export function CuentaPage() {
       <div className="account-shell">
         <section className="profile-hero">
           <div className="profile-hero-glow" aria-hidden="true" />
-          <button type="button" className="profile-logout-btn" onClick={() => void signOut()}>
-            Cerrar sesión
-          </button>
           <div className="profile-hero-main">
             <div className="profile-identity">
               <div className="profile-avatar-wrap">
@@ -147,24 +144,6 @@ export function CuentaPage() {
                   ) : (
                     <span className="profile-photo-fallback" aria-hidden="true" />
                   )}
-                </div>
-                <div className="profile-avatar-actions">
-                  <button
-                    type="button"
-                    className="profile-cam-btn"
-                    disabled={photoBusy}
-                    onClick={() => cameraRef.current?.click()}
-                  >
-                    {photoBusy ? '…' : 'Tomar foto'}
-                  </button>
-                  <button
-                    type="button"
-                    className="profile-cam-btn ghost"
-                    disabled={photoBusy}
-                    onClick={() => galleryRef.current?.click()}
-                  >
-                    Galería
-                  </button>
                 </div>
                 <input
                   ref={cameraRef}
@@ -202,12 +181,12 @@ export function CuentaPage() {
                       disabled={nameBusy}
                     />
                     <div className="profile-name-actions">
-                      <button type="submit" className="profile-cam-btn" disabled={nameBusy}>
+                      <button type="submit" className="profile-text-action solid" disabled={nameBusy}>
                         {nameBusy ? '…' : 'Guardar'}
                       </button>
                       <button
                         type="button"
-                        className="profile-cam-btn ghost"
+                        className="profile-text-action"
                         disabled={nameBusy}
                         onClick={() => {
                           setEditingName(false)
@@ -219,24 +198,42 @@ export function CuentaPage() {
                     </div>
                   </form>
                 ) : (
-                  <div className="profile-name-row">
-                    <h1>{profile?.display_name || 'Alumno/a'}</h1>
-                    <button type="button" className="profile-edit-name" onClick={startEditName}>
-                      Editar
-                    </button>
-                  </div>
+                  <h1>{profile?.display_name || 'Alumno/a'}</h1>
                 )}
                 <p className="profile-email">{profile?.email || user.email}</p>
-                {memberSince ? <p className="profile-meta">Miembro desde {memberSince}</p> : null}
+                <p className="profile-meta">
+                  {memberSince ? <>Miembro desde {memberSince}</> : null}
+                  {memberSince ? ' · ' : null}
+                  Alumno
+                  {quizzesPassed > 0 ? <> · {quizzesPassed} autoevals</> : null}
+                  {readyForCert ? <> · Listo para certificado</> : null}
+                </p>
 
-                <div className="profile-toolbar" aria-label="Estado de la cuenta">
-                  <span className="profile-chip">Alumno</span>
-                  {readyForCert ? <span className="profile-chip gold">Listo para certificado</span> : null}
-                  {quizzesPassed > 0 ? (
-                    <span className="profile-chip soft">
-                      <strong>{quizzesPassed}</strong> autoevals
-                    </span>
+                <div className="profile-actions" aria-label="Acciones de perfil">
+                  {!editingName ? (
+                    <button type="button" className="profile-text-action" onClick={startEditName}>
+                      Editar nombre
+                    </button>
                   ) : null}
+                  <button
+                    type="button"
+                    className="profile-text-action"
+                    disabled={photoBusy}
+                    onClick={() => cameraRef.current?.click()}
+                  >
+                    {photoBusy ? 'Subiendo…' : 'Tomar foto'}
+                  </button>
+                  <button
+                    type="button"
+                    className="profile-text-action"
+                    disabled={photoBusy}
+                    onClick={() => galleryRef.current?.click()}
+                  >
+                    Galería
+                  </button>
+                  <button type="button" className="profile-text-action muted" onClick={() => void signOut()}>
+                    Cerrar sesión
+                  </button>
                 </div>
               </div>
             </div>
