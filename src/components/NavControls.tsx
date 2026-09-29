@@ -53,11 +53,11 @@ function IconScroll() {
 
 type NavPillsProps = {
   onNavigate?: () => void
-  expandClases?: boolean
 }
 
-export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
+export function ClasesDropdown({ onNavigate }: NavPillsProps) {
   const [open, setOpen] = useState(false)
+  const [openLevels, setOpenLevels] = useState<Record<string, boolean>>({})
   const rootRef = useRef<HTMLDivElement>(null)
   const menuId = useId()
   const location = useLocation()
@@ -65,11 +65,8 @@ export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
 
   useEffect(() => {
     setOpen(false)
+    setOpenLevels({})
   }, [location.pathname])
-
-  useEffect(() => {
-    if (expandClases) setOpen(true)
-  }, [expandClases])
 
   useEffect(() => {
     if (!open) return
@@ -86,6 +83,10 @@ export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
       document.removeEventListener('keydown', onKey)
     }
   }, [open])
+
+  function toggleLevel(slug: string) {
+    setOpenLevels((prev) => ({ ...prev, [slug]: !prev[slug] }))
+  }
 
   return (
     <div className={`nav-dropdown ${open ? 'open' : ''} ${active ? 'active' : ''}`} ref={rootRef}>
@@ -106,34 +107,49 @@ export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
       <div className="nav-menu nivel-menu" id={menuId} role="menu" hidden={!open}>
         {levels.map((nivel) => {
           const nivelClasses = nivel.available ? classes : []
+          const levelOpen = Boolean(openLevels[nivel.slug])
+          const panelId = `${menuId}-${nivel.slug}`
+
           return (
             <section
               key={nivel.slug}
-              className={`nav-level-group ${nivel.available ? '' : 'coming-soon'}`}
+              className={`nav-level-group ${nivel.available ? '' : 'coming-soon'} ${levelOpen ? 'is-open' : ''}`}
             >
-              {nivel.available ? (
-                <Link
-                  to={`/${nivel.slug}`}
-                  className="nav-level-head"
-                  onClick={() => {
-                    setOpen(false)
-                    onNavigate?.()
-                  }}
-                >
-                  <span>
-                    <strong>{nivel.title}</strong>
+              <button
+                type="button"
+                className={`nav-level-head ${nivel.available ? '' : 'locked'}`}
+                aria-expanded={levelOpen}
+                aria-controls={panelId}
+                onClick={() => toggleLevel(nivel.slug)}
+              >
+                <span>
+                  <strong>{nivel.title}</strong>
+                </span>
+                <span className="nav-level-meta">
+                  <span className={`nav-level-all ${nivel.available ? '' : 'soon'}`}>
+                    {nivel.available ? (levelOpen ? 'Ocultar' : 'Ver') : 'Próximamente'}
                   </span>
-                  <span className="nav-level-all">Ver todo</span>
-                </Link>
-              ) : (
-                <div className="nav-level-head locked">
-                  <span>
-                    <strong>{nivel.title}</strong>
+                  <span className="nav-level-chevron" aria-hidden="true">
+                    <Chevron />
                   </span>
-                  <span className="nav-level-all soon">Próximamente</span>
-                </div>
-              )}
-              <div className="nav-level-classes">
+                </span>
+              </button>
+
+              <div id={panelId} className="nav-level-classes" hidden={!levelOpen}>
+                {nivel.available ? (
+                  <Link
+                    to={`/${nivel.slug}`}
+                    className="nav-class-item nav-level-overview"
+                    role="menuitem"
+                    onClick={() => {
+                      setOpen(false)
+                      onNavigate?.()
+                    }}
+                  >
+                    <span className="nav-class-num">→</span>
+                    <span className="nav-class-title">Ver todo el nivel</span>
+                  </Link>
+                ) : null}
                 {nivelClasses.length > 0 ? (
                   nivelClasses.map((lesson, index) => (
                     <Link
@@ -163,11 +179,11 @@ export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
   )
 }
 
-export function NavPills({ onNavigate, expandClases }: NavPillsProps) {
+export function NavPills({ onNavigate }: NavPillsProps) {
   return (
     <>
       <div className="nav-cluster" aria-label="Contenido">
-        <ClasesDropdown onNavigate={onNavigate} expandClases={expandClases} />
+        <ClasesDropdown onNavigate={onNavigate} />
         <NavLink
           to="/diccionario"
           className={({ isActive }) => `nav-pill nav-pill-dict ${isActive ? 'active' : ''}`}
@@ -227,7 +243,7 @@ function UserNavButton({ onNavigate }: { onNavigate?: () => void }) {
       {avatar ? <img className="nav-avatar" src={avatar} alt="" /> : <IconUser />}
       <span className="nav-pill-label">
         <strong>{user ? 'Perfil' : 'Login'}</strong>
-        <em>{user ? 'Progreso y foto' : 'Ingresá'}</em>
+        <em>{user ? 'Tu cuenta' : 'Ingresá'}</em>
       </span>
     </NavLink>
   )

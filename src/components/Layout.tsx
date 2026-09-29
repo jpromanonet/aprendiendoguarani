@@ -129,7 +129,7 @@ export function Layout() {
             <strong className="mobile-nav-title">¿Qué querés hacer?</strong>
           </div>
           <div className="mobile-nav-links">
-            <NavPills onNavigate={() => setMenuOpen(false)} expandClases={menuOpen} />
+            <NavPills onNavigate={() => setMenuOpen(false)} />
           </div>
           <div className="mobile-nav-foot">
             <p>
