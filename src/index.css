@@ -221,7 +221,10 @@ body.nav-open {
 }
 
 .mobile-nav-top,
-.mobile-nav-foot,
+.mobile-nav-foot {
+  display: none;
+}
+
 .mobile-nav-links {
   display: contents;
 }
@@ -1909,8 +1912,7 @@ h3 {
   }
 
   .mobile-nav-top,
-  .mobile-nav-foot,
-  .mobile-nav-links {
+  .mobile-nav-foot {
     display: block;
   }
 
@@ -1936,11 +1938,11 @@ h3 {
   }
 
   .mobile-nav-links {
+    display: flex;
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding: 0.35rem 1rem 1rem;
-    display: flex;
     flex-direction: column;
     gap: 0.55rem;
   }
