@@ -15,7 +15,7 @@ export type Section =
   | { type: 'list'; title: string; items: string[] }
   | { type: 'vocab'; title: string; items: VocabItem[]; audio?: string }
   | { type: 'colors'; title: string; items: ColorItem[]; audio?: string }
-  | { type: 'alphabet'; title: string; letters: string[]; vowels: string[] }
+  | { type: 'alphabet'; title: string; letters: string[]; vowels: string[]; audio?: string; vowelsAudio?: string }
   | { type: 'pronouns'; title: string; singular: VocabItem[]; plural: VocabItem[]; audio?: string }
   | { type: 'pairs'; title: string; subtitle?: string; groups: { label: string; items: VocabItem[] }[] }
   | { type: 'rules'; title: string; rules: { title: string; body: string }[] }
@@ -60,7 +60,7 @@ export const classes: ClassLesson[] = [
     date: 'Lunes 31 de agosto de 2026',
     subtitle: "Avañe'ẽ — la lengua del hombre",
     summary:
-      'Introducción al guaraní: significado del nombre, alfabeto, vocales y las características esenciales del idioma. Saludos y agradecimiento.',
+      'Introducción al guaraní: significado del nombre, alfabeto, vocales y las características esenciales del idioma. Saludos y agradecimiento. Incluye audios del abecedario y de las vocales.',
     themes: ['Introducción', 'Alfabeto', 'Características', 'Saludos'],
     sections: [
       {
@@ -76,6 +76,8 @@ export const classes: ClassLesson[] = [
       {
         type: 'alphabet',
         title: "Avañe'ẽ achegety — Alfabeto guaraní",
+        audio: '/audio/abecedario.m4a',
+        vowelsAudio: '/audio/vocales.m4a',
         letters: [
           'A', 'Ã', 'CH', 'E', 'Ẽ', 'G', 'G̃', 'H', 'I', 'Ĩ', 'J', 'K', 'L', 'M', 'MB',
           'N', 'ND', 'NG', 'NT', 'Ñ', 'O', 'Õ', 'P', 'R', 'RR', 'S', 'T', 'U', 'Ũ', 'V', 'Y', 'Ỹ', "'",

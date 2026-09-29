@@ -39,6 +39,7 @@ export function SectionRenderer({ section }: { section: Section }) {
           <div className="section-heading">
             <h2>{section.title}</h2>
           </div>
+          {section.audio ? <AudioBlock src={section.audio} label="Abecedario" /> : null}
           <div className="alphabet-grid">
             {section.letters.map((letter, index) => (
               <span
@@ -51,6 +52,7 @@ export function SectionRenderer({ section }: { section: Section }) {
             ))}
           </div>
           <p className="subheading">Pu'ae — Vocales</p>
+          {section.vowelsAudio ? <AudioBlock src={section.vowelsAudio} label="Vocales" /> : null}
           <div className="alphabet-grid vowels">
             {section.vowels.map((letter, index) => (
               <span
