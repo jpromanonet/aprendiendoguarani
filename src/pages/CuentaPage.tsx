@@ -1,6 +1,11 @@
-import { useRef, useState, type FormEvent } from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { classes } from '../data/classes'
+import { NIVEL_1_TOTAL_CLASSES, allNivel1Slugs } from '../data/nivel1'
+import { fetchProgress } from '../lib/progress'
+import { supabase } from '../lib/supabase'
+import type { LessonProgress, SelfAssessment } from '../types/database'
 
 export function CuentaPage() {
   const {
@@ -21,26 +26,60 @@ export function CuentaPage() {
   const [message, setMessage] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [photoBusy, setPhotoBusy] = useState(false)
+  const [rows, setRows] = useState<LessonProgress[]>([])
+  const [assessments, setAssessments] = useState<SelfAssessment[]>([])
   const cameraRef = useRef<HTMLInputElement>(null)
   const galleryRef = useRef<HTMLInputElement>(null)
 
+  useEffect(() => {
+    if (!user || !supabase) return
+    void Promise.all([
+      fetchProgress(user.id),
+      supabase.from('self_assessments').select('*').eq('user_id', user.id),
+    ])
+      .then(([progress, assess]) => {
+        setRows(progress)
+        setAssessments((assess.data ?? []) as SelfAssessment[])
+      })
+      .catch((err: Error) => setError(err.message))
+  }, [user])
+
+  const bySlug = useMemo(() => new Map(rows.map((r) => [r.class_slug, r])), [rows])
+  const completedCount = allNivel1Slugs().filter((slug) => bySlug.get(slug)?.completed).length
+  const inProgressCount = rows.filter((r) => !r.completed).length
+  const startedCount = rows.length
+  const progressPct = Math.round((completedCount / NIVEL_1_TOTAL_CLASSES) * 100)
+  const quizAttempts = assessments.length
+  const quizzesPassed = new Set(assessments.filter((a) => a.passed).map((a) => a.class_slug)).size
+  const bestScore = assessments.length ? Math.max(...assessments.map((a) => a.score)) : null
+  const memberSince = profile?.created_at
+    ? new Date(profile.created_at).toLocaleDateString('es-AR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+    : null
+  const readyForCert = completedCount >= NIVEL_1_TOTAL_CLASSES
+  const nextClass = allNivel1Slugs().find((slug) => !bySlug.get(slug)?.completed)
+  const nextPublished = nextClass ? classes.find((c) => c.slug === nextClass) : undefined
+
   if (!configured) {
     return (
-      <div className="account-page">
-        <header className="resource-hero dict">
-          <h1>Mi cuenta</h1>
+      <div className="account-shell">
+        <div className="account-login-card">
+          <h1>Login</h1>
           <p className="lede">
-            Falta conectar Supabase. Creá un proyecto y cargá <code>VITE_SUPABASE_URL</code> y{' '}
+            Falta conectar Supabase. Cargá <code>VITE_SUPABASE_URL</code> y{' '}
             <code>VITE_SUPABASE_ANON_KEY</code> en <code>.env.local</code>.
           </p>
-        </header>
+        </div>
       </div>
     )
   }
 
   if (loading) {
     return (
-      <div className="account-page">
+      <div className="account-shell">
         <p className="lede">Cargando sesión…</p>
       </div>
     )
@@ -62,68 +101,188 @@ export function CuentaPage() {
 
   if (user) {
     return (
-      <div className="account-page">
-        <header className="resource-hero dict">
-          <h1>Hola, {profile?.display_name || 'alumno/a'}</h1>
-          <p className="lede">{profile?.email || user.email}</p>
-        </header>
+      <div className="account-shell">
+        <section className="profile-hero">
+          <div className="profile-hero-glow" aria-hidden="true" />
+          <div className="profile-hero-main">
+            <div className="profile-identity">
+              <div className="profile-avatar-wrap">
+                <div className="profile-avatar">
+                  {profile?.avatar_url ? (
+                    <img src={profile.avatar_url} alt="Tu foto de perfil" />
+                  ) : (
+                    <span className="profile-photo-fallback" aria-hidden="true" />
+                  )}
+                </div>
+                <div className="profile-avatar-actions">
+                  <button
+                    type="button"
+                    className="profile-cam-btn"
+                    disabled={photoBusy}
+                    onClick={() => cameraRef.current?.click()}
+                  >
+                    {photoBusy ? '…' : 'Tomar foto'}
+                  </button>
+                  <button
+                    type="button"
+                    className="profile-cam-btn ghost"
+                    disabled={photoBusy}
+                    onClick={() => galleryRef.current?.click()}
+                  >
+                    Galería
+                  </button>
+                </div>
+                <input
+                  ref={cameraRef}
+                  className="sr-only"
+                  type="file"
+                  accept="image/*"
+                  capture="user"
+                  onChange={(e) => void onPickPhoto(e.target.files?.[0])}
+                />
+                <input
+                  ref={galleryRef}
+                  className="sr-only"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => void onPickPhoto(e.target.files?.[0])}
+                />
+              </div>
 
-        <section className="profile-photo-card">
-          <div className="profile-photo-preview">
-            {profile?.avatar_url ? (
-              <img src={profile.avatar_url} alt="Tu foto de perfil" />
-            ) : (
-              <span className="profile-photo-fallback" aria-hidden="true" />
-            )}
-          </div>
-          <div className="profile-photo-actions">
-            <p className="lede">Sacá una foto o elegí una imagen para tu perfil.</p>
-            <div className="account-actions">
-              <button
-                type="button"
-                className="primary-btn"
-                disabled={photoBusy}
-                onClick={() => cameraRef.current?.click()}
-              >
-                {photoBusy ? 'Subiendo…' : 'Tomar foto'}
-              </button>
-              <button
-                type="button"
-                className="ghost-btn"
-                disabled={photoBusy}
-                onClick={() => galleryRef.current?.click()}
-              >
-                Elegir imagen
-              </button>
+              <div className="profile-copy">
+                <p className="profile-kicker">Nivel 1 · Avañe'ẽ</p>
+                <h1>{profile?.display_name || 'Alumno/a'}</h1>
+                <p className="profile-email">{profile?.email || user.email}</p>
+                {memberSince ? <p className="profile-meta">Miembro desde {memberSince}</p> : null}
+                <div className="profile-badges">
+                  <span className="profile-badge">Alumno</span>
+                  {readyForCert ? <span className="profile-badge gold">Listo para certificado</span> : null}
+                  {quizzesPassed > 0 ? (
+                    <span className="profile-badge">{quizzesPassed} autoevals aprobadas</span>
+                  ) : null}
+                </div>
+              </div>
             </div>
-            <input
-              ref={cameraRef}
-              className="sr-only"
-              type="file"
-              accept="image/*"
-              capture="user"
-              onChange={(e) => void onPickPhoto(e.target.files?.[0])}
-            />
-            <input
-              ref={galleryRef}
-              className="sr-only"
-              type="file"
-              accept="image/*"
-              onChange={(e) => void onPickPhoto(e.target.files?.[0])}
-            />
-            {error ? <p className="quiz-error">{error}</p> : null}
-            {message ? <p className="quiz-passed">{message}</p> : null}
+
+            <div className="profile-ring-card">
+              <div
+                className="profile-ring"
+                style={{ '--pct': `${progressPct}` } as CSSProperties}
+                aria-label={`${progressPct}% del Nivel 1`}
+              >
+                <strong>{progressPct}%</strong>
+                <span>completado</span>
+              </div>
+              <p>
+                {completedCount}/{NIVEL_1_TOTAL_CLASSES} clases
+              </p>
+              {nextPublished ? (
+                <Link className="primary-btn" to={`/nivel-1/clase/${nextPublished.slug}`}>
+                  Seguir con {nextPublished.title}
+                </Link>
+              ) : readyForCert ? (
+                <p className="quiz-passed">Completaste el Nivel 1</p>
+              ) : (
+                <Link className="primary-btn" to="/nivel-1">
+                  Ver clases
+                </Link>
+              )}
+            </div>
           </div>
+          {error ? <p className="quiz-error">{error}</p> : null}
+          {message ? <p className="quiz-passed">{message}</p> : null}
         </section>
 
-        <div className="account-actions">
-          <Link className="primary-btn" to="/progreso">
-            Ver mi progreso
-          </Link>
-          <button type="button" className="ghost-btn" onClick={() => void signOut()}>
-            Cerrar sesión
-          </button>
-        </div>
+        <section className="profile-metrics" aria-label="Métricas">
+          <article>
+            <span>Completadas</span>
+            <strong>{completedCount}</strong>
+            <em>de {NIVEL_1_TOTAL_CLASSES}</em>
+          </article>
+          <article>
+            <span>En curso</span>
+            <strong>{inProgressCount}</strong>
+            <em>iniciadas sin cerrar</em>
+          </article>
+          <article>
+            <span>Autoevals</span>
+            <strong>{quizzesPassed}</strong>
+            <em>{quizAttempts} intentos totales</em>
+          </article>
+          <article>
+            <span>Mejor score</span>
+            <strong>{bestScore == null ? '—' : `${bestScore}%`}</strong>
+            <em>en quizzes</em>
+          </article>
+        </section>
+
+        <section className="profile-panel">
+          <div className="profile-panel-head">
+            <div>
+              <p className="eyebrow">Tu experiencia</p>
+              <h2>Recorrido del Nivel 1</h2>
+            </div>
+            <button type="button" className="ghost-btn" onClick={() => void signOut()}>
+              Cerrar sesión
+            </button>
+          </div>
+
+          <div className="progress-summary compact">
+            <div className="progress-bar" aria-hidden="true">
+              <span style={{ width: `${progressPct}%` }} />
+            </div>
+            <p className="lede">
+              {readyForCert
+                ? 'Cumpliste las 15 clases. El certificado se habilita en la próxima etapa.'
+                : `Te faltan ${NIVEL_1_TOTAL_CLASSES - completedCount} clases para el certificado.`}
+            </p>
+          </div>
+
+          <ul className="progress-list rich">
+            {allNivel1Slugs().map((slug, index) => {
+              const id = index + 1
+              const published = classes.find((c) => c.slug === slug)
+              const row = bySlug.get(slug)
+              const classAssess = assessments.filter((a) => a.class_slug === slug)
+              const passed = classAssess.some((a) => a.passed)
+              const status = row?.completed
+                ? 'Completada'
+                : row
+                  ? 'En curso'
+                  : published
+                    ? 'Sin empezar'
+                    : 'Próximamente'
+              return (
+                <li key={slug} className={row?.completed ? 'done' : row ? 'active' : ''}>
+                  <div className="progress-item-main">
+                    <span className="progress-num">{String(id).padStart(2, '0')}</span>
+                    <div>
+                      <strong>
+                        {published ? published.subtitle : `Clase ${id}`}
+                      </strong>
+                      <span>
+                        {status}
+                        {passed ? ' · Autoeval OK' : classAssess.length ? ` · ${classAssess.length} intento(s)` : ''}
+                      </span>
+                    </div>
+                  </div>
+                  {published ? (
+                    <Link to={`/nivel-1/clase/${slug}`}>{row?.completed ? 'Repasar' : 'Entrar'} →</Link>
+                  ) : (
+                    <span className="muted">—</span>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+
+          {startedCount === 0 ? (
+            <p className="profile-empty">
+              Todavía no empezaste. Entrá a la{' '}
+              <Link to="/nivel-1/clase/clase-1">Clase 1</Link> y tu progreso aparece acá.
+            </p>
+          ) : null}
+        </section>
       </div>
     )
   }
@@ -143,74 +302,75 @@ export function CuentaPage() {
       return
     }
     if (mode === 'register') {
-      setMessage('Cuenta creada. Si el proyecto pide confirmar email, revisá tu correo.')
+      setMessage('Cuenta creada. Si pide confirmar email, revisá tu correo.')
     }
   }
 
   return (
-    <div className="account-page">
-      <header className="resource-hero dict">
-        <h1>{mode === 'login' ? 'Ingresar' : 'Crear cuenta'}</h1>
-        <p className="lede">Alumnos del Nivel 1: progreso, autoevaluación y certificado.</p>
-      </header>
+    <div className="account-shell login-view">
+      <div className="account-login-card">
+        <p className="profile-kicker">Avañe'ẽ</p>
+        <h1>{mode === 'login' ? 'Login' : 'Crear cuenta'}</h1>
+        <p className="lede">Entrá para guardar progreso, foto de perfil y autoevaluaciones.</p>
 
-      <form className="account-form" onSubmit={onSubmit}>
-        {mode === 'register' ? (
+        <form className="account-form" onSubmit={onSubmit}>
+          {mode === 'register' ? (
+            <label>
+              Nombre
+              <input
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                placeholder="Tu nombre"
+                autoComplete="name"
+              />
+            </label>
+          ) : null}
           <label>
-            Nombre
+            Email
             <input
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-              placeholder="Tu nombre"
-              autoComplete="name"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
             />
           </label>
-        ) : null}
-        <label>
-          Email
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email"
-          />
-        </label>
-        <label>
-          Contraseña
-          <input
-            type="password"
-            required
-            minLength={6}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
-          />
-        </label>
-        {error ? <p className="quiz-error">{error}</p> : null}
-        {message ? <p className="quiz-passed">{message}</p> : null}
-        <button className="primary-btn" type="submit" disabled={busy}>
-          {busy ? 'Esperá…' : mode === 'login' ? 'Ingresar' : 'Registrarme'}
-        </button>
-      </form>
+          <label>
+            Contraseña
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+            />
+          </label>
+          {error ? <p className="quiz-error">{error}</p> : null}
+          {message ? <p className="quiz-passed">{message}</p> : null}
+          <button className="primary-btn" type="submit" disabled={busy}>
+            {busy ? 'Esperá…' : mode === 'login' ? 'Ingresar' : 'Registrarme'}
+          </button>
+        </form>
 
-      <p className="account-switch">
-        {mode === 'login' ? (
-          <>
-            ¿No tenés cuenta?{' '}
-            <button type="button" onClick={() => setMode('register')}>
-              Registrate
-            </button>
-          </>
-        ) : (
-          <>
-            ¿Ya tenés cuenta?{' '}
-            <button type="button" onClick={() => setMode('login')}>
-              Ingresá
-            </button>
-          </>
-        )}
-      </p>
+        <p className="account-switch">
+          {mode === 'login' ? (
+            <>
+              ¿No tenés cuenta?{' '}
+              <button type="button" onClick={() => setMode('register')}>
+                Registrate
+              </button>
+            </>
+          ) : (
+            <>
+              ¿Ya tenés cuenta?{' '}
+              <button type="button" onClick={() => setMode('login')}>
+                Ingresá
+              </button>
+            </>
+          )}
+        </p>
+      </div>
     </div>
   )
 }

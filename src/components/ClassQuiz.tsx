@@ -60,7 +60,7 @@ export function ClassQuiz({ classSlug }: Props) {
         </div>
         <p className="lede">Iniciá sesión para hacer la autoevaluación (máx. {maxAttempts} intentos).</p>
         <Link className="primary-btn" to="/cuenta">
-          Ir a mi cuenta
+          Ir a login
         </Link>
       </section>
     )

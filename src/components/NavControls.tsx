@@ -189,25 +189,23 @@ function IconUser() {
 
 function UserNavButton({ onNavigate }: { onNavigate?: () => void }) {
   const { user, profile } = useAuth()
-  const label = user ? profile?.display_name || 'Mi cuenta' : 'Cuenta'
+  const label = user ? profile?.display_name || 'Mi perfil' : 'Login'
   const avatar = profile?.avatar_url
 
   return (
     <NavLink
       to="/cuenta"
-      className={({ isActive }) => `nav-pill nav-pill-account ${isActive ? 'active' : ''} ${avatar ? 'has-avatar' : ''}`}
+      className={({ isActive }) =>
+        `nav-pill nav-pill-account ${isActive ? 'active' : ''} ${avatar ? 'has-avatar' : ''}`
+      }
       onClick={() => onNavigate?.()}
       title={label}
       aria-label={label}
     >
-      {avatar ? (
-        <img className="nav-avatar" src={avatar} alt="" />
-      ) : (
-        <IconUser />
-      )}
+      {avatar ? <img className="nav-avatar" src={avatar} alt="" /> : <IconUser />}
       <span className="nav-pill-label">
-        <strong>{user ? 'Cuenta' : 'Cuenta'}</strong>
-        <em>{user ? 'Perfil y foto' : 'Ingresá'}</em>
+        <strong>{user ? 'Perfil' : 'Login'}</strong>
+        <em>{user ? 'Progreso y foto' : 'Ingresá'}</em>
       </span>
     </NavLink>
   )
