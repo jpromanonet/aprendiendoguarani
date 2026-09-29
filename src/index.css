@@ -1974,16 +1974,19 @@ h3 {
     color: var(--leaf);
   }
 
-  .site-nav .nav-pill {
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0.85rem;
-    min-height: 3.35rem;
-    padding: 0.85rem 0.95rem;
-    border-radius: 18px;
-    font-size: 1rem;
-    box-shadow: 0 10px 24px rgba(7, 52, 40, 0.1);
+  .site-nav .nav-pill-account {
+    margin-left: 0;
+    margin-top: 0.55rem;
+    padding-top: 0.95rem;
+  }
+
+  .site-nav .nav-pill-account::before {
+    left: 0;
+    right: 0;
+    top: -0.15rem;
+    bottom: auto;
+    width: auto;
+    height: 1px;
   }
 
   .site-nav .nav-pill > svg:first-child {
