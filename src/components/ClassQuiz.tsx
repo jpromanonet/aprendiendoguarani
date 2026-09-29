@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getQuiz, scoreQuiz } from '../data/quizzes'
-import { DEFAULT_QUIZ_MAX_ATTEMPTS } from '../data/nivel1'
 import { fetchAssessments, submitAssessment } from '../lib/progress'
 import type { SelfAssessment } from '../types/database'
 
@@ -32,8 +31,7 @@ export function ClassQuiz({ classSlug }: Props) {
       .then((rows) => {
         setAttempts(rows)
         const passed = rows.some((a) => a.passed)
-        const remaining = Math.max(0, (quiz.maxAttempts ?? DEFAULT_QUIZ_MAX_ATTEMPTS) - rows.length)
-        setTaking(!passed && remaining > 0)
+        setTaking(!passed && rows.length === 0)
       })
       .catch((err: Error) => setError(err.message))
       .finally(() => {
@@ -43,15 +41,11 @@ export function ClassQuiz({ classSlug }: Props) {
   }, [user, classSlug, quiz])
 
   const usedAttempts = attempts.length
-  const maxAttempts = quiz?.maxAttempts ?? DEFAULT_QUIZ_MAX_ATTEMPTS
-  const remaining = Math.max(0, maxAttempts - usedAttempts)
   const best = useMemo(
     () => (attempts.length ? Math.max(...attempts.map((a) => a.score)) : null),
     [attempts],
   )
   const passedAny = attempts.some((a) => a.passed)
-  const exhausted = remaining === 0
-  const canRetake = remaining > 0
 
   function startRetake() {
     setAnswers({})
@@ -79,7 +73,7 @@ export function ClassQuiz({ classSlug }: Props) {
         <div className="section-heading">
           <h2>{quiz.title}</h2>
         </div>
-        <p className="lede">Iniciá sesión para hacer la autoevaluación (máx. {maxAttempts} intentos).</p>
+        <p className="lede">Iniciá sesión para hacer la autoevaluación. Podés retomarlas las veces que quieras.</p>
         <Link className="primary-btn" to="/cuenta">
           Ir a login
         </Link>
@@ -89,7 +83,7 @@ export function ClassQuiz({ classSlug }: Props) {
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault()
-    if (!user || !quiz || exhausted) return
+    if (!user || !quiz) return
     if (quiz.questions.some((q) => !answers[q.id])) {
       setError('Respondé todas las preguntas antes de enviar.')
       return
@@ -103,7 +97,6 @@ export function ClassQuiz({ classSlug }: Props) {
         userId: user.id,
         classSlug,
         attempt: attemptNumber,
-        maxAttempts: quiz.maxAttempts,
         score: scored.score,
         passed: scored.passed,
         answers,
@@ -118,7 +111,7 @@ export function ClassQuiz({ classSlug }: Props) {
     }
   }
 
-  const showForm = hydrated && taking && !exhausted
+  const showForm = hydrated && taking
 
   return (
     <section className="section-block quiz-block">
@@ -126,7 +119,7 @@ export function ClassQuiz({ classSlug }: Props) {
         <h2>{quiz.title}</h2>
       </div>
       <p className="quiz-meta">
-        Intentos: <strong>{usedAttempts}</strong> / {maxAttempts}
+        Intentos: <strong>{usedAttempts}</strong>
         {best != null ? (
           <>
             {' '}
@@ -168,7 +161,7 @@ export function ClassQuiz({ classSlug }: Props) {
             </fieldset>
           ))}
           <button className="primary-btn" type="submit" disabled={submitting}>
-            {submitting ? 'Enviando…' : `Enviar intento (${remaining} restantes)`}
+            {submitting ? 'Enviando…' : 'Enviar intento'}
           </button>
         </form>
       ) : hydrated && !loading ? (
@@ -180,17 +173,15 @@ export function ClassQuiz({ classSlug }: Props) {
             </p>
           ) : passedAny ? (
             <p>¡Listo! Ya aprobaste esta autoevaluación.</p>
-          ) : exhausted ? (
-            <p>Agotaste los {maxAttempts} intentos absolutos de esta autoevaluación.</p>
+          ) : usedAttempts > 0 ? (
+            <p>Todavía no alcanzaste el puntaje de aprobación. Podés volver a intentar.</p>
           ) : (
             <p>Podés empezar cuando quieras.</p>
           )}
 
-          {canRetake ? (
-            <button type="button" className="primary-btn" onClick={startRetake}>
-              {passedAny || result ? 'Retomar quiz' : 'Empezar'}
-            </button>
-          ) : null}
+          <button type="button" className="primary-btn" onClick={startRetake}>
+            {usedAttempts > 0 ? 'Retomar quiz' : 'Empezar'}
+          </button>
         </div>
       ) : null}
     </section>

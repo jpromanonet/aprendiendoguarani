@@ -1,6 +1,5 @@
 import { supabase } from './supabase'
 import type { LessonProgress, SelfAssessment } from '../types/database'
-import { DEFAULT_QUIZ_MAX_ATTEMPTS } from '../data/nivel1'
 
 export async function fetchProgress(userId: string): Promise<LessonProgress[]> {
   if (!supabase) return []
@@ -70,7 +69,8 @@ export async function submitAssessment(input: {
       user_id: input.userId,
       class_slug: input.classSlug,
       attempt: input.attempt,
-      max_attempts: input.maxAttempts ?? DEFAULT_QUIZ_MAX_ATTEMPTS,
+      // Historial ilimitado: el tope queda solo como metadato legado en DB.
+      max_attempts: input.maxAttempts ?? 9999,
       score: input.score,
       passed: input.passed,
       answers: input.answers,
