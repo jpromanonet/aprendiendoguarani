@@ -1540,6 +1540,11 @@ h3 {
   color: var(--bg-deep);
 }
 
+.footer-heart {
+  color: #c23b4a;
+  margin-left: 0.15rem;
+}
+
 .footer-repo {
   color: var(--river);
   font-weight: 600;

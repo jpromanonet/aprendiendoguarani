@@ -88,7 +88,9 @@ export function Layout() {
 
       <footer className="site-footer">
         <div className="footer-inner footer-social">
-          <p className="footer-love">hecho con amor &lt;3</p>
+          <p className="footer-love">
+            Hecho con amor <span className="footer-heart" aria-hidden="true">♥</span>
+          </p>
           <a
             className="footer-repo"
             href="https://github.com/jpromanonet/aprendiendoguarani"
