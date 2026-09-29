@@ -233,6 +233,9 @@ export function CuentaPage() {
                     <span className="profile-badge">{quizzesPassed} autoevals aprobadas</span>
                   ) : null}
                 </div>
+                <button type="button" className="profile-logout-btn" onClick={() => void signOut()}>
+                  Cerrar sesión
+                </button>
               </div>
             </div>
 
@@ -296,9 +299,6 @@ export function CuentaPage() {
               <p className="eyebrow">Camino completo</p>
               <h2>Niveles del curso</h2>
             </div>
-            <button type="button" className="ghost-btn" onClick={() => void signOut()}>
-              Cerrar sesión
-            </button>
           </div>
 
           <div className="progress-summary compact">
