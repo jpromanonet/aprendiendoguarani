@@ -150,10 +150,26 @@ export function Layout() {
         <div className="footer-inner footer-social">
           <div className="footer-credits">
             <p className="footer-credits-label">Contenido pedagógico</p>
-            <p className="footer-credits-names">
-              Verónica Mabel Gómez · Ercilia Noemí Ocampos · Liliana Bernal · Yéssica
-              Rodríguez
-            </p>
+            <ul className="footer-credits-list">
+              {[
+                'Verónica Mabel Gómez',
+                'Ercilia Noemí Ocampos',
+                'Liliana Bernal',
+                'Yéssica Rodríguez',
+              ].map((name) => (
+                <li key={name}>
+                  <span className="footer-teacher-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="14" height="14">
+                      <path
+                        fill="currentColor"
+                        d="M12 3 2 8l10 5 8.2-4.1V15h1.8V8L12 3Zm0 8.2L5.2 8 12 4.8 18.8 8 12 11.2ZM6.5 13.4v2.7c0 1.5 2.5 2.7 5.5 2.7s5.5-1.2 5.5-2.7v-2.7l-5.5 2.75L6.5 13.4Z"
+                      />
+                    </svg>
+                  </span>
+                  <span>{name}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           <p className="footer-love">
             Hecho con amor <span className="footer-heart" aria-hidden="true">♥</span>
