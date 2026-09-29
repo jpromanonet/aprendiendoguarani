@@ -631,6 +631,63 @@ img {
   font-size: clamp(1.7rem, 3vw, 2.3rem);
 }
 
+.level-cut {
+  border: 1px solid rgba(15, 77, 58, 0.16);
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: var(--shadow);
+}
+
+.level-cut-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 1.1rem 1.25rem;
+  background: linear-gradient(135deg, #0f4d3a, #1a6a52);
+  color: #f4fff8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.level-cut-label {
+  margin: 0 0 0.2rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(239, 195, 85, 0.95);
+  font-weight: 700;
+}
+
+.level-cut-head h3 {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  font-weight: 700;
+}
+
+.level-cut-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: background 0.25s ease, transform 0.25s var(--ease-out);
+}
+
+.level-cut-link:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+.level-cut .class-index {
+  padding: 1rem;
+  margin: 0;
+}
+
 .start-link {
   display: inline-flex;
   align-items: center;
