@@ -152,7 +152,9 @@ export function ClassPage() {
               className={`toc-quiz-btn ${activeId === QUIZ_ANCHOR_ID ? 'active' : ''}`}
               onClick={() => setActiveId(QUIZ_ANCHOR_ID)}
             >
-              Autoevaluación
+              <span className="toc-quiz-kicker">Cierre</span>
+              <strong>Autoevaluación</strong>
+              <em>Repasá esta clase</em>
             </a>
           ) : null}
         </aside>
