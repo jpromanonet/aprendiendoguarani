@@ -135,6 +135,9 @@ export function CuentaPage() {
       <div className="account-shell">
         <section className="profile-hero">
           <div className="profile-hero-glow" aria-hidden="true" />
+          <button type="button" className="profile-logout-btn" onClick={() => void signOut()}>
+            Cerrar sesión
+          </button>
           <div className="profile-hero-main">
             <div className="profile-identity">
               <div className="profile-avatar-wrap">
@@ -181,7 +184,6 @@ export function CuentaPage() {
               </div>
 
               <div className="profile-copy">
-                <p className="profile-kicker">Nivel 1 · Avañe'ẽ</p>
                 {editingName ? (
                   <form
                     className="profile-name-edit"
@@ -226,16 +228,16 @@ export function CuentaPage() {
                 )}
                 <p className="profile-email">{profile?.email || user.email}</p>
                 {memberSince ? <p className="profile-meta">Miembro desde {memberSince}</p> : null}
-                <div className="profile-badges">
-                  <span className="profile-badge">Alumno</span>
-                  {readyForCert ? <span className="profile-badge gold">Listo para certificado</span> : null}
+
+                <div className="profile-toolbar" aria-label="Estado de la cuenta">
+                  <span className="profile-chip">Alumno</span>
+                  {readyForCert ? <span className="profile-chip gold">Listo para certificado</span> : null}
                   {quizzesPassed > 0 ? (
-                    <span className="profile-badge">{quizzesPassed} autoevals aprobadas</span>
+                    <span className="profile-chip soft">
+                      <strong>{quizzesPassed}</strong> autoevals
+                    </span>
                   ) : null}
                 </div>
-                <button type="button" className="profile-logout-btn" onClick={() => void signOut()}>
-                  Cerrar sesión
-                </button>
               </div>
             </div>
 
@@ -264,8 +266,8 @@ export function CuentaPage() {
               )}
             </div>
           </div>
-          {error ? <p className="quiz-error">{error}</p> : null}
-          {message ? <p className="quiz-passed">{message}</p> : null}
+          {error ? <p className="profile-flash error">{error}</p> : null}
+          {message ? <p className="profile-flash ok">{message}</p> : null}
         </section>
 
         <section className="profile-metrics" aria-label="Métricas">
