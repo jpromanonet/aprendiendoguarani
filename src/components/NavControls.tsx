@@ -52,9 +52,10 @@ function IconScroll() {
 
 type NavPillsProps = {
   onNavigate?: () => void
+  expandClases?: boolean
 }
 
-export function ClasesDropdown({ onNavigate }: NavPillsProps) {
+export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
   const menuId = useId()
@@ -64,6 +65,10 @@ export function ClasesDropdown({ onNavigate }: NavPillsProps) {
   useEffect(() => {
     setOpen(false)
   }, [location.pathname])
+
+  useEffect(() => {
+    if (expandClases) setOpen(true)
+  }, [expandClases])
 
   useEffect(() => {
     if (!open) return
@@ -91,7 +96,10 @@ export function ClasesDropdown({ onNavigate }: NavPillsProps) {
         onClick={() => setOpen((value) => !value)}
       >
         <IconBook />
-        Clases
+        <span className="nav-pill-label">
+          <strong>Clases</strong>
+          <em>Nivel 1 y más</em>
+        </span>
         <Chevron />
       </button>
       <div className="nav-menu nivel-menu" id={menuId} role="menu" hidden={!open}>
@@ -136,17 +144,20 @@ export function ClasesDropdown({ onNavigate }: NavPillsProps) {
   )
 }
 
-export function NavPills({ onNavigate }: NavPillsProps) {
+export function NavPills({ onNavigate, expandClases }: NavPillsProps) {
   return (
     <>
-      <ClasesDropdown onNavigate={onNavigate} />
+      <ClasesDropdown onNavigate={onNavigate} expandClases={expandClases} />
       <NavLink
         to="/diccionario"
         className={({ isActive }) => `nav-pill nav-pill-dict ${isActive ? 'active' : ''}`}
         onClick={() => onNavigate?.()}
       >
         <IconSearch />
-        Diccionario
+        <span className="nav-pill-label">
+          <strong>Diccionario</strong>
+          <em>Buscá ES ↔ GN</em>
+        </span>
       </NavLink>
       <NavLink
         to="/textos"
@@ -154,7 +165,10 @@ export function NavPills({ onNavigate }: NavPillsProps) {
         onClick={() => onNavigate?.()}
       >
         <IconScroll />
-        Textos
+        <span className="nav-pill-label">
+          <strong>Textos</strong>
+          <em>PDFs y lectura</em>
+        </span>
       </NavLink>
     </>
   )

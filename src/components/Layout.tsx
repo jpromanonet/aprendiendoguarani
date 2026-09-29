@@ -124,7 +124,21 @@ export function Layout() {
         />
 
         <nav className="site-nav" id={navId} aria-label="Principal" data-open={menuOpen || undefined}>
-          <NavPills onNavigate={() => setMenuOpen(false)} />
+          <div className="mobile-nav-top">
+            <p className="mobile-nav-kicker">Navegación</p>
+            <strong className="mobile-nav-title">¿Qué querés hacer?</strong>
+          </div>
+          <div className="mobile-nav-links">
+            <NavPills onNavigate={() => setMenuOpen(false)} expandClases={menuOpen} />
+          </div>
+          <div className="mobile-nav-foot">
+            <p>
+              Hecho con amor <span aria-hidden="true">♥</span>
+            </p>
+            <a href="https://github.com/jpromanonet/aprendiendoguarani" target="_blank" rel="noreferrer">
+              Ver el repo
+            </a>
+          </div>
         </nav>
       </header>
 

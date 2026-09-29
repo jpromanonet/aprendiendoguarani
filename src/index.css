@@ -201,8 +201,29 @@ body.nav-open {
     filter 0.25s ease;
 }
 
+.nav-pill-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.nav-pill-label strong {
+  font-weight: 600;
+}
+
+.nav-pill-label em {
+  display: none;
+  font-style: normal;
+}
+
 .nav-pill svg:last-child {
   transition: transform 0.28s var(--ease-out);
+}
+
+.mobile-nav-top,
+.mobile-nav-foot,
+.mobile-nav-links {
+  display: contents;
 }
 
 .nav-pill:hover {
@@ -1835,6 +1856,11 @@ h3 {
     display: inline-flex;
   }
 
+  .site-header.menu-open {
+    box-shadow: none;
+    border-bottom-color: transparent;
+  }
+
   .nav-backdrop {
     display: block;
     position: fixed;
@@ -1843,9 +1869,10 @@ h3 {
     border: 0;
     padding: 0;
     margin: 0;
-    background: rgba(3, 25, 18, 0.45);
+    background: rgba(3, 25, 18, 0.52);
+    backdrop-filter: blur(3px);
     cursor: pointer;
-    animation: fadeIn 0.2s ease both;
+    animation: fadeIn 0.22s ease both;
   }
 
   .nav-backdrop[hidden] {
@@ -1857,35 +1884,132 @@ h3 {
     top: 0;
     right: 0;
     z-index: 41;
-    width: min(20.5rem, 86vw);
+    width: min(22.5rem, 92vw);
     height: 100dvh;
     margin: 0;
-    padding: calc(4.6rem + env(safe-area-inset-top, 0px)) 1rem
-      calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    padding: 0;
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: stretch;
     justify-content: flex-start;
-    gap: 0.65rem;
-    background: #fff;
+    gap: 0;
+    background:
+      radial-gradient(ellipse 80% 40% at 100% 0%, rgba(239, 195, 85, 0.16), transparent 55%),
+      linear-gradient(180deg, #f7fbf8 0%, #eef6f1 100%);
     border-left: 1px solid rgba(7, 52, 40, 0.1);
-    box-shadow: -18px 0 40px rgba(7, 52, 40, 0.18);
+    box-shadow: -24px 0 48px rgba(7, 52, 40, 0.22);
     transform: translateX(105%);
-    transition: transform 0.3s var(--ease-out);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    transition: transform 0.32s var(--ease-out);
+    overflow: hidden;
   }
 
   .site-nav[data-open] {
     transform: translateX(0);
   }
 
+  .mobile-nav-top,
+  .mobile-nav-foot,
+  .mobile-nav-links {
+    display: block;
+  }
+
+  .mobile-nav-top {
+    padding: calc(4.75rem + env(safe-area-inset-top, 0px)) 1.2rem 0.85rem;
+  }
+
+  .mobile-nav-kicker {
+    margin: 0 0 0.2rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--leaf);
+    font-weight: 700;
+  }
+
+  .mobile-nav-title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .mobile-nav-links {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.35rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .mobile-nav-foot {
+    margin-top: auto;
+    padding: 1rem 1.2rem calc(1.15rem + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid rgba(7, 52, 40, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  .mobile-nav-foot p {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+
+  .mobile-nav-foot span {
+    color: #c45b5b;
+  }
+
+  .mobile-nav-foot a {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--leaf);
+  }
+
   .site-nav .nav-pill {
     width: 100%;
     justify-content: flex-start;
-    min-height: 2.85rem;
-    border-radius: 16px;
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 3.35rem;
+    padding: 0.85rem 0.95rem;
+    border-radius: 18px;
     font-size: 1rem;
+    box-shadow: 0 10px 24px rgba(7, 52, 40, 0.1);
+  }
+
+  .site-nav .nav-pill > svg:first-child {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex: 0 0 auto;
+  }
+
+  .site-nav .nav-pill-label {
+    display: grid;
+    gap: 0.1rem;
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+  }
+
+  .site-nav .nav-pill-label strong {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .site-nav .nav-pill-label em {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.82;
+    line-height: 1.2;
   }
 
   .site-nav .nav-dropdown {
@@ -1896,8 +2020,21 @@ h3 {
     position: static;
     width: 100%;
     margin-top: 0.45rem;
+    padding: 0.35rem;
     box-shadow: none;
     border-radius: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    animation: none;
+  }
+
+  .site-nav .nav-level-head {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .site-nav .nav-class-item {
+    padding: 0.72rem 0.7rem;
+    opacity: 1;
+    transform: none;
     animation: none;
   }
 
