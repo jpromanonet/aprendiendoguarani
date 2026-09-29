@@ -1267,63 +1267,57 @@ h3 {
 
 .vocab-tile {
   appearance: none;
-  border: 0;
-  background: transparent;
-  padding: 0;
-  perspective: 1000px;
-  min-height: 6.4rem;
+  border: 1px solid rgba(7, 52, 40, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 0.95rem;
+  min-height: 6.2rem;
+  border-radius: 18px;
   cursor: pointer;
   text-align: left;
-}
-
-.vocab-tile-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 6.4rem;
-  transform-style: preserve-3d;
-  transition: transform 0.55s var(--ease-out);
-}
-
-.vocab-tile.flipped .vocab-tile-inner {
-  transform: rotateY(180deg);
-}
-
-.vocab-face {
-  position: absolute;
-  inset: 0;
   display: grid;
   align-content: center;
-  gap: 0.25rem;
-  padding: 0.95rem;
-  border-radius: 18px;
-  border: 1px solid rgba(7, 52, 40, 0.08);
-  backface-visibility: hidden;
+  gap: 0.3rem;
+  width: 100%;
+  transition:
+    transform 0.2s var(--ease-out),
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.vocab-face.front {
-  background: rgba(255, 255, 255, 0.9);
+.vocab-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(7, 52, 40, 0.1);
 }
 
-.vocab-face.back {
+.vocab-tile:focus-visible {
+  outline: 2px solid var(--river);
+  outline-offset: 2px;
+}
+
+.vocab-tile.revealed {
   background: linear-gradient(145deg, #0f4d3a, #187456);
+  border-color: transparent;
   color: #f4fff8;
-  transform: rotateY(180deg);
 }
 
-.vocab-face em {
+.vocab-tile.revealed em {
+  color: rgba(244, 255, 248, 0.8);
+}
+
+.vocab-tile em {
   font-style: normal;
-  font-size: 0.78rem;
-  opacity: 0.75;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
 }
 
-.vocab-tile.highlight .vocab-face.front {
+.vocab-tile.highlight {
   background: rgba(239, 195, 85, 0.14);
   border-color: rgba(239, 195, 85, 0.35);
 }
 
-.vocab-tile:hover .vocab-face.front {
-  box-shadow: 0 12px 28px rgba(7, 52, 40, 0.1);
+.vocab-tile.highlight.revealed {
+  background: linear-gradient(145deg, #0f4d3a, #187456);
 }
 
 .example-stack {
@@ -1796,14 +1790,7 @@ h3 {
     transition: none !important;
   }
 
-  .flip-word:hover .front,
-  .flip-word:focus-visible .front,
-  .vocab-tile.flipped .vocab-tile-inner {
-    transform: none;
-  }
-
-  .flip-face.back,
-  .vocab-face.back {
+  .flip-face.back {
     position: static;
     transform: none;
   }

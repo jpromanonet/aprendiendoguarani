@@ -8,25 +8,26 @@ type Props = {
 }
 
 export function VocabTile({ guaraní, español, note, highlight }: Props) {
-  const [flipped, setFlipped] = useState(false)
+  const [showTranslation, setShowTranslation] = useState(false)
 
   return (
     <button
       type="button"
-      className={`vocab-tile ${flipped ? 'flipped' : ''} ${highlight ? 'highlight' : ''}`}
-      onClick={() => setFlipped((value) => !value)}
-      aria-pressed={flipped}
+      className={`vocab-tile ${showTranslation ? 'revealed' : ''} ${highlight ? 'highlight' : ''}`}
+      onClick={() => setShowTranslation((value) => !value)}
+      aria-pressed={showTranslation}
     >
-      <span className="vocab-tile-inner">
-        <span className="vocab-face front">
+      {showTranslation ? (
+        <>
+          <strong>{español}</strong>
+          <em className="guarani">{note ?? guaraní}</em>
+        </>
+      ) : (
+        <>
           <strong className="guarani">{guaraní}</strong>
           <em>tocá para traducir</em>
-        </span>
-        <span className="vocab-face back">
-          <strong>{español}</strong>
-          {note ? <em>{note}</em> : <em className="guarani">{guaraní}</em>}
-        </span>
-      </span>
+        </>
+      )}
     </button>
   )
 }
