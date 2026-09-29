@@ -129,7 +129,7 @@ export const classes: ClassLesson[] = [
     date: 'Lunes 7 de septiembre de 2026',
     subtitle: 'Vocales, consonantes y sustantivos',
     summary:
-      'Clasificación de vocales y consonantes (orales, nasales, seminasales). Correspondencias con el castellano. Importancia de la virgulilla y el puso. Vocabulario de animales y naturaleza.',
+      'Clasificación de vocales y consonantes (orales, nasales, seminasales). Correspondencias con el castellano. Importancia de la virgulilla y el puso. Vocabulario de animales y naturaleza, con audio de sustantivos.',
     themes: ['Fonética', 'Ortografía', 'Sustantivos', 'Virgulilla'],
     sections: [
       {
@@ -220,6 +220,7 @@ export const classes: ClassLesson[] = [
       {
         type: 'vocab',
         title: 'Tero / Terokuéra — Sustantivos',
+        audio: '/audio/sustantivos.m4a',
         items: [
           { guaraní: 'Kavaju', español: 'caballo' },
           { guaraní: 'Kavara', español: 'cabra' },
