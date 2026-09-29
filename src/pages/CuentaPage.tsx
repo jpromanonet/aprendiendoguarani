@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { classes } from '../data/classes'
+import { classes, levels } from '../data/classes'
 import { NIVEL_1_TOTAL_CLASSES, allNivel1Slugs } from '../data/nivel1'
 import { fetchProgress } from '../lib/progress'
 import { supabase } from '../lib/supabase'
@@ -283,6 +283,31 @@ export function CuentaPage() {
               <Link to="/nivel-1/clase/clase-1">Clase 1</Link> y tu progreso aparece acá.
             </p>
           ) : null}
+        </section>
+
+        <section className="profile-panel levels-roadmap" aria-label="Próximos niveles">
+          <div className="profile-panel-head">
+            <div>
+              <p className="eyebrow">Camino completo</p>
+              <h2>Niveles del curso</h2>
+            </div>
+          </div>
+          <ul className="levels-roadmap-list">
+            {levels.map((nivel) => (
+              <li key={nivel.slug} className={nivel.available ? 'open' : 'locked'}>
+                <div>
+                  <strong>{nivel.title}</strong>
+                  <span>{nivel.subtitle}</span>
+                  <p>{nivel.description}</p>
+                </div>
+                {nivel.available ? (
+                  <Link to={`/${nivel.slug}`}>Ver clases →</Link>
+                ) : (
+                  <span className="soon-pill">Próximamente</span>
+                )}
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     )

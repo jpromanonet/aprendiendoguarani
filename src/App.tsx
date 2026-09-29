@@ -7,6 +7,7 @@ import { NivelPage } from './pages/NivelPage'
 import { DiccionarioPage } from './pages/DiccionarioPage'
 import { TextosPage } from './pages/TextosPage'
 import { CuentaPage } from './pages/CuentaPage'
+import { levels } from './data/classes'
 
 export default function App() {
   return (
@@ -15,7 +16,9 @@ export default function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="nivel-1" element={<NivelPage />} />
+            {levels.map((nivel) => (
+              <Route key={nivel.slug} path={nivel.slug} element={<NivelPage />} />
+            ))}
             <Route path="nivel-1/clase/:slug" element={<ClassPage />} />
             <Route path="diccionario" element={<DiccionarioPage />} />
             <Route path="textos" element={<TextosPage />} />

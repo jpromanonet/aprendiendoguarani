@@ -104,42 +104,62 @@ export function ClasesDropdown({ onNavigate, expandClases }: NavPillsProps) {
         <Chevron />
       </button>
       <div className="nav-menu nivel-menu" id={menuId} role="menu" hidden={!open}>
-        {levels.map((nivel) => (
-          <section key={nivel.slug} className="nav-level-group">
-            <Link
-              to={`/${nivel.slug}`}
-              className="nav-level-head"
-              onClick={() => {
-                setOpen(false)
-                onNavigate?.()
-              }}
+        {levels.map((nivel) => {
+          const nivelClasses = nivel.available ? classes : []
+          return (
+            <section
+              key={nivel.slug}
+              className={`nav-level-group ${nivel.available ? '' : 'coming-soon'}`}
             >
-              <span>
-                <strong>{nivel.title}</strong>
-                <em>{nivel.subtitle}</em>
-              </span>
-              <span className="nav-level-all">Ver todo</span>
-            </Link>
-            <div className="nav-level-classes">
-              {classes.map((lesson, index) => (
+              {nivel.available ? (
                 <Link
-                  key={lesson.slug}
-                  to={`/nivel-1/clase/${lesson.slug}`}
-                  role="menuitem"
-                  className="nav-class-item"
-                  style={{ '--i': index } as CSSProperties}
+                  to={`/${nivel.slug}`}
+                  className="nav-level-head"
                   onClick={() => {
                     setOpen(false)
                     onNavigate?.()
                   }}
                 >
-                  <span className="nav-class-num">{String(lesson.id).padStart(2, '0')}</span>
-                  <span className="nav-class-title">{lesson.subtitle}</span>
+                  <span>
+                    <strong>{nivel.title}</strong>
+                    <em>{nivel.subtitle}</em>
+                  </span>
+                  <span className="nav-level-all">Ver todo</span>
                 </Link>
-              ))}
-            </div>
-          </section>
-        ))}
+              ) : (
+                <div className="nav-level-head locked">
+                  <span>
+                    <strong>{nivel.title}</strong>
+                    <em>{nivel.subtitle}</em>
+                  </span>
+                  <span className="nav-level-all soon">Próximamente</span>
+                </div>
+              )}
+              <div className="nav-level-classes">
+                {nivelClasses.length > 0 ? (
+                  nivelClasses.map((lesson, index) => (
+                    <Link
+                      key={lesson.slug}
+                      to={`/${nivel.slug}/clase/${lesson.slug}`}
+                      role="menuitem"
+                      className="nav-class-item"
+                      style={{ '--i': index } as CSSProperties}
+                      onClick={() => {
+                        setOpen(false)
+                        onNavigate?.()
+                      }}
+                    >
+                      <span className="nav-class-num">{String(lesson.id).padStart(2, '0')}</span>
+                      <span className="nav-class-title">{lesson.subtitle}</span>
+                    </Link>
+                  ))
+                ) : (
+                  <p className="nav-level-empty">Las clases de este nivel se publicarán pronto.</p>
+                )}
+              </div>
+            </section>
+          )
+        })}
       </div>
     </div>
   )

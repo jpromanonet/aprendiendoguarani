@@ -62,6 +62,54 @@ export const quizzes: Record<string, ClassQuiz> = {
       },
     ],
   },
+  'clase-2': {
+    classSlug: 'clase-2',
+    title: 'Autoevaluación — Clase 2',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c2-q1',
+        prompt: "¿Qué son las pu'ae tĩgua?",
+        options: [
+          { id: 'a', label: 'Vocales orales: a, e, i, o, u' },
+          { id: 'b', label: 'Vocales nasales: ã, ẽ, ĩ, õ, ũ' },
+          { id: 'c', label: 'Consonantes seminasales: mb, nd, ng, nt' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c2-q2',
+        prompt: "¿Qué produce el ' (puso)?",
+        options: [
+          { id: 'a', label: 'Una nasalización de la vocal' },
+          { id: 'b', label: 'Una leve pausa o corte entre vocales' },
+          { id: 'c', label: 'El plural de la palabra' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c2-q3',
+        prompt: '¿Cómo se escribe el sonido “ca/que/qui” en guaraní?',
+        options: [
+          { id: 'a', label: 'Con c o q' },
+          { id: 'b', label: 'Con k (ka, ke, ki…)' },
+          { id: 'c', label: 'Con g' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c2-q4',
+        prompt: '¿Qué significa Jaguarete?',
+        options: [
+          { id: 'a', label: 'Perro' },
+          { id: 'b', label: 'Gato' },
+          { id: 'c', label: 'Jaguar' },
+        ],
+        correctOptionId: 'c',
+      },
+    ],
+  },
 }
 
 export function getQuiz(classSlug: string) {
