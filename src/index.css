@@ -12,8 +12,8 @@
   --paper: rgba(255, 255, 255, 0.78);
   --shadow: 0 20px 60px rgba(7, 52, 40, 0.14);
   --radius: 24px;
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'Sora', system-ui, sans-serif;
+  --font-display: 'Ubuntu', system-ui, sans-serif;
+  --font-body: 'Ubuntu', system-ui, sans-serif;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   color: var(--ink);
   background: var(--bg);
