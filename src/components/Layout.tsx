@@ -2,6 +2,7 @@ import { useEffect, useId, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { courseInfo } from '../data/classes'
 import { NavPills } from './NavControls'
+import { ScrollToTop } from './ScrollToTop'
 
 const socials = [
   {
@@ -145,6 +146,8 @@ export function Layout() {
       <main>
         <Outlet />
       </main>
+
+      <ScrollToTop />
 
       <footer className="site-footer">
         <div className="footer-inner footer-row">
