@@ -18,6 +18,7 @@ export function CuentaPage() {
     signUp,
     signOut,
     updateAvatar,
+    updateDisplayName,
   } = useAuth()
   const [mode, setMode] = useState<'login' | 'register'>('login')
   const [email, setEmail] = useState('')
@@ -30,11 +31,35 @@ export function CuentaPage() {
   const [rows, setRows] = useState<LessonProgress[]>([])
   const [assessments, setAssessments] = useState<SelfAssessment[]>([])
   const [openLevels, setOpenLevels] = useState<Record<string, boolean>>({ 'nivel-1': true })
+  const [editingName, setEditingName] = useState(false)
+  const [nameDraft, setNameDraft] = useState('')
+  const [nameBusy, setNameBusy] = useState(false)
   const cameraRef = useRef<HTMLInputElement>(null)
   const galleryRef = useRef<HTMLInputElement>(null)
+  const nameInputRef = useRef<HTMLInputElement>(null)
 
   function toggleLevel(slug: string) {
     setOpenLevels((prev) => ({ ...prev, [slug]: !prev[slug] }))
+  }
+
+  function startEditName() {
+    setNameDraft(profile?.display_name || '')
+    setEditingName(true)
+    setError(null)
+    setTimeout(() => nameInputRef.current?.focus(), 0)
+  }
+
+  async function saveDisplayName() {
+    setNameBusy(true)
+    setError(null)
+    const result = await updateDisplayName(nameDraft)
+    setNameBusy(false)
+    if (result.error) {
+      setError(result.error)
+      return
+    }
+    setEditingName(false)
+    setMessage('Nombre actualizado.')
   }
 
   useEffect(() => {
@@ -157,7 +182,48 @@ export function CuentaPage() {
 
               <div className="profile-copy">
                 <p className="profile-kicker">Nivel 1 · Avañe'ẽ</p>
-                <h1>{profile?.display_name || 'Alumno/a'}</h1>
+                {editingName ? (
+                  <form
+                    className="profile-name-edit"
+                    onSubmit={(e) => {
+                      e.preventDefault()
+                      void saveDisplayName()
+                    }}
+                  >
+                    <input
+                      ref={nameInputRef}
+                      className="profile-name-input"
+                      value={nameDraft}
+                      maxLength={60}
+                      onChange={(e) => setNameDraft(e.target.value)}
+                      aria-label="Nombre de usuario"
+                      disabled={nameBusy}
+                    />
+                    <div className="profile-name-actions">
+                      <button type="submit" className="profile-cam-btn" disabled={nameBusy}>
+                        {nameBusy ? '…' : 'Guardar'}
+                      </button>
+                      <button
+                        type="button"
+                        className="profile-cam-btn ghost"
+                        disabled={nameBusy}
+                        onClick={() => {
+                          setEditingName(false)
+                          setError(null)
+                        }}
+                      >
+                        Cancelar
+                      </button>
+                    </div>
+                  </form>
+                ) : (
+                  <div className="profile-name-row">
+                    <h1>{profile?.display_name || 'Alumno/a'}</h1>
+                    <button type="button" className="profile-edit-name" onClick={startEditName}>
+                      Editar
+                    </button>
+                  </div>
+                )}
                 <p className="profile-email">{profile?.email || user.email}</p>
                 {memberSince ? <p className="profile-meta">Miembro desde {memberSince}</p> : null}
                 <div className="profile-badges">

@@ -23,6 +23,7 @@ type AuthContextValue = {
   signOut: () => Promise<void>
   refreshProfile: () => Promise<void>
   updateAvatar: (file: File) => Promise<{ error: string | null }>
+  updateDisplayName: (name: string) => Promise<{ error: string | null }>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -160,6 +161,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           .eq('id', session.user.id)
         if (updateError) return { error: updateError.message }
 
+        await loadProfile(session.user.id, session.user)
+        return { error: null }
+      },
+      async updateDisplayName(name: string) {
+        if (!supabase || !session?.user) return { error: 'Tenés que iniciar sesión.' }
+        const trimmed = name.trim()
+        if (!trimmed) return { error: 'El nombre no puede estar vacío.' }
+        if (trimmed.length > 60) return { error: 'Máximo 60 caracteres.' }
+        const { error: updateError } = await supabase
+          .from('profiles')
+          .update({ display_name: trimmed, updated_at: new Date().toISOString() })
+          .eq('id', session.user.id)
+        if (updateError) return { error: updateError.message }
         await loadProfile(session.user.id, session.user)
         return { error: null }
       },
