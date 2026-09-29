@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getQuiz, scoreQuiz } from '../data/quizzes'
+import { DEFAULT_QUIZ_MAX_ATTEMPTS } from '../data/nivel1'
 import { fetchAssessments, submitAssessment } from '../lib/progress'
 import type { SelfAssessment } from '../types/database'
 

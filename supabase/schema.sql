@@ -31,7 +31,7 @@ create table if not exists public.self_assessments (
   user_id uuid not null references auth.users (id) on delete cascade,
   class_slug text not null,
   attempt int not null check (attempt >= 1),
-  max_attempts int not null default 3 check (max_attempts >= 1),
+  max_attempts int not null default 5 check (max_attempts >= 1),
   score int not null check (score between 0 and 100),
   passed boolean not null default false,
   answers jsonb not null default '{}'::jsonb,

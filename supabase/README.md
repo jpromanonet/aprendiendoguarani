@@ -13,7 +13,7 @@
 ## Reglas de negocio
 
 - Nivel 1 = **15 clases** → certificado
-- Autoevaluación: **3 intentos absolutos** por clase (configurable en `src/data/quizzes.ts`)
+- Autoevaluación: **5 intentos absolutos** por clase (configurable en `src/data/quizzes.ts`)
 - Aprobado desde **70%**
 - Cada alumno solo ve su data (RLS)
 
