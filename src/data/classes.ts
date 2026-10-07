@@ -813,6 +813,207 @@ export const classes: ClassLesson[] = [
       },
     ],
   },
+  {
+    id: 6,
+    slug: 'clase-6',
+    title: 'Clase 6',
+    date: 'Lunes 05 de octubre de 2026',
+    subtitle: 'Futuro, volitivo, conjunciones y terokuéra',
+    summary:
+      'Tiempo futuro con -ta, modo volitivo con -se, conjunciones (ha, térã, ỹrõ), resumen de tiempos verbales y vocabulario de sustantivos (terokuéra) con audio.',
+    themes: ['Futuro', 'Volitivo', 'Conjunciones', 'Sustantivos'],
+    sections: [
+      {
+        type: 'rules',
+        title: 'Tiempo futuro',
+        rules: [
+          {
+            title: 'Partícula -ta',
+            body: 'Para el futuro se agrega la partícula sufija átona -ta al verbo conjugado. Fórmula: prefijo + verbo + ta.',
+          },
+        ],
+      },
+      {
+        type: 'examples',
+        title: 'Futuro — Karu (comer) · oral',
+        items: [
+          { guaraní: 'Che akarúta', español: 'Yo comeré' },
+          { guaraní: 'Nde rekarúta', español: 'Tú / vos comerás' },
+          { guaraní: "Ha'e okarúta", español: 'Él / ella comerá' },
+          { guaraní: 'Ñande jakarúta', español: 'Nosotros/as comeremos (incluyente)' },
+          { guaraní: 'Ore rokarúta', español: 'Nosotros/as comeremos (excluyente)' },
+          { guaraní: 'Peẽ pekarúta', español: 'Ustedes comerán' },
+          { guaraní: "Ha'ekuéra okarúta", español: 'Ellos / ellas comerán' },
+        ],
+      },
+      {
+        type: 'examples',
+        title: "Futuro — Ñe'ẽ (hablar) · nasal",
+        items: [
+          { guaraní: "Añe'ẽta", español: 'Hablaré' },
+          { guaraní: "Reñe'ẽta", español: 'Hablarás' },
+          { guaraní: "Oñe'ẽta", español: 'Hablará' },
+          { guaraní: "Ñañe'ẽta", español: 'Hablaremos (incluyente)' },
+          { guaraní: "Roñe'ẽta", español: 'Hablaremos (excluyente)' },
+          { guaraní: "Peñe'ẽta", español: 'Hablarán ustedes' },
+          { guaraní: "Oñe'ẽta hikuái", español: 'Hablarán ellos' },
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Audio — Tiempo futuro',
+        audio: '/audio/tiempo-futuro.ogg',
+        items: [
+          { guaraní: 'Che akarúta', español: 'Yo comeré' },
+          { guaraní: "Añe'ẽta", español: 'Hablaré' },
+          { guaraní: 'Ñande jakarúta', español: 'Comeremos (incl.)' },
+          { guaraní: "Ñañe'ẽta", español: 'Hablaremos (incl.)' },
+        ],
+      },
+      {
+        type: 'rules',
+        title: 'Modo volitivo',
+        rules: [
+          {
+            title: 'Partícula -se',
+            body: 'Expresa el deseo de que se realice la acción. Lleva la partícula sufija tónica -se. Fórmula: prefijo + verbo + se.',
+          },
+          {
+            title: 'Combinaciones',
+            body: "Puede combinarse con tiempos: akaruse (quiero comer), akarusékuri / akaruséra'e (quise / había querido comer), akaruséta (querré comer).",
+          },
+        ],
+      },
+      {
+        type: 'examples',
+        title: 'Volitivo — Karu + se',
+        items: [
+          { guaraní: 'Che akaruse', español: 'Yo quiero comer' },
+          { guaraní: 'Nde rekaruse', español: 'Tú quieres comer' },
+          { guaraní: "Ha'e okaruse", español: 'Él / ella quiere comer' },
+          { guaraní: 'Ñande jakaruse', español: 'Nosotros/as queremos comer (incl.)' },
+          { guaraní: 'Ore rokaruse', español: 'Nosotros/as queremos comer (excl.)' },
+          { guaraní: 'Peẽ pekaruse', español: 'Ustedes quieren comer' },
+          { guaraní: "Ha'ekuéra okaruse", español: 'Ellos / ellas quieren comer' },
+        ],
+      },
+      {
+        type: 'rules',
+        title: "Conjunción — Ñe'ẽjoajuha",
+        rules: [
+          {
+            title: "Copulativa · ñe'ẽjoajuhaite · ha",
+            body: 'Une palabras u oraciones. Equivale a “y” / “e” en castellano. Ej.: María ha che (María y yo). Che aguata ha añe\'ẽ (Yo camino y hablo).',
+          },
+          {
+            title: 'Disyuntiva · oiporavóva · térã / ỹrõ / ỹramo',
+            body: 'Expresan alternativas. Ej.: María térã che (María o yo).',
+          },
+        ],
+      },
+      {
+        type: 'examples',
+        title: 'Ejemplos de conjunciones',
+        items: [
+          { guaraní: 'María ha che', español: 'María y yo' },
+          { guaraní: "Che aguata ha añe'ẽ", español: 'Yo camino y hablo' },
+          { guaraní: "Ha'e ha Isabel", español: 'Él / ella e Isabel' },
+          { guaraní: 'María térã che', español: 'María o yo' },
+        ],
+      },
+      {
+        type: 'rules',
+        title: 'Resumen de tiempo verbal',
+        rules: [
+          {
+            title: 'Prefijos',
+            body: 'a · re · o · ja/ña · ro · pe · o',
+          },
+          {
+            title: 'Presente',
+            body: 'Prefijo + verbo. Ej.: akaru',
+          },
+          {
+            title: 'Pretérito',
+            body: "Prefijo + verbo + kuri / ra'e. Ej.: akarúkuri, akarúra'e",
+          },
+          {
+            title: 'Futuro',
+            body: 'Prefijo + verbo + ta. Ej.: akarúta',
+          },
+          {
+            title: 'Volitivo',
+            body: "Prefijo + verbo + se (+ kuri / ra'e / ta). Ej.: akaruse, akaruséta",
+          },
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Terokuéra — Sustantivos',
+        audio: '/audio/tero-cuera-sustantivos.ogg',
+        items: [
+          { guaraní: 'Mbaraka', español: 'guitarra' },
+          { guaraní: 'Tupa', español: 'cama' },
+          { guaraní: 'Tata', español: 'fuego' },
+          { guaraní: 'Tatakua', español: 'horno de barro / fogón' },
+          { guaraní: 'Óga', español: 'casa' },
+          { guaraní: "Mbo'ehao", español: 'escuela' },
+          { guaraní: 'Tupão', español: 'iglesia' },
+          { guaraní: 'Avati', español: 'maíz' },
+          { guaraní: 'Ao', español: 'ropa' },
+          { guaraní: 'Okẽ', español: 'puerta' },
+          { guaraní: 'Typycha', español: 'escoba' },
+          { guaraní: 'Avakachi', español: 'ananá / piña' },
+          { guaraní: 'Pakova', español: 'banana' },
+          { guaraní: 'Mbujape', español: 'pan' },
+          { guaraní: "So'o", español: 'carne' },
+          { guaraní: 'Kamby', español: 'leche' },
+          { guaraní: "Ryguasurupi'a", español: 'huevo de gallina' },
+          { guaraní: 'Kumanda', español: 'poroto / frijol' },
+          { guaraní: 'Yva', español: 'fruta' },
+        ],
+      },
+      {
+        type: 'exercise',
+        title: 'Tembiaporã — Analizá y traducí',
+        prompt: 'Indicá el tiempo/modo cuando puedas y traducí al español.',
+        items: [
+          {
+            prompt: "Ha'e ha che ropurahéi.",
+            answer: 'Él/ella y yo cantamos. (presente, ore)',
+          },
+          {
+            prompt: "Kururu hovyũ okaruse mymbachu'i.",
+            answer: 'El sapo verde quiere comer insectos. (volitivo)',
+          },
+          {
+            prompt: "Ha'ekuéra ojupíta ỹrõ oguejýta.",
+            answer: 'Ellos subirán o bajarán. (futuro + disyuntiva)',
+          },
+          {
+            prompt: "Jaguarete'ikuéra okarúkuri so'o.",
+            answer: 'Los jaguaritos comieron carne. (pretérito kuri)',
+          },
+          {
+            prompt: 'Kuehe ombopu hikuái mbaraka ha ajeroky heta.',
+            answer: 'Ayer ellos tocaron la guitarra y yo bailé mucho.',
+          },
+          {
+            prompt: "Jaguarete ha mborerotochu oñaniséra'e.",
+            answer: 'El jaguar y el elefante habían querido correr / resultó que querían correr.',
+          },
+          {
+            prompt: 'Juan, María ha che rovy\'a.',
+            answer: 'Juan, María y yo nos alegramos. (ore)',
+          },
+          {
+            prompt: "Liz, che ha nde ñamoñe'ẽ.",
+            answer: 'Liz, yo y vos leemos. (ñande)',
+          },
+        ],
+      },
+    ],
+  },
 ]
 
 export function getClassBySlug(slug: string) {

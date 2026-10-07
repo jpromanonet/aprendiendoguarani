@@ -284,6 +284,64 @@ export const quizzes: Record<string, ClassQuiz> = {
       },
     ],
   },
+  'clase-6': {
+    classSlug: 'clase-6',
+    title: 'Autoevaluación — Clase 6',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c6-q1',
+        prompt: '¿Qué partícula marca el futuro?',
+        options: [
+          { id: 'a', label: 'kuri' },
+          { id: 'b', label: 'ta' },
+          { id: 'c', label: 'se' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c6-q2',
+        prompt: '¿Qué significa Che akaruse?',
+        options: [
+          { id: 'a', label: 'Yo comeré' },
+          { id: 'b', label: 'Yo quiero comer' },
+          { id: 'c', label: 'Yo comí' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c6-q3',
+        prompt: '¿Cuál es la conjunción copulativa equivalente a “y”?',
+        options: [
+          { id: 'a', label: 'térã' },
+          { id: 'b', label: 'ha' },
+          { id: 'c', label: 'ỹrõ' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c6-q4',
+        prompt: '¿Qué significa Mbaraka?',
+        options: [
+          { id: 'a', label: 'Cama' },
+          { id: 'b', label: 'Guitarra' },
+          { id: 'c', label: 'Escuela' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c6-q5',
+        prompt: '¿Cuál es la fórmula del futuro?',
+        options: [
+          { id: 'a', label: 'prefijo + verbo + ta' },
+          { id: 'b', label: "prefijo + verbo + kuri / ra'e" },
+          { id: 'c', label: 'solo el verbo sin prefijo' },
+        ],
+        correctOptionId: 'a',
+      },
+    ],
+  },
 }
 
 export function getQuiz(classSlug: string) {
