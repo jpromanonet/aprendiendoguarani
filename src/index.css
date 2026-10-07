@@ -1620,6 +1620,10 @@ h3 {
   animation: riseSoft 0.55s var(--ease-out) both;
 }
 
+.section-heading {
+  margin-bottom: 0.85rem;
+}
+
 .section-heading h2 {
   margin: 0;
   font-size: clamp(1.4rem, 2.8vw, 1.85rem);
@@ -1703,8 +1707,12 @@ h3 {
 }
 
 .rule-item h3 {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.65rem;
   font-size: 1.1rem;
+}
+
+.rule-item p {
+  margin: 0;
 }
 
 .rule-item p,
