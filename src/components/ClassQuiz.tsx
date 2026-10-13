@@ -179,6 +179,30 @@ export function ClassQuiz({ classSlug }: Props) {
             <p>Podés empezar cuando quieras.</p>
           )}
 
+          {usedAttempts > 0 ? (
+            <ol className="quiz-review">
+              {quiz.questions.map((question, index) => {
+                const pickedId =
+                  answers[question.id] ??
+                  (attempts[attempts.length - 1]?.answers as Record<string, string> | undefined)?.[
+                    question.id
+                  ]
+                const picked = question.options.find((option) => option.id === pickedId)
+                const correct = question.options.find((option) => option.id === question.correctOptionId)
+                const ok = pickedId === question.correctOptionId
+                return (
+                  <li key={question.id} className={ok ? 'ok' : 'bad'}>
+                    <strong>
+                      {index + 1}. {question.prompt}
+                    </strong>
+                    <span>{ok ? 'Correcta' : `Elegiste: ${picked?.label ?? '—'}`}</span>
+                    {ok ? null : <em>Respuesta: {correct?.label}</em>}
+                  </li>
+                )
+              })}
+            </ol>
+          ) : null}
+
           <button type="button" className="primary-btn" onClick={startRetake}>
             {usedAttempts > 0 ? 'Retomar quiz' : 'Empezar'}
           </button>

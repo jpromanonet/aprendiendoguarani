@@ -2909,6 +2909,52 @@ h3 {
   background: rgba(15, 77, 58, 0.06);
 }
 
+.quiz-review {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.quiz-review li {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+}
+
+.quiz-review li.ok {
+  border-color: rgba(24, 116, 86, 0.35);
+}
+
+.quiz-review li.bad {
+  border-color: rgba(185, 48, 48, 0.35);
+}
+
+.quiz-review strong {
+  font-size: 0.92rem;
+}
+
+.quiz-review span,
+.quiz-review em {
+  font-size: 0.84rem;
+  font-style: normal;
+  color: var(--ink-soft);
+}
+
+.quiz-review li.ok span {
+  color: var(--leaf);
+  font-weight: 700;
+}
+
+.quiz-review li.bad em {
+  color: #9f1239;
+  font-weight: 700;
+}
+
 .quiz-locked,
 .class-complete {
   margin-top: 1rem;
