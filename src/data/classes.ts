@@ -1014,6 +1014,126 @@ export const classes: ClassLesson[] = [
       },
     ],
   },
+  {
+    id: 7,
+    slug: 'clase-7',
+    title: 'Clase 7',
+    date: 'Lunes 12 de octubre de 2026',
+    subtitle: "Teroja ohekome'ẽva — adjetivos calificativos",
+    summary:
+      'Adjetivos que describen al sustantivo. En guaraní el adjetivo va siempre después del nombre. Incluye pares de opuestos, ejemplos y audios de la clase asincrónica.',
+    themes: ['Adjetivos', 'Cualidades', 'Orden'],
+    sections: [
+      {
+        type: 'rules',
+        title: "Teroja ohekome'ẽva — Adjetivos calificativos",
+        rules: [
+          {
+            title: 'Qué son',
+            body: 'Acompañan al sustantivo y dicen cómo es: una cualidad, una característica o un juicio de valor.',
+          },
+          {
+            title: 'Orden en guaraní',
+            body: 'El adjetivo va siempre después del sustantivo que califica. Ej.: jagua morotĩ (perro blanco), no “morotĩ jagua”.',
+          },
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Algunos adjetivos calificativos',
+        audio: '/audio/adjetivos.mp4',
+        items: [
+          { guaraní: 'Porã', español: 'lindo/a' },
+          { guaraní: 'Vai', español: 'feo/a' },
+          { guaraní: 'Yvate', español: 'alto/a' },
+          { guaraní: 'Karape', español: 'bajo/a' },
+          { guaraní: 'Kyra', español: 'gordo/a' },
+          { guaraní: 'Piru', español: 'flaco/a' },
+          { guaraní: 'Arandu', español: 'sabio/a' },
+          { guaraní: 'Tavy', español: 'tonto/a' },
+          { guaraní: "Ate'ỹ", español: 'haragán / haragana' },
+          { guaraní: "Kyre'ỹ", español: 'activo/a · animado/a' },
+          { guaraní: 'Tuja', español: 'viejo/a' },
+          { guaraní: 'Pyahu', español: 'joven / nuevo/a' },
+          { guaraní: "Ky'a", español: 'sucio/a' },
+          { guaraní: 'Potĩ', español: 'limpio/a' },
+          { guaraní: 'Mbarete', español: 'fuerte' },
+          { guaraní: 'Kangy', español: 'débil' },
+          { guaraní: 'Tuicha', español: 'grande' },
+          { guaraní: 'Michĩ', español: 'chico/a' },
+          { guaraní: 'Mbegue', español: 'lento/a' },
+          { guaraní: "Pya'e", español: 'rápido/a' },
+          { guaraní: 'Puku', español: 'largo/a' },
+          { guaraní: 'Mbyky', español: 'corto/a' },
+        ],
+      },
+      {
+        type: 'examples',
+        title: 'Ejemplos',
+        items: [
+          { guaraní: 'Jagua morotĩ', español: 'Perro blanco' },
+          { guaraní: 'Mbarakaja michĩ', español: 'Gato pequeño' },
+          { guaraní: 'Kuña karape', español: 'Mujer petisa / baja' },
+          { guaraní: 'Kure kyra', español: 'Cerdo gordo' },
+          { guaraní: "Óga ky'a", español: 'Casa sucia' },
+          { guaraní: 'Sapatu potĩ', español: 'Zapato limpio' },
+          { guaraní: 'Jatyta mbegue', español: 'Caracol lento' },
+          { guaraní: "Kuimba'e mbarete", español: 'Hombre fuerte' },
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Audio — Ejemplos',
+        audio: '/audio/adjetivos-ejemplos.mp4',
+        items: [
+          { guaraní: 'Jagua morotĩ', español: 'Perro blanco' },
+          { guaraní: 'Mbarakaja michĩ', español: 'Gato pequeño' },
+          { guaraní: 'Kuña karape', español: 'Mujer baja' },
+          { guaraní: 'Kure kyra', español: 'Cerdo gordo' },
+          { guaraní: "Óga ky'a", español: 'Casa sucia' },
+          { guaraní: 'Sapatu potĩ', español: 'Zapato limpio' },
+          { guaraní: 'Jatyta mbegue', español: 'Caracol lento' },
+          { guaraní: "Kuimba'e mbarete", español: 'Hombre fuerte' },
+        ],
+      },
+      {
+        type: 'exercise',
+        title: 'Tembiaporã — Tres adjetivos por imagen',
+        prompt:
+          "Escribí tres adjetivos calificativos para cada sustantivo, unidos con ha. El adjetivo va después del nombre.",
+        items: [
+          {
+            prompt: 'Jaguarete ____ , ____ ha ____',
+            answer: 'Ej.: Jaguarete mbarete, porã ha pya\'e',
+            hint: 'fuerte, lindo, rápido…',
+          },
+          {
+            prompt: 'Mborerotochu ____ , ____ ha ____',
+            answer: 'Ej.: Mborerotochu tuicha, kyra ha mbegue',
+            hint: 'grande, gordo, lento…',
+          },
+          {
+            prompt: 'Karumbe ____ , ____ ha ____',
+            answer: 'Ej.: Karumbe mbegue, tuja ha michĩ',
+            hint: 'lento, viejo, chico…',
+          },
+          {
+            prompt: 'Tahýikuéra ____ , ____ ha ____',
+            answer: "Ej.: Tahýikuéra michĩ, kyre'ỹ ha pya'e",
+            hint: 'chicas, activas, rápidas…',
+          },
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Tarea — Dictado',
+        audio: '/audio/adjetivos-tarea.mp4',
+        items: [
+          { guaraní: 'Escuchá el audio', español: 'Copiá las palabras y traducilas al español' },
+        ],
+      },
+    ],
+  },
 ]
 
 export function getClassBySlug(slug: string) {

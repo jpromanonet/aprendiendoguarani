@@ -342,6 +342,64 @@ export const quizzes: Record<string, ClassQuiz> = {
       },
     ],
   },
+  'clase-7': {
+    classSlug: 'clase-7',
+    title: 'Autoevaluación — Clase 7',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c7-q1',
+        prompt: 'En guaraní, ¿dónde va el adjetivo?',
+        options: [
+          { id: 'a', label: 'Siempre antes del sustantivo' },
+          { id: 'b', label: 'Siempre después del sustantivo' },
+          { id: 'c', label: 'Da igual el orden' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c7-q2',
+        prompt: '¿Qué significa Jagua morotĩ?',
+        options: [
+          { id: 'a', label: 'Perro negro' },
+          { id: 'b', label: 'Perro blanco' },
+          { id: 'c', label: 'Gato blanco' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c7-q3',
+        prompt: '¿Cuál es el opuesto de Porã (lindo/a)?',
+        options: [
+          { id: 'a', label: 'Vai' },
+          { id: 'b', label: 'Pyahu' },
+          { id: 'c', label: 'Yvate' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c7-q4',
+        prompt: "¿Qué significa Óga ky'a?",
+        options: [
+          { id: 'a', label: 'Casa limpia' },
+          { id: 'b', label: 'Casa sucia' },
+          { id: 'c', label: 'Casa grande' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c7-q5',
+        prompt: '¿Qué significa Mbarete?',
+        options: [
+          { id: 'a', label: 'Débil' },
+          { id: 'b', label: 'Fuerte' },
+          { id: 'c', label: 'Lento' },
+        ],
+        correctOptionId: 'b',
+      },
+    ],
+  },
 }
 
 export function getQuiz(classSlug: string) {
