@@ -238,6 +238,9 @@ export function CuentaPage() {
                   >
                     {photoBusy ? 'Subiendo…' : 'Subir foto'}
                   </button>
+                  <Link className="profile-text-action profile-certs" to="/certificados">
+                    Certificados
+                  </Link>
                   <button type="button" className="profile-text-action profile-logout" onClick={() => void signOut()}>
                     Cerrar sesión
                   </button>
@@ -310,9 +313,6 @@ export function CuentaPage() {
               <p className="eyebrow">Camino completo</p>
               <h2>Niveles del curso</h2>
             </div>
-            <Link className="cert-profile-link" to="/certificados">
-              Certificados
-            </Link>
           </div>
 
           <div className="level-accordions">
