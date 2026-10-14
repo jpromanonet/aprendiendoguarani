@@ -1492,11 +1492,11 @@ h3 {
     radial-gradient(circle at 88% 18%, rgba(239, 195, 85, 0.22), transparent 28%),
     linear-gradient(135deg, #04261e, #0f4d3a 55%, #187456);
   color: #f4fff8;
-  padding: 3.8rem clamp(1rem, 4vw, 2.5rem) 3.2rem;
+  padding: 3.8rem 0 3.2rem;
 }
 
 .class-hero-inner {
-  width: min(980px, 100%);
+  width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
   animation: rise 0.7s var(--ease-out) both;
 }
