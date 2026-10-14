@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { classes, levels } from '../data/classes'
 import { NIVEL_1_TOTAL_CLASSES, allNivel1Slugs } from '../data/nivel1'
 import { fetchProgress } from '../lib/progress'
+import { learnedWordTotal } from '../lib/vocabulary'
 import { supabase } from '../lib/supabase'
 import type { LessonProgress, SelfAssessment } from '../types/database'
 
@@ -81,6 +82,14 @@ export function CuentaPage() {
   const progressPct = Math.round((completedCount / NIVEL_1_TOTAL_CLASSES) * 100)
   const quizAttempts = assessments.length
   const quizzesPassed = new Set(assessments.filter((a) => a.passed).map((a) => a.class_slug)).size
+  const { learnedWords, wordsByClass } = useMemo(() => {
+    const slugs = allNivel1Slugs().filter((slug) => {
+      if (bySlug.get(slug)?.completed) return true
+      return assessments.some((item) => item.class_slug === slug && item.passed)
+    })
+    const result = learnedWordTotal(slugs)
+    return { learnedWords: result.total, wordsByClass: result.bySlug }
+  }, [assessments, bySlug])
   const bestScore = assessments.length ? Math.max(...assessments.map((a) => a.score)) : null
   const memberSince = profile?.created_at
     ? new Date(profile.created_at).toLocaleDateString('es-AR', {
@@ -252,6 +261,11 @@ export function CuentaPage() {
 
         <section className="profile-metrics" aria-label="Métricas">
           <article>
+            <span>Palabras</span>
+            <strong>{learnedWords}</strong>
+            <em>aprendidas</em>
+          </article>
+          <article>
             <span>Completadas</span>
             <strong>{completedCount}</strong>
             <em>de {NIVEL_1_TOTAL_CLASSES}</em>
@@ -344,6 +358,7 @@ export function CuentaPage() {
                             const row = bySlug.get(slug)
                             const classAssess = assessments.filter((a) => a.class_slug === slug)
                             const passed = classAssess.some((a) => a.passed)
+                            const wordCount = published ? (wordsByClass.get(slug) ?? 0) : 0
                             const status = row?.completed
                               ? 'Completada'
                               : row
@@ -359,6 +374,9 @@ export function CuentaPage() {
                                     <strong>{published ? published.subtitle : `Clase ${id}`}</strong>
                                     <span>
                                       {status}
+                                      {wordCount > 0
+                                        ? ` · ${wordCount} ${wordCount === 1 ? 'palabra' : 'palabras'}`
+                                        : ''}
                                       {passed
                                         ? ' · Autoeval OK'
                                         : classAssess.length

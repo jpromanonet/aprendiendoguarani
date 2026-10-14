@@ -2296,16 +2296,20 @@ h3 {
     max-height: none;
   }
 
+  .class-toc {
+    overflow: visible;
+  }
+
   .class-toc ol {
-    display: flex;
-    gap: 0.35rem;
-    overflow-x: auto;
-    padding-bottom: 0.2rem;
-    -webkit-overflow-scrolling: touch;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    overflow: visible;
   }
 
   .class-toc a {
-    min-width: 10rem;
+    min-width: 0;
+    width: 100%;
   }
 
   .home-hero-inner {
@@ -2696,7 +2700,7 @@ h3 {
   }
 
   .class-toc a {
-    min-width: 8.5rem;
+    min-width: 0;
   }
 }
 
@@ -3287,7 +3291,7 @@ h3 {
 
 .profile-metrics {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.7rem;
   margin-bottom: 1rem;
 }
