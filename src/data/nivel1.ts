@@ -1,6 +1,8 @@
 /** Nivel 1: 15 clases para el certificado */
 export const NIVEL_1_TOTAL_CLASSES = 15
 export const NIVEL_1_SLUG = 'nivel-1'
+/** Certificado del curso, cuando ya están emitidos los de todos los niveles. */
+export const COURSE_CERTIFICATE_SLUG = 'curso'
 export const DEFAULT_QUIZ_MAX_ATTEMPTS = 5
 export const QUIZ_PASS_SCORE = 70
 
@@ -10,4 +12,9 @@ export function classSlug(id: number) {
 
 export function allNivel1Slugs() {
   return Array.from({ length: NIVEL_1_TOTAL_CLASSES }, (_, i) => classSlug(i + 1))
+}
+
+export function slugsForLevel(levelSlug: string) {
+  if (levelSlug === NIVEL_1_SLUG) return allNivel1Slugs()
+  return []
 }

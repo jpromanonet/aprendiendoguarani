@@ -48,6 +48,8 @@ export type LevelInfo = {
   subtitle?: string
   description: string
   available: boolean
+  /** Clases previstas del nivel. 0 hasta que el plan del nivel esté definido. */
+  totalClasses: number
 }
 
 export const levels: LevelInfo[] = [
@@ -58,6 +60,7 @@ export const levels: LevelInfo[] = [
     description:
       'Introducción al alfabeto, vocabulario básico, pronombres, colores, números, pluralización y diminutivos.',
     available: true,
+    totalClasses: 15,
   },
   {
     id: 2,
@@ -65,6 +68,7 @@ export const levels: LevelInfo[] = [
     title: 'Nivel 2',
     description: 'Próximamente.',
     available: false,
+    totalClasses: 0,
   },
   {
     id: 3,
@@ -72,6 +76,7 @@ export const levels: LevelInfo[] = [
     title: 'Nivel 3',
     description: 'Próximamente.',
     available: false,
+    totalClasses: 0,
   },
   {
     id: 4,
@@ -79,6 +84,7 @@ export const levels: LevelInfo[] = [
     title: 'Nivel 4',
     description: 'Próximamente.',
     available: false,
+    totalClasses: 0,
   },
 ]
 

@@ -2,11 +2,19 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEven
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { classes, levels } from '../data/classes'
-import { NIVEL_1_TOTAL_CLASSES, allNivel1Slugs } from '../data/nivel1'
+import { COURSE_CERTIFICATE_SLUG, slugsForLevel } from '../data/nivel1'
 import { fetchProgress } from '../lib/progress'
 import { learnedWordTotal } from '../lib/vocabulary'
 import { supabase } from '../lib/supabase'
-import type { LessonProgress, SelfAssessment } from '../types/database'
+import type { Certificate, LessonProgress, SelfAssessment } from '../types/database'
+
+function formatCertDate(iso: string) {
+  return new Date(iso).toLocaleDateString('es-AR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+}
 
 export function CuentaPage() {
   const {
@@ -31,6 +39,7 @@ export function CuentaPage() {
   const [photoBusy, setPhotoBusy] = useState(false)
   const [rows, setRows] = useState<LessonProgress[]>([])
   const [assessments, setAssessments] = useState<SelfAssessment[]>([])
+  const [certificates, setCertificates] = useState<Certificate[]>([])
   const [openLevels, setOpenLevels] = useState<Record<string, boolean>>({ 'nivel-1': true })
   const [editingName, setEditingName] = useState(false)
   const [nameDraft, setNameDraft] = useState('')
@@ -67,29 +76,45 @@ export function CuentaPage() {
     void Promise.all([
       fetchProgress(user.id),
       supabase.from('self_assessments').select('*').eq('user_id', user.id),
+      supabase.from('certificates').select('*').eq('user_id', user.id),
     ])
-      .then(([progress, assess]) => {
+      .then(([progress, assess, certs]) => {
         setRows(progress)
         setAssessments((assess.data ?? []) as SelfAssessment[])
+        setCertificates((certs.data ?? []) as Certificate[])
       })
       .catch((err: Error) => setError(err.message))
   }, [user])
 
   const bySlug = useMemo(() => new Map(rows.map((r) => [r.class_slug, r])), [rows])
-  const completedCount = allNivel1Slugs().filter((slug) => bySlug.get(slug)?.completed).length
+  const levelStats = useMemo(
+    () =>
+      levels.map((nivel) => {
+        const slugs = slugsForLevel(nivel.slug)
+        const done = slugs.filter((slug) => bySlug.get(slug)?.completed).length
+        const total = nivel.totalClasses
+        const pct = total > 0 ? Math.round((done / total) * 100) : 0
+        return { nivel, slugs, done, total, pct }
+      }),
+    [bySlug],
+  )
+  const courseTotal = levelStats.reduce((sum, level) => sum + level.total, 0)
+  const completedCount = levelStats.reduce((sum, level) => sum + level.done, 0)
   const inProgressCount = rows.filter((r) => !r.completed).length
   const startedCount = rows.length
-  const progressPct = Math.round((completedCount / NIVEL_1_TOTAL_CLASSES) * 100)
+  const progressPct = courseTotal > 0 ? Math.round((completedCount / courseTotal) * 100) : 0
   const quizAttempts = assessments.length
   const quizzesPassed = new Set(assessments.filter((a) => a.passed).map((a) => a.class_slug)).size
   const { learnedWords, wordsByClass } = useMemo(() => {
-    const slugs = allNivel1Slugs().filter((slug) => {
-      if (bySlug.get(slug)?.completed) return true
-      return assessments.some((item) => item.class_slug === slug && item.passed)
-    })
+    const slugs = levelStats.flatMap((level) =>
+      level.slugs.filter((slug) => {
+        if (bySlug.get(slug)?.completed) return true
+        return assessments.some((item) => item.class_slug === slug && item.passed)
+      }),
+    )
     const result = learnedWordTotal(slugs)
     return { learnedWords: result.total, wordsByClass: result.bySlug }
-  }, [assessments, bySlug])
+  }, [assessments, bySlug, levelStats])
   const bestScore = assessments.length ? Math.max(...assessments.map((a) => a.score)) : null
   const memberSince = profile?.created_at
     ? new Date(profile.created_at).toLocaleDateString('es-AR', {
@@ -98,8 +123,14 @@ export function CuentaPage() {
         year: 'numeric',
       })
     : null
-  const readyForCert = completedCount >= NIVEL_1_TOTAL_CLASSES
-  const nextClass = allNivel1Slugs().find((slug) => !bySlug.get(slug)?.completed)
+  const nivel1 = levelStats.find((level) => level.nivel.slug === 'nivel-1')
+  const readyForCert = Boolean(nivel1 && nivel1.total > 0 && nivel1.done >= nivel1.total)
+  const earnedLevelCerts = levelStats.filter((level) =>
+    certificates.some((item) => item.level_slug === level.nivel.slug),
+  ).length
+  const finalCert = certificates.find((item) => item.level_slug === COURSE_CERTIFICATE_SLUG)
+  const finalReady = levelStats.length > 0 && earnedLevelCerts === levelStats.length
+  const nextClass = nivel1?.slugs.find((slug) => !bySlug.get(slug)?.completed)
   const nextPublished = nextClass ? classes.find((c) => c.slug === nextClass) : undefined
 
   if (!configured) {
@@ -234,13 +265,13 @@ export function CuentaPage() {
               <div
                 className="profile-ring"
                 style={{ '--pct': `${progressPct}` } as CSSProperties}
-                aria-label={`${progressPct}% del Nivel 1`}
+                aria-label={`${progressPct}% del curso`}
               >
                 <strong>{progressPct}%</strong>
-                <span>completado</span>
+                <span>del curso</span>
               </div>
               <p>
-                {completedCount}/{NIVEL_1_TOTAL_CLASSES} clases
+                {completedCount}/{courseTotal} clases
               </p>
               {nextPublished ? (
                 <Link className="primary-btn" to={`/nivel-1/clase/${nextPublished.slug}`}>
@@ -268,7 +299,7 @@ export function CuentaPage() {
           <article>
             <span>Completadas</span>
             <strong>{completedCount}</strong>
-            <em>de {NIVEL_1_TOTAL_CLASSES}</em>
+            <em>de {courseTotal} del curso</em>
           </article>
           <article>
             <span>En curso</span>
@@ -287,6 +318,67 @@ export function CuentaPage() {
           </article>
         </section>
 
+        <section className="profile-panel cert-panel" aria-label="Certificados">
+          <div className="profile-panel-head">
+            <div>
+              <p className="eyebrow">Niveles y cierre del curso</p>
+              <h2>Certificados</h2>
+            </div>
+          </div>
+          <div className="cert-grid">
+            {levelStats.map(({ nivel, done, total }) => {
+              const issued = certificates.find((item) => item.level_slug === nivel.slug)
+              const ready = total > 0 && done >= total
+              return (
+                <article key={nivel.slug} className={`cert-card ${issued ? 'earned' : ''}`}>
+                  <span className="cert-kicker">{issued ? 'Emitido' : 'Certificado'}</span>
+                  <strong>{nivel.title}</strong>
+                  {issued ? (
+                    <>
+                      <em>{formatCertDate(issued.issued_at)}</em>
+                      <span className="cert-code">{issued.code}</span>
+                      {issued.pdf_url ? (
+                        <a href={issued.pdf_url} target="_blank" rel="noreferrer">
+                          Ver certificado
+                        </a>
+                      ) : null}
+                    </>
+                  ) : ready ? (
+                    <em>Completaste este nivel. El certificado se habilita en la próxima etapa.</em>
+                  ) : total > 0 ? (
+                    <em>
+                      {done} de {total} clases
+                    </em>
+                  ) : (
+                    <em>Cuando se publique este nivel</em>
+                  )}
+                </article>
+              )
+            })}
+            <article className={`cert-card cert-final ${finalCert || finalReady ? 'earned' : ''}`}>
+              <span className="cert-kicker">{finalCert || finalReady ? 'Emitido' : 'Certificado final'}</span>
+              <strong>Curso completo</strong>
+              {finalCert ? (
+                <>
+                  <em>{formatCertDate(finalCert.issued_at)}</em>
+                  <span className="cert-code">{finalCert.code}</span>
+                  {finalCert.pdf_url ? (
+                    <a href={finalCert.pdf_url} target="_blank" rel="noreferrer">
+                      Ver certificado
+                    </a>
+                  ) : null}
+                </>
+              ) : finalReady ? (
+                <em>Reuniste los certificados de todos los niveles.</em>
+              ) : (
+                <em>
+                  Se emite al tener los certificados de todos los niveles. {earnedLevelCerts} de {levelStats.length}.
+                </em>
+              )}
+            </article>
+          </div>
+        </section>
+
         <div className="profile-cut" aria-hidden="true" />
 
         <section className="profile-panel levels-journey" aria-label="Niveles del curso">
@@ -297,22 +389,10 @@ export function CuentaPage() {
             </div>
           </div>
 
-          <div className="progress-summary compact">
-            <div className="progress-bar" aria-hidden="true">
-              <span style={{ width: `${progressPct}%` }} />
-            </div>
-            <p className="lede">
-              {readyForCert
-                ? 'Cumpliste las 15 clases del Nivel 1. El certificado se habilita en la próxima etapa.'
-                : `Nivel 1: te faltan ${NIVEL_1_TOTAL_CLASSES - completedCount} clases para el certificado.`}
-            </p>
-          </div>
-
           <div className="level-accordions">
-            {levels.map((nivel) => {
+            {levelStats.map(({ nivel, slugs, done, total, pct }) => {
               const isOpen = Boolean(openLevels[nivel.slug])
               const panelId = `level-panel-${nivel.slug}`
-              const nivelClasses = nivel.available ? allNivel1Slugs() : []
 
               return (
                 <div
@@ -330,14 +410,17 @@ export function CuentaPage() {
                       <strong>{nivel.title}</strong>
                     </span>
                     <span className="level-accordion-meta">
-                      {nivel.available ? (
+                      {total > 0 ? (
                         <span className="level-accordion-count">
-                          {completedCount}/{NIVEL_1_TOTAL_CLASSES}
+                          {done}/{total}
                         </span>
                       ) : (
                         <span className="soon-pill">Próximamente</span>
                       )}
                       <span className="level-accordion-chevron" aria-hidden="true" />
+                    </span>
+                    <span className="level-accordion-progress" aria-hidden="true">
+                      <span style={{ width: `${pct}%` }} />
                     </span>
                   </button>
 
@@ -352,7 +435,7 @@ export function CuentaPage() {
                     {nivel.available ? (
                       <>
                         <ul className="progress-list rich">
-                          {nivelClasses.map((slug, index) => {
+                          {slugs.map((slug, index) => {
                             const id = index + 1
                             const published = classes.find((c) => c.slug === slug)
                             const row = bySlug.get(slug)

@@ -542,15 +542,31 @@ body.nav-open {
 .level-accordion-trigger {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.65rem 1rem;
   padding: 1rem 1.1rem;
   border: 0;
   background: transparent;
   color: inherit;
   text-align: left;
   cursor: pointer;
+}
+
+.level-accordion-progress {
+  flex: 1 0 100%;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: rgba(7, 52, 40, 0.1);
+  overflow: hidden;
+}
+
+.level-accordion-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0f4d3a, #efc355);
 }
 
 .level-accordion-copy strong {
@@ -1090,13 +1106,80 @@ body.nav-open {
   font-weight: 600;
 }
 
+.nivel-page {
+  overflow-x: clip;
+}
+
 .nivel-hero {
-  padding: 1.5rem 0 0.5rem;
+  padding: 2.8rem 0 2.5rem;
+  color: #f4fff8;
+  background:
+    radial-gradient(ellipse 70% 140% at 88% 45%, rgba(239, 195, 85, 0.18), transparent 46%),
+    linear-gradient(105deg, #04261e 0%, #0c3f31 48%, #187456 100%);
+}
+
+.nivel-hero-inner {
+  width: min(1180px, calc(100% - 2rem));
+  max-width: calc(100vw - 2rem);
+  margin: 0 auto;
+}
+
+.nivel-hero .breadcrumb {
+  margin-bottom: 1.15rem;
+  color: rgba(244, 255, 248, 0.72);
+}
+
+.nivel-hero .breadcrumb a,
+.nivel-hero .breadcrumb span {
+  color: rgba(244, 255, 248, 0.78);
+}
+
+.nivel-hero .eyebrow {
+  margin-bottom: 0.45rem;
 }
 
 .nivel-hero h1 {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+  font-size: clamp(3.4rem, 8vw, 5.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+.nivel-hero .lede,
+.nivel-hero-words {
+  max-width: 38rem;
+  margin: 0.85rem 0 0;
+  color: rgba(244, 255, 248, 0.92);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.nivel-hero-words {
+  margin-top: 0.15rem;
+}
+
+.nivel-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.75rem, max-content));
+  justify-content: start;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 100%;
+  margin: 1.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nivel-stats li {
+  width: max-content;
+  max-width: 100%;
+  padding: 0.38rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(244, 255, 248, 0.92);
+  font-size: 0.92rem;
 }
 
 .nivel-actions {
@@ -3331,6 +3414,79 @@ h3 {
   box-shadow: var(--shadow);
 }
 
+.cert-panel {
+  margin-bottom: 1rem;
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.cert-card {
+  display: grid;
+  align-content: start;
+  gap: 0.2rem;
+  min-height: 7.2rem;
+  padding: 0.95rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+}
+
+.cert-card.earned {
+  background: linear-gradient(165deg, #fff8ea, #fff);
+  border-color: rgba(196, 138, 42, 0.45);
+}
+
+.cert-final {
+  grid-column: 1 / -1;
+  min-height: 0;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(239, 195, 85, 0.28), transparent 42%),
+    rgba(255, 255, 255, 0.72);
+}
+
+.cert-kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--leaf);
+}
+
+.cert-card.earned .cert-kicker {
+  color: #8a5a12;
+}
+
+.cert-card strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+
+.cert-card em {
+  font-style: normal;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.cert-code {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--bg-deep);
+}
+
+.cert-card a {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--leaf);
+}
+
 .profile-panel-head {
   display: flex;
   justify-content: space-between;
@@ -3380,6 +3536,10 @@ h3 {
   }
 
   .profile-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cert-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

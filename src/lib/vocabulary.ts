@@ -1,4 +1,5 @@
-import { classes, type ClassLesson, type VocabItem } from '../data/classes'
+import { classes, levels, type ClassLesson, type VocabItem } from '../data/classes'
+import { slugsForLevel } from '../data/nivel1'
 
 const PRONOUN_START = /^(che|nde|ha'e|ha'ekuéra|ñande|ore|peẽ)\b/i
 
@@ -74,4 +75,16 @@ export function learnedWordTotal(learnedSlugs: Iterable<string>) {
   }
 
   return { total: all.size, bySlug }
+}
+
+/** Palabras del nivel y total acumulado hasta ese nivel, sin repetir. */
+export function vocabularyForLevel(levelSlug: string) {
+  const index = levels.findIndex((level) => level.slug === levelSlug)
+  const through = levels.slice(0, Math.max(index, 0) + 1)
+  const ownSlugs = slugsForLevel(levelSlug)
+  const accumulatedSlugs = through.flatMap((level) => slugsForLevel(level.slug))
+  return {
+    nuevas: learnedWordTotal(ownSlugs).total,
+    acumuladas: learnedWordTotal(accumulatedSlugs).total,
+  }
 }

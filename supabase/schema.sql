@@ -39,7 +39,8 @@ create table if not exists public.self_assessments (
   unique (user_id, class_slug, attempt)
 );
 
--- Certificado Nivel 1 (cuando las 15 clases estén completas)
+-- Certificado por nivel (level_slug = nivel-1 …) y del curso (level_slug = curso),
+-- este último cuando ya existen los certificados de todos los niveles.
 create table if not exists public.certificates (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users (id) on delete cascade,
