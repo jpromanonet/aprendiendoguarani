@@ -8,6 +8,7 @@ import { NivelPage } from './pages/NivelPage'
 import { DiccionarioPage } from './pages/DiccionarioPage'
 import { TextosPage } from './pages/TextosPage'
 import { CuentaPage } from './pages/CuentaPage'
+import { CertificadosPage } from './pages/CertificadosPage'
 import { levels } from './data/classes'
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="diccionario" element={<DiccionarioPage />} />
             <Route path="textos" element={<TextosPage />} />
             <Route path="cuenta" element={<CuentaPage />} />
+            <Route path="certificados" element={<CertificadosPage />} />
             <Route path="progreso" element={<Navigate to="/cuenta" replace />} />
             <Route path="login" element={<Navigate to="/cuenta" replace />} />
             <Route path="clase/:slug" element={<LegacyClassRedirect />} />

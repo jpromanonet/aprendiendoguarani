@@ -3410,8 +3410,21 @@ h3 {
   box-shadow: var(--shadow);
 }
 
-.cert-panel {
-  margin-bottom: 1rem;
+.cert-page {
+  width: min(1100px, calc(100% - 1.5rem));
+  margin: 0 auto;
+  padding: 1.4rem 0 3.5rem;
+}
+
+.cert-page .cert-panel {
+  margin-bottom: 0;
+}
+
+.cert-profile-link {
+  align-self: center;
+  font-weight: 700;
+  color: var(--leaf);
+  white-space: nowrap;
 }
 
 .cert-grid {

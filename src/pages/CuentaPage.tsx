@@ -2,19 +2,11 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEven
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { classes, levels } from '../data/classes'
-import { COURSE_CERTIFICATE_SLUG, slugsForLevel } from '../data/nivel1'
+import { slugsForLevel } from '../data/nivel1'
 import { fetchProgress } from '../lib/progress'
 import { learnedWordTotal } from '../lib/vocabulary'
 import { supabase } from '../lib/supabase'
-import type { Certificate, LessonProgress, SelfAssessment } from '../types/database'
-
-function formatCertDate(iso: string) {
-  return new Date(iso).toLocaleDateString('es-AR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
-}
+import type { LessonProgress, SelfAssessment } from '../types/database'
 
 export function CuentaPage() {
   const {
@@ -39,7 +31,6 @@ export function CuentaPage() {
   const [photoBusy, setPhotoBusy] = useState(false)
   const [rows, setRows] = useState<LessonProgress[]>([])
   const [assessments, setAssessments] = useState<SelfAssessment[]>([])
-  const [certificates, setCertificates] = useState<Certificate[]>([])
   const [openLevels, setOpenLevels] = useState<Record<string, boolean>>({ 'nivel-1': true })
   const [editingName, setEditingName] = useState(false)
   const [nameDraft, setNameDraft] = useState('')
@@ -76,12 +67,10 @@ export function CuentaPage() {
     void Promise.all([
       fetchProgress(user.id),
       supabase.from('self_assessments').select('*').eq('user_id', user.id),
-      supabase.from('certificates').select('*').eq('user_id', user.id),
     ])
-      .then(([progress, assess, certs]) => {
+      .then(([progress, assess]) => {
         setRows(progress)
         setAssessments((assess.data ?? []) as SelfAssessment[])
-        setCertificates((certs.data ?? []) as Certificate[])
       })
       .catch((err: Error) => setError(err.message))
   }, [user])
@@ -125,11 +114,6 @@ export function CuentaPage() {
     : null
   const nivel1 = levelStats.find((level) => level.nivel.slug === 'nivel-1')
   const readyForCert = Boolean(nivel1 && nivel1.total > 0 && nivel1.done >= nivel1.total)
-  const earnedLevelCerts = levelStats.filter((level) =>
-    certificates.some((item) => item.level_slug === level.nivel.slug),
-  ).length
-  const finalCert = certificates.find((item) => item.level_slug === COURSE_CERTIFICATE_SLUG)
-  const finalReady = levelStats.length > 0 && earnedLevelCerts === levelStats.length
   const nextClass = nivel1?.slugs.find((slug) => !bySlug.get(slug)?.completed)
   const nextPublished = nextClass ? classes.find((c) => c.slug === nextClass) : undefined
 
@@ -318,67 +302,6 @@ export function CuentaPage() {
           </article>
         </section>
 
-        <section className="profile-panel cert-panel" aria-label="Certificados">
-          <div className="profile-panel-head">
-            <div>
-              <p className="eyebrow">Niveles y cierre del curso</p>
-              <h2>Certificados</h2>
-            </div>
-          </div>
-          <div className="cert-grid">
-            {levelStats.map(({ nivel, done, total }) => {
-              const issued = certificates.find((item) => item.level_slug === nivel.slug)
-              const ready = total > 0 && done >= total
-              return (
-                <article key={nivel.slug} className={`cert-card ${issued ? 'earned' : ''}`}>
-                  <span className="cert-kicker">{issued ? 'Emitido' : 'Certificado'}</span>
-                  <strong>{nivel.title}</strong>
-                  {issued ? (
-                    <>
-                      <em>{formatCertDate(issued.issued_at)}</em>
-                      <span className="cert-code">{issued.code}</span>
-                      {issued.pdf_url ? (
-                        <a href={issued.pdf_url} target="_blank" rel="noreferrer">
-                          Ver certificado
-                        </a>
-                      ) : null}
-                    </>
-                  ) : ready ? (
-                    <em>Completaste este nivel. El certificado se habilita en la próxima etapa.</em>
-                  ) : total > 0 ? (
-                    <em>
-                      {done} de {total} clases
-                    </em>
-                  ) : (
-                    <em>Cuando se publique este nivel</em>
-                  )}
-                </article>
-              )
-            })}
-            <article className={`cert-card cert-final ${finalCert || finalReady ? 'earned' : ''}`}>
-              <span className="cert-kicker">{finalCert || finalReady ? 'Emitido' : 'Certificado final'}</span>
-              <strong>Curso completo</strong>
-              {finalCert ? (
-                <>
-                  <em>{formatCertDate(finalCert.issued_at)}</em>
-                  <span className="cert-code">{finalCert.code}</span>
-                  {finalCert.pdf_url ? (
-                    <a href={finalCert.pdf_url} target="_blank" rel="noreferrer">
-                      Ver certificado
-                    </a>
-                  ) : null}
-                </>
-              ) : finalReady ? (
-                <em>Reuniste los certificados de todos los niveles.</em>
-              ) : (
-                <em>
-                  Se emite al tener los certificados de todos los niveles. {earnedLevelCerts} de {levelStats.length}.
-                </em>
-              )}
-            </article>
-          </div>
-        </section>
-
         <div className="profile-cut" aria-hidden="true" />
 
         <section className="profile-panel levels-journey" aria-label="Niveles del curso">
@@ -387,6 +310,9 @@ export function CuentaPage() {
               <p className="eyebrow">Camino completo</p>
               <h2>Niveles del curso</h2>
             </div>
+            <Link className="cert-profile-link" to="/certificados">
+              Certificados
+            </Link>
           </div>
 
           <div className="level-accordions">
