@@ -3299,6 +3299,19 @@ h3 {
   color: #1d2a16;
 }
 
+.profile-actions .profile-certs {
+  color: #1d2a16;
+  background: var(--sun);
+  border-color: rgba(239, 195, 85, 0.7);
+  box-shadow: 0 6px 16px rgba(239, 195, 85, 0.28);
+}
+
+.profile-actions .profile-certs:hover {
+  color: #1d2a16;
+  background: #ffd978;
+  border-color: #efc355;
+}
+
 .profile-actions .profile-text-action.profile-logout {
   color: #fff;
   background: #e11d48;
