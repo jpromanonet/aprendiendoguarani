@@ -1,0 +1,13 @@
+---
+description: Al terminar un cambio en este sitio, subirlo a GitHub para que Vercel despliegue
+alwaysApply: true
+---
+
+# Deploy al terminar
+
+Cuando un cambio de este repo queda listo, commitealo y pushealo a `main` para que Vercel lo despliegue. No esperes un "subilo" aparte.
+
+- El destino es solo `origin` de este repo (GitHub → Vercel).
+- No subas este proyecto a W: ni a otro servidor, drive o sitio.
+- No commitees secretos (`.env`, claves, contraseñas).
+- Si el usuario pide explícitamente no subir, no pushees.

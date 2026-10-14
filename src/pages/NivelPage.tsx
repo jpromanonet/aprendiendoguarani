@@ -22,15 +22,13 @@ function NivelHero({ nivel }: { nivel: LevelInfo }) {
         <p className="eyebrow light">{stage}</p>
         <h1>{nivel.title}</h1>
         <p className="lede">{nivel.description}</p>
-        <p className="nivel-hero-words">{countLabel(words.nuevas, 'palabra.', 'palabras.')}</p>
         <ul className="nivel-stats">
           <li>
             {nivel.totalClasses > 0
               ? countLabel(nivel.totalClasses, 'clase', 'clases')
               : 'Próximamente'}
           </li>
-          <li>{countLabel(words.nuevas, 'palabra nueva', 'palabras nuevas')}</li>
-          <li>{countLabel(words.acumuladas, 'acumulada', 'acumuladas')}</li>
+          <li>{countLabel(words.nuevas, 'palabra', 'palabras')}</li>
         </ul>
       </div>
     </section>
@@ -52,14 +50,7 @@ export function NivelPage() {
 
       {nivel.available ? (
         <div className="home home-direct">
-          <section className="home-classes" aria-labelledby="nivel-classes-title">
-            <div className="home-classes-head">
-              <div>
-                <p className="eyebrow">Contenido</p>
-                <h2 id="nivel-classes-title">Clases de {nivel.title}</h2>
-              </div>
-            </div>
-
+          <section className="home-classes" aria-label="Clases">
             <div className="class-index immediate">
               {classes.map((lesson, index) => (
                 <Link

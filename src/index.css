@@ -1146,17 +1146,12 @@ body.nav-open {
   letter-spacing: -0.035em;
 }
 
-.nivel-hero .lede,
-.nivel-hero-words {
+.nivel-hero .lede {
   max-width: 38rem;
   margin: 0.85rem 0 0;
   color: rgba(244, 255, 248, 0.92);
   font-size: 1.05rem;
   line-height: 1.55;
-}
-
-.nivel-hero-words {
-  margin-top: 0.15rem;
 }
 
 .nivel-stats {
