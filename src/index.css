@@ -1155,11 +1155,11 @@ body.nav-open {
 }
 
 .nivel-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8.75rem, max-content));
-  justify-content: start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 0.5rem;
-  width: 100%;
+  width: max-content;
   max-width: 100%;
   margin: 1.35rem 0 0;
   padding: 0;
@@ -1167,6 +1167,7 @@ body.nav-open {
 }
 
 .nivel-stats li {
+  flex: 0 0 auto;
   width: max-content;
   max-width: 100%;
   padding: 0.38rem 0.85rem;
