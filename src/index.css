@@ -3660,3 +3660,64 @@ h3 {
 .account-login-card .account-form {
   margin-top: 0.4rem;
 }
+
+.solved-stack {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.solved-group {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.solved-group .subheading {
+  margin: 0;
+}
+
+.solved-item {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(15, 77, 58, 0.1);
+}
+
+.solved-prompt {
+  margin: 0;
+  font-weight: 650;
+}
+
+.solved-image {
+  width: min(100%, 280px);
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 0.85rem;
+  background: #f4f7f5;
+}
+
+.solved-answer {
+  margin: 0;
+  color: var(--bg-deep);
+}
+
+.solved-answer span {
+  display: inline-block;
+  margin-right: 0.45rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  background: var(--sun);
+  color: #1d2a16;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.solved-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}

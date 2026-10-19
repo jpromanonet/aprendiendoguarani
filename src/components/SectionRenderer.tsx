@@ -229,6 +229,35 @@ export function SectionRenderer({ section }: { section: Section }) {
     case 'exercise':
       return <Exercise title={section.title} prompt={section.prompt} items={section.items} />
 
+    case 'solved':
+      return (
+        <section className="section-block">
+          <div className="section-heading">
+            <h2>{section.title}</h2>
+            {section.intro ? <p className="lede">{section.intro}</p> : null}
+          </div>
+          <div className="solved-stack">
+            {section.groups.map((group) => (
+              <div key={group.title} className="solved-group">
+                <h3 className="subheading">{group.title}</h3>
+                {group.items.map((item) => (
+                  <article key={`${group.title}-${item.answer}-${item.image ?? ''}`} className="solved-item">
+                    <p className="solved-prompt">{item.prompt}</p>
+                    {item.image ? (
+                      <img className="solved-image" src={item.image} alt={item.answer} />
+                    ) : null}
+                    <p className="solved-answer">
+                      <span>Respuesta</span> {item.answer}
+                    </p>
+                    {item.note ? <p className="solved-note">{item.note}</p> : null}
+                  </article>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+
     default:
       return null
   }
