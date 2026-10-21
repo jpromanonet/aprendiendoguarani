@@ -31,6 +31,14 @@ export type Section =
         items: { prompt: string; answer: string; note?: string; image?: string }[]
       }[]
     }
+  | {
+      type: 'figure'
+      title: string
+      image: string
+      caption?: string
+      audio?: string
+      body?: string[]
+    }
 
 export type ClassLesson = {
   id: number
@@ -1341,6 +1349,318 @@ export const classes: ClassLesson[] = [
                 note: "Futuro con -ta. Mba'apo es nasal, así que che ha nde usa ña-. Descansar es pytu'u, con y.",
               },
             ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 8,
+    slug: 'clase-8',
+    title: 'Clase 8',
+    date: 'Lunes 19 de octubre de 2026',
+    subtitle: 'Saludos, preguntas personales y familia',
+    summary:
+      "Saludos cortos y largos, despedidas, saludos según el momento del día, preguntas personales, adverbios de pregunta, posposiciones y vocabulario familiar (ñe'ẽndy ogaygua). Incluye las láminas y los audios de la clase presencial.",
+    themes: ['Saludos', 'Preguntas', 'Posposiciones', 'Familia'],
+    sections: [
+      {
+        type: 'figure',
+        title: '¿Cómo saludamos?',
+        image: '/clase8/como-saludamos.jpg',
+        caption: 'Saludo corto y saludo un poco más largo. Reiko es para vos; peiko es para ustedes.',
+        audio: '/audio/saludo-corto.mp4',
+        body: [
+          "Saludo corto: Mba'éichapa. — Iporã, ¿ha nde? — Iporã avei.",
+          "Saludo un poco más largo: Mba'éichapa reiko. — Aiko porã, ¿ha nde? — Aiko porã avei.",
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Audio — Saludo un poco más largo',
+        audio: '/audio/saludo-largo.mp4',
+        items: [
+          { guaraní: "Mba'éichapa reiko", español: '¿Cómo estás?' },
+          { guaraní: 'Aiko porã', español: 'Estoy bien' },
+          { guaraní: 'Iporã avei', español: 'Bien también' },
+          { guaraní: 'Reiko', español: 'estás (vos)', note: 'singular' },
+          { guaraní: 'Peiko', español: 'están (ustedes)', note: 'plural' },
+        ],
+      },
+      {
+        type: 'figure',
+        title: '¿Cómo nos despedimos?',
+        image: '/clase8/como-nos-despedimos.jpg',
+        caption: 'Dos formas habituales de despedirse.',
+        body: [
+          'Jajoecháta: nos vemos.',
+          'Jajohecha peve: hasta la próxima.',
+        ],
+      },
+      {
+        type: 'examples',
+        title: 'Saludo con momentos del día',
+        items: [
+          {
+            guaraní: "Mba'éichapa neko'ẽ. — Cheko'ẽ porã / vai.",
+            español: '¿Cómo amaneciste? — Amanecí bien / mal.',
+          },
+          {
+            guaraní: "Mba'éichapa ndepyhareve. — Chepyhare porã.",
+            español: '¿Cómo está tu mañana? — Mi mañana está bien.',
+          },
+          {
+            guaraní: "Mba'éichapa ndeasaje. — Cheasaje porã.",
+            español: '¿Cómo está tu mediodía / siesta? — Mi siesta está bien.',
+          },
+          {
+            guaraní: "Mba'éichapa ndeka'aru. — Cheka'aru vai.",
+            español: '¿Cómo está tu tarde? — Mi tarde está mal.',
+          },
+          {
+            guaraní: "Mba'éichapa ndepyhare. — Chepyhare porã.",
+            español: '¿Cómo está tu noche? — Mi noche está bien.',
+          },
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Audio — Saludos según los momentos del día',
+        audio: '/audio/saludos-momentos.mp4',
+        items: [
+          { guaraní: "Ko'ẽ", español: 'amanecer / madrugada' },
+          { guaraní: 'Pyhareve', español: 'mañana' },
+          { guaraní: 'Asaje', español: 'mediodía / siesta' },
+          { guaraní: "Ka'aru", español: 'tarde' },
+          { guaraní: 'Pyhare', español: 'noche' },
+        ],
+      },
+      {
+        type: 'examples',
+        title: 'Preguntas personales',
+        items: [
+          {
+            guaraní: "Mba'éichapa nderéra. — Cheréra Juan. / Che cheréra Juan.",
+            español: '¿Cómo te llamas? — Me llamo Juan. / Yo me llamo Juan.',
+          },
+          {
+            guaraní: "Mba'éichapa nde rerajoapy. — Che rerajoapy Giménez.",
+            español: '¿Cómo es tu apellido? — Mi apellido es Giménez.',
+          },
+          {
+            guaraní: "Moõguápiko nde. — Che Buenos Aires-gua. / Che ka'agusugua.",
+            español: "¿De dónde sos? — Soy de Buenos Aires. / Soy de Ka'aguasu.",
+          },
+          {
+            guaraní: 'Moõpa reiko. — Che aiko Tigre-pe. / Che aiko Tovatĩme.',
+            español: '¿Dónde vivís? — Yo vivo en Tigre. / Yo vivo en Tovatĩ.',
+          },
+          {
+            guaraní: 'Mboy arýpa rereko / reguereko. — Che areko 30 ary. / Che aguereko 30 ary.',
+            español: '¿Cuántos años tienes? — Yo tengo 30 años. / Tengo 30 años.',
+          },
+          {
+            guaraní: 'Mávandipa reiko. — Che aiko che sy ndive. / Che aiko che sýndi.',
+            español: '¿Con quién vivís? — Yo vivo con mi madre.',
+          },
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Audio — Preguntas y respuestas personales',
+        audio: '/audio/preguntas-personales.mp4',
+        items: [
+          { guaraní: 'Téra', español: 'nombre' },
+          { guaraní: 'Rerajoapy', español: 'apellido' },
+          { guaraní: 'Moõgua', español: 'de dónde (origen)' },
+          { guaraní: 'Aiko', español: 'vivo / estoy' },
+          { guaraní: 'Ary', español: 'año' },
+        ],
+      },
+      {
+        type: 'rules',
+        title: 'Adverbios de preguntas',
+        rules: [
+          { title: "Mba'e", body: 'Qué' },
+          { title: "Mba'éicha", body: 'Cómo' },
+          { title: 'Moõ', body: 'Dónde' },
+          { title: 'Moõgui', body: 'De dónde (circunstancia)' },
+          { title: 'Moõgua', body: 'De dónde (origen / pertenencia)' },
+          { title: 'Mboy', body: 'Cuánto' },
+          { title: 'Máva', body: 'Quién' },
+        ],
+      },
+      {
+        type: 'examples',
+        title: "Ñe'ẽteja oporandúva — Con partículas sufijas",
+        items: [
+          { guaraní: "Mba'épa / mba'épiko", español: '¿Qué?' },
+          { guaraní: "Mba'éichapa / mba'éichapiko", español: '¿Cómo?' },
+          { guaraní: 'Moõpa / Moõpiko', español: '¿Dónde?' },
+          { guaraní: 'Moõguipa / moõguipiko', español: '¿De dónde?' },
+          { guaraní: 'Moõguápa / Moõguápiko', español: '¿De dónde? (origen)' },
+          { guaraní: 'Mboýpa / mboýpiko', español: '¿Cuánto?' },
+          { guaraní: 'Mávapa / Mávapiko', español: '¿Quién?' },
+        ],
+      },
+      {
+        type: 'text',
+        title: 'Partículas de pregunta',
+        body: [
+          'Las partículas usadas para formular preguntas en guaraní son pa y piko (y los derivados de piko: pio, iko, tiko).',
+          'Todas van unidas al vocablo y son átonas. Al usar estas partículas que indican pregunta, no usamos signo de interrogación.',
+        ],
+      },
+      {
+        type: 'rules',
+        title: "Ñe'ẽriregua — Posposiciones",
+        rules: [
+          {
+            title: 'Qué son',
+            body: 'Son equivalentes a las preposiciones del español. Se llaman posposiciones porque van al final del término o frase que modifican.',
+          },
+          { title: 'Pe / me', body: 'En, a, al. Es átona. Ej.: Tigre-pe (en Tigre).' },
+          {
+            title: 'Ndive / ndivé / ndi / ndie',
+            body: 'Con, en compañía de. Ej.: che sy ndive / che sýndi (con mi madre).',
+          },
+          { title: 'gui', body: 'De (de dónde, circunstancial). Es átona.' },
+          { title: 'gua', body: 'De (origen o pertenencia). Es tónica. Ej.: Buenos Aires-gua.' },
+          {
+            title: 'icha',
+            body: 'Comparación “como”. Es átona. Ej.: Chéicha oke. (Como yo duerme).',
+          },
+        ],
+      },
+      {
+        type: 'exercise',
+        title: 'Tembiaporã — Datos personales',
+        prompt: 'Contestá las preguntas con tus datos personales.',
+        items: [
+          {
+            prompt: "Mba'éichapa nderéra.",
+            answer: 'Ej.: Cheréra Ana. / Che cheréra Ana.',
+            hint: 'nombre',
+          },
+          {
+            prompt: "Mba'éichapa nde rerajoapy.",
+            answer: 'Ej.: Che rerajoapy López.',
+            hint: 'apellido',
+          },
+          {
+            prompt: 'Moõguápiko nde.',
+            answer: 'Ej.: Che Tigre-gua.',
+            hint: 'origen con -gua',
+          },
+          {
+            prompt: 'Moõpa reiko.',
+            answer: 'Ej.: Che aiko Tigre-pe.',
+            hint: 'lugar con -pe / -me',
+          },
+          {
+            prompt: 'Mboy arýpa rereko / reguereko.',
+            answer: 'Ej.: Che areko 25 ary.',
+            hint: 'número + ary',
+          },
+          {
+            prompt: 'Mávandipa reiko.',
+            answer: 'Ej.: Che aiko che sy ndive.',
+            hint: 'ndive / ndi',
+          },
+        ],
+      },
+      {
+        type: 'figure',
+        title: "Ñe'ẽndy ogaygua — Vocabulario familiar",
+        image: '/clase8/neendy-ogaygua.jpg',
+        caption:
+          'Algunas palabras cambian según quien habla: el hombre, la mujer, o ambos.',
+        audio: '/audio/vocabulario-familiar.mp4',
+      },
+      {
+        type: 'pairs',
+        title: 'Familia según quien habla',
+        subtitle: "Kuimba'e he'i, kuña he'i, y lo que dicen ambos.",
+        groups: [
+          {
+            label: "Kuimba'e he'i — El hombre dice",
+            items: [
+              { guaraní: 'Che rembireko', español: 'mi esposa' },
+              { guaraní: 'Che rajy', español: 'mi hija' },
+              { guaraní: "Che ra'y", español: 'mi hijo' },
+              { guaraní: "Che ryke'y", español: 'mi hermano mayor' },
+              { guaraní: 'Che ryvy', español: 'mi hermano menor' },
+              { guaraní: 'Che reindy', español: 'mi hermana' },
+              { guaraní: 'Che rembirekorã', español: 'mi novia' },
+              { guaraní: 'Che rovaja', español: 'cuñado / cuñada' },
+            ],
+          },
+          {
+            label: "Kuña he'i — La mujer dice",
+            items: [
+              { guaraní: 'Che ména', español: 'mi esposo' },
+              { guaraní: 'Che memby', español: 'mi hijo / hija' },
+              { guaraní: 'Che membykuña', español: 'mi hija' },
+              { guaraní: "Che membykuimba'e", español: 'mi hijo' },
+              { guaraní: 'Che ryke', español: 'mi hermana mayor' },
+              { guaraní: "Che kypy'y", español: 'mi hermana menor' },
+              { guaraní: 'Che kyvy', español: 'mi hermano' },
+              { guaraní: 'Che menarã', español: 'mi novio' },
+              { guaraní: "Che uke'i", español: 'mi cuñada' },
+              { guaraní: 'Che rovaja', español: 'cuñado' },
+            ],
+          },
+          {
+            label: "Kuña ha kuimba'e he'i — Ambos dicen",
+            items: [
+              { guaraní: 'Che ru', español: 'mi padre' },
+              { guaraní: 'Che sy', español: 'mi madre' },
+              { guaraní: 'Che ramói / che taita', español: 'mi abuelo' },
+              { guaraní: 'Che jarýi', español: 'mi abuela' },
+              { guaraní: 'Che remiarirõ', español: 'mi nieto / nieta' },
+              { guaraní: 'Che kichiha', español: 'novio / novia' },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'rules',
+        title: "Kuña y kuimba'e con animales",
+        rules: [
+          {
+            title: 'Kuña',
+            body: 'Designa el sexo de personas (mujeres) y también el de muchos animales: kurekuña (chancha), jaguakuña (perra).',
+          },
+          {
+            title: "Kuimba'e",
+            body: "Solo se usa con personas varones. Para animales machos se usa el préstamo mácho: kure mácho (cerdo), jagua mácho (perro).",
+          },
+        ],
+      },
+      {
+        type: 'exercise',
+        title: 'Tembiaporã — Tarea',
+        prompt: 'Traducí las oraciones al español.',
+        items: [
+          {
+            prompt: 'Asajépe che ru ha che sy okarúta.',
+            answer: 'Al mediodía / a la siesta mi padre y mi madre comerán.',
+          },
+          {
+            prompt: 'Che membykuña okese chendive.',
+            answer: 'Mi hija quiere dormir conmigo.',
+          },
+          {
+            prompt: "Che ra'y ha che rajy ompotĩkuri óga.",
+            answer: 'Mi hijo y mi hija limpiaron la casa.',
+          },
+          {
+            prompt: 'Che, che memby ha che ména roguereko peteĩ jagua mácho.',
+            answer: 'Yo, mi hijo/a y mi esposo tenemos un perro (macho).',
+          },
+          {
+            prompt: 'Che rembirekorã ojogua sái hovy.',
+            answer: 'Mi novia compra una pollera azul.',
           },
         ],
       },

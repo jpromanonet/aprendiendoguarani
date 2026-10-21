@@ -258,6 +258,27 @@ export function SectionRenderer({ section }: { section: Section }) {
         </section>
       )
 
+    case 'figure':
+      return (
+        <section className="section-block">
+          <div className="section-heading">
+            <h2>{section.title}</h2>
+          </div>
+          {section.audio ? <AudioBlock src={section.audio} /> : null}
+          {section.body?.length ? (
+            <div className="prose">
+              {section.body.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+          ) : null}
+          <figure className="class-figure">
+            <img src={section.image} alt={section.caption || section.title} />
+            {section.caption ? <figcaption>{section.caption}</figcaption> : null}
+          </figure>
+        </section>
+      )
+
     default:
       return null
   }

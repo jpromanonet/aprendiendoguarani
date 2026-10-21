@@ -400,6 +400,64 @@ export const quizzes: Record<string, ClassQuiz> = {
       },
     ],
   },
+  'clase-8': {
+    classSlug: 'clase-8',
+    title: 'Autoevaluación — Clase 8',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c8-q1',
+        prompt: "¿Qué significa Mba'éichapa reiko?",
+        options: [
+          { id: 'a', label: '¿Cómo estás?' },
+          { id: 'b', label: '¿Cómo te llamas?' },
+          { id: 'c', label: 'Nos vemos' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c8-q2',
+        prompt: '¿Cuál es una despedida correcta?',
+        options: [
+          { id: 'a', label: 'Aguyje' },
+          { id: 'b', label: 'Jajoecháta' },
+          { id: 'c', label: 'Iporã avei' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c8-q3',
+        prompt: "¿Qué pregunta Mba'éichapa nderéra?",
+        options: [
+          { id: 'a', label: '¿Dónde vivís?' },
+          { id: 'b', label: '¿De dónde sos?' },
+          { id: 'c', label: '¿Cómo te llamas?' },
+        ],
+        correctOptionId: 'c',
+      },
+      {
+        id: 'c8-q4',
+        prompt: "Si un hombre dice Che ra'y, ¿a quién se refiere?",
+        options: [
+          { id: 'a', label: 'A su hija' },
+          { id: 'b', label: 'A su hijo' },
+          { id: 'c', label: 'A su hermano' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c8-q5',
+        prompt: '¿Cómo se dice “perro” (macho) en esta clase?',
+        options: [
+          { id: 'a', label: "Jagua kuimba'e" },
+          { id: 'b', label: 'Jagua mácho' },
+          { id: 'c', label: 'Jaguakuña' },
+        ],
+        correctOptionId: 'b',
+      },
+    ],
+  },
 }
 
 export function getQuiz(classSlug: string) {
