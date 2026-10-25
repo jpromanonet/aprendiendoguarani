@@ -229,7 +229,15 @@ export function SectionRenderer({ section }: { section: Section }) {
     case 'exercise':
       return <Exercise title={section.title} prompt={section.prompt} items={section.items} />
 
-    case 'solved':
+    case 'solved': {
+      let questionNumber = 0
+      const numberedGroups = section.groups.map((group) => ({
+        ...group,
+        items: group.items.map((item) => {
+          questionNumber += 1
+          return { ...item, number: questionNumber }
+        }),
+      }))
       return (
         <section className="section-block">
           <div className="section-heading">
@@ -237,18 +245,33 @@ export function SectionRenderer({ section }: { section: Section }) {
             {section.intro ? <p className="lede">{section.intro}</p> : null}
           </div>
           <div className="solved-stack">
-            {section.groups.map((group) => (
+            {numberedGroups.map((group) => (
               <div key={group.title} className="solved-group">
                 <h3 className="subheading">{group.title}</h3>
                 {group.items.map((item) => (
-                  <article key={`${group.title}-${item.answer}-${item.image ?? ''}`} className="solved-item">
+                  <article
+                    key={`${group.title}-${item.number}-${item.answers.join('|')}`}
+                    className="solved-item"
+                  >
+                    <p className="solved-number">Pregunta {item.number}</p>
                     <p className="solved-prompt">{item.prompt}</p>
                     {item.image ? (
-                      <img className="solved-image" src={item.image} alt={item.answer} />
+                      <img
+                        className="solved-image"
+                        src={item.image}
+                        alt={item.answers.join(', ')}
+                      />
                     ) : null}
-                    <p className="solved-answer">
-                      <span>Respuesta</span> {item.answer}
-                    </p>
+                    <div className="solved-answers">
+                      <p className="solved-answers-label">
+                        {item.answers.length > 1 ? 'Respuestas' : 'Respuesta'}
+                      </p>
+                      <ul>
+                        {item.answers.map((answer) => (
+                          <li key={answer}>{answer}</li>
+                        ))}
+                      </ul>
+                    </div>
                     {item.note ? <p className="solved-note">{item.note}</p> : null}
                   </article>
                 ))}
@@ -257,6 +280,7 @@ export function SectionRenderer({ section }: { section: Section }) {
           </div>
         </section>
       )
+    }
 
     case 'figure':
       return (

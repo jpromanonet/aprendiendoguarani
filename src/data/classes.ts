@@ -28,7 +28,7 @@ export type Section =
       intro?: string
       groups: {
         title: string
-        items: { prompt: string; answer: string; note?: string; image?: string }[]
+        items: { prompt: string; answers: string[]; note?: string; image?: string }[]
       }[]
     }
   | {
@@ -1181,15 +1181,18 @@ export const classes: ClassLesson[] = [
         type: 'solved',
         title: 'Ejemplo resuelto — Trabajo de repaso',
         intro:
-          'Así se resuelve el trabajo de repaso del curso. Cada ítem muestra la respuesta correcta.',
+          'Así se resuelve el trabajo de repaso del curso. Cada pregunta muestra la respuesta o las respuestas correctas.',
         groups: [
           {
             title: 'Características del guaraní',
             items: [
               {
                 prompt: 'Marcá las respuestas correctas.',
-                answer:
-                  'Aglutinante y polisintético. Contiene palabras orales y nasales. Su acento natural es el agudo.',
+                answers: [
+                  'Aglutinante y polisintético.',
+                  'Contiene palabras orales y nasales.',
+                  'Su acento natural es el agudo.',
+                ],
                 note: '“Su acento natural es grave” no corresponde: el acento natural es agudo.',
               },
             ],
@@ -1200,31 +1203,31 @@ export const classes: ClassLesson[] = [
               {
                 prompt: 'Marcá el sustantivo de la imagen.',
                 image: '/repaso/01-jagua.jpg',
-                answer: 'Jagua',
+                answers: ['Jagua'],
                 note: 'Perro. Tapiti es conejo y kure es cerdo.',
               },
               {
                 prompt: 'Marcá el sustantivo de la imagen.',
                 image: '/repaso/02-mbarakaja.jpg',
-                answer: 'Mbarakaja',
+                answers: ['Mbarakaja'],
                 note: 'Gato. Mbói es víbora y mberu es mosca.',
               },
               {
                 prompt: 'Marcá el sustantivo de la imagen.',
                 image: '/repaso/03-karumbe.jpg',
-                answer: 'Karumbe',
+                answers: ['Karumbe'],
                 note: 'Tortuga. Jatyta es caracol y kavara es cabra.',
               },
               {
                 prompt: 'Marcá el sustantivo de la imagen.',
                 image: '/repaso/04-yvyra.jpg',
-                answer: 'Yvyra',
+                answers: ['Yvyra'],
                 note: 'Árbol. Yvytu es viento y yvy es tierra.',
               },
               {
                 prompt: 'Marcá el sustantivo de la imagen.',
                 image: '/repaso/05-kua.jpg',
-                answer: 'Kuã',
+                answers: ['Kuã'],
                 note: "Dedo. Kua es agujero y ku'a es cintura.",
               },
             ],
@@ -1234,12 +1237,12 @@ export const classes: ClassLesson[] = [
             items: [
               {
                 prompt: 'Marcá los sustantivos nasales.',
-                answer: "Mberu y Ñati'ũ",
+                answers: ['Mberu', "Ñati'ũ"],
                 note: "Kure y kavaju son orales. Mberu es nasal por la m, y Ñati'ũ por la ũ.",
               },
               {
                 prompt: 'Marcá los sustantivos orales.',
-                answer: 'Óga',
+                answers: ['Óga'],
                 note: 'Panambi y ñakyrã son nasales. Lembu no es respuesta en esta consigna: la oral correcta es Óga.',
               },
             ],
@@ -1249,7 +1252,7 @@ export const classes: ClassLesson[] = [
             items: [
               {
                 prompt: 'Marcá los que están pluralizados correctamente.',
-                answer: 'Mainumbykuéra, Ñahatĩnguéra y Tupãokuéra',
+                answers: ['Mainumbykuéra', 'Ñahatĩnguéra', 'Tupãokuéra'],
                 note: 'Vakanguéra no corresponde (vaka lleva kuéra: Vakakuéra). Tupão lleva kuéra porque la nasal no está en la sílaba final: Tupãokuéra.',
               },
             ],
@@ -1260,19 +1263,19 @@ export const classes: ClassLesson[] = [
               {
                 prompt: 'Marcá el color de la imagen.',
                 image: '/repaso/06-hovy.jpg',
-                answer: 'Hovy',
+                answers: ['Hovy'],
                 note: 'Azul. Hũ es negro y hovyũ es verde.',
               },
               {
                 prompt: 'Marcá el color de la imagen.',
                 image: '/repaso/07-pyta.jpg',
-                answer: 'Pytã',
+                answers: ['Pytã'],
                 note: 'Rojo. Morotĩ es blanco y pytãngy es rosado.',
               },
               {
                 prompt: 'Marcá el color de la imagen.',
                 image: '/repaso/08-hu.jpg',
-                answer: 'Hũ',
+                answers: ['Hũ'],
                 note: "Negro. Sa'yju es amarillo y hũngy es gris.",
               },
             ],
@@ -1283,31 +1286,31 @@ export const classes: ClassLesson[] = [
               {
                 prompt: 'Marcá el verbo de la imagen.',
                 image: '/repaso/09-karu.jpg',
-                answer: 'Karu',
+                answers: ['Karu'],
                 note: 'Comer. Ke es dormir y guata es caminar.',
               },
               {
                 prompt: 'Marcá el verbo de la imagen.',
                 image: '/repaso/10-purahei.jpg',
-                answer: 'Purahéi',
+                answers: ['Purahéi'],
                 note: 'Cantar. Mbojy es cocinar y ñani es correr.',
               },
               {
                 prompt: 'Marcá el verbo de la imagen.',
                 image: '/repaso/11-mopoti.jpg',
-                answer: 'Mopotĩ',
+                answers: ['Mopotĩ'],
                 note: 'Limpiar. Mbopu es hacer sonar y ñani es correr.',
               },
               {
                 prompt: 'Marcá el verbo de la imagen.',
                 image: '/repaso/12-jupi.jpg',
-                answer: 'Jupi',
+                answers: ['Jupi'],
                 note: "Subir. Ñe'ẽ es hablar y guejy es bajar.",
               },
               {
                 prompt: 'Marcá el verbo de la imagen.',
                 image: '/repaso/13-po.jpg',
-                answer: 'Po',
+                answers: ['Po'],
                 note: 'Saltar. Guapy es sentarse y poñy es gatear.',
               },
             ],
@@ -1317,32 +1320,32 @@ export const classes: ClassLesson[] = [
             items: [
               {
                 prompt: 'Marcá las oraciones que están en presente.',
-                answer: "Juan okaru so'o. Juan okaruse so'o.",
+                answers: ["Juan okaru so'o.", "Juan okaruse so'o."],
                 note: 'Okarúkuri es pasado con testigo, no presente. En este examen se marcan okaru y okaruse.',
               },
               {
                 prompt: 'Marcá las oraciones que están en pasado.',
-                answer: "Roberto oguatára'e. Kuehe Roberto oguata.",
+                answers: ["Roberto oguatára'e.", 'Kuehe Roberto oguata.'],
                 note: 'Oguatáta es futuro, no pasado.',
               },
               {
                 prompt: '¿En qué oración el emisor fue testigo?',
-                answer: "Ha'e ojupíkuri yvyráre.",
+                answers: ["Ha'e ojupíkuri yvyráre."],
                 note: "Kuri marca que quien habla lo vio. Ra'e es pasado sin haber sido testigo.",
               },
               {
                 prompt: '¿Qué oración indica un deseo?',
-                answer: "Che amba'aposéta ko'ẽrõ.",
+                answers: ["Che amba'aposéta ko'ẽrõ."],
                 note: "-se marca el deseo y -ta el futuro. Amba'apóta es solo futuro: voy a trabajar.",
               },
               {
                 prompt: '¿Cuál está escrita correctamente?',
-                answer: "Ñande ñamoñe'ẽ.",
+                answers: ["Ñande ñamoñe'ẽ."],
                 note: "Moñe'ẽ es nasal, así que con ñande el prefijo es ña-, no ja-.",
               },
               {
                 prompt: '¿En cuál el receptor no está incluido?',
-                answer: 'Ore rojeroky pyhare.',
+                answers: ['Ore rojeroky pyhare.'],
                 note: 'Ore excluye a quien escucha. Ñande jajeroky lo incluye.',
               },
             ],
@@ -1352,22 +1355,22 @@ export const classes: ClassLesson[] = [
             items: [
               {
                 prompt: 'Dos perros comerán carne.',
-                answer: "Mokõi jagua okarúta so'o.",
+                answers: ["Mokõi jagua okarúta so'o."],
                 note: 'Mokõi es dos y -ta es futuro. Mbohapy es tres y kuri es pasado.',
               },
               {
                 prompt: 'Ellos toman mate a la mañana.',
-                answer: "Ha'ekuéra oka'ay'u pyharevépe.",
+                answers: ["Ha'ekuéra oka'ay'u pyharevépe."],
                 note: "Ha'ekuéra es ellos. Pyharevépe es a la mañana; asajépe es a la siesta.",
               },
               {
                 prompt: 'El perrito flaco, amarillo y sucio duerme.',
-                answer: "Jagua'i piru, sa'yju, ha ky'a oke.",
+                answers: ["Jagua'i piru, sa'yju, ha ky'a oke."],
                 note: "Perrito es jagua'i, con el diminutivo 'i. Piru es flaco, sa'yju es amarillo, ky'a es sucio y oke es duerme.",
               },
               {
                 prompt: 'Marcá lo que se escucha en el audio.',
-                answer: "Che ha nde ñamba'apóta heta ha upéi japytu'úta.",
+                answers: ["Che ha nde ñamba'apóta heta ha upéi japytu'úta."],
                 note: "Futuro con -ta. Mba'apo es nasal, así que che ha nde usa ña-. Descansar es pytu'u, con y.",
               },
             ],
