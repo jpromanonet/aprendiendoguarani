@@ -159,7 +159,7 @@ export const classes: ClassLesson[] = [
         title: 'Ejemplos de aglutinación',
         items: [
           { guaraní: 'Guata', español: 'caminar', detail: 'cvvcv' },
-          { guaraní: 'Aguata', español: 'camino', detail: 'vcvvca' },
+          { guaraní: 'Aguata', español: 'camino', detail: 'vcvvcv' },
           { guaraní: 'Aguatase', español: 'quiero caminar', detail: 'vcvvcvcv' },
           { guaraní: 'Mitã okaru', español: 'El niño come / La niña come', detail: 'Sin género gramatical' },
         ],
