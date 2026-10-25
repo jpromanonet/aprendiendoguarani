@@ -1212,13 +1212,13 @@ export const classes: ClassLesson[] = [
             items: [
               {
                 prompt: 'Marcá los sustantivos nasales.',
-                answer: "Ñati'ũ",
-                note: 'Kure y kavaju terminan en vocal oral. Mberu empieza con mb (seminasal) y sus vocales también son orales.',
+                answer: "Mberu y Ñati'ũ",
+                note: 'Kure y kavaju son orales. En este examen las respuestas nasales son Mberu y Ñati\'ũ.',
               },
               {
                 prompt: 'Marcá los sustantivos orales.',
                 answer: 'Óga',
-                note: 'Panambi tiene n y ñakyrã termina en vocal nasal, así que son nasales. En esta consigna la respuesta oral es Óga.',
+                note: 'Panambi y ñakyrã son nasales. Lembu no es respuesta en esta consigna: la oral correcta es Óga.',
               },
             ],
           },
@@ -1227,8 +1227,8 @@ export const classes: ClassLesson[] = [
             items: [
               {
                 prompt: 'Marcá los que están pluralizados correctamente.',
-                answer: 'Mainumbykuéra y Ñahatĩnguéra',
-                note: 'Mainumby termina en y oral, así que lleva kuéra. Ñahatĩ termina en ĩ, así que lleva nguéra. Vaka es Vakakuéra (no Vakanguéra) y tupão es Tupãonguéra (no Tupãokuéra).',
+                answer: 'Mainumbykuéra, Ñahatĩnguéra y Tupãokuéra',
+                note: 'Vakanguéra no corresponde (vaka lleva kuéra: Vakakuéra). En este examen se marcan Mainumbykuéra, Ñahatĩnguéra y Tupãokuéra.',
               },
             ],
           },
@@ -1295,8 +1295,8 @@ export const classes: ClassLesson[] = [
             items: [
               {
                 prompt: 'Marcá las oraciones que están en presente.',
-                answer: "Juan okaru so'o.",
-                note: 'Okaru es presente. Okarúkuri es pasado con testigo y okaruse es deseo.',
+                answer: "Juan okaru so'o. Juan okaruse so'o.",
+                note: 'Okarúkuri es pasado con testigo, no presente. En este examen se marcan okaru y okaruse.',
               },
               {
                 prompt: 'Marcá las oraciones que están en pasado.',
