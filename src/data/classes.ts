@@ -1737,46 +1737,31 @@ export const classes: ClassLesson[] = [
       },
       {
         type: 'figure',
-        title: 'Tembiaporã 1 — Nombrá las partes señaladas',
+        title: 'Tembiaporã 1 — Partes señaladas (resuelto)',
         image: '/clase9/tete-rehegua.jpg',
         caption:
-          'Observá la imagen y nombrá en guaraní las partes del cuerpo que están señaladas.',
+          'Lámina completada: cada casilla tiene el nombre en guaraní de la parte señalada.',
         body: [
           'Izquierda (arriba → abajo): Akã (cabeza), Tesa (ojo), Nambi (oreja), Po (mano), Kuã (dedo de la mano), Tetyma (pierna).',
-          'Derecha (arriba → abajo): Áva / akãrague (cabello), Tî (nariz), Tembe (labio), Juru (boca), Kû (lengua), Py (pie).',
-        ],
-      },
-      {
-        type: 'exercise',
-        title: 'Respuestas — Partes señaladas',
-        prompt: 'Completá cada casilla con la palabra en guaraní.',
-        items: [
-          { prompt: 'Cabeza', answer: 'Akã', hint: 'arriba a la izquierda' },
-          { prompt: 'Ojo', answer: 'Tesa' },
-          { prompt: 'Oreja', answer: 'Nambi' },
-          { prompt: 'Mano', answer: 'Po' },
-          { prompt: 'Dedo de la mano', answer: 'Kuã' },
-          { prompt: 'Pierna', answer: 'Tetyma' },
-          { prompt: 'Cabello', answer: 'Áva / akãrague', hint: 'arriba a la derecha' },
-          { prompt: 'Nariz', answer: 'Tî' },
-          { prompt: 'Labio', answer: 'Tembe' },
-          { prompt: 'Boca', answer: 'Juru' },
-          { prompt: 'Lengua', answer: 'Kû' },
-          { prompt: 'Pie', answer: 'Py' },
+          'Derecha (arriba → abajo): Áva (cabello), Tî (nariz), Tembe (labio), Tãi (diente), Kû (lengua), Py (pie).',
         ],
       },
       {
         type: 'figure',
-        title: 'Tembiaporã 2 — Sopa de letras',
+        title: 'Tembiaporã 2 — Sopa de letras (resuelta)',
         image: '/clase9/sopa-de-letras.jpg',
         caption:
-          'Encontrá las palabras de las partes del cuerpo. Solo aparecen en horizontal (→) o vertical (↓), nunca al revés ni en diagonal. Los números indican filas y columnas.',
+          'Sopa completada: las palabras están marcadas en color. Solo aparecen en horizontal (→) o vertical (↓). En la grilla, Kû aparece como KŨ y Tî como TĨ.',
+        body: [
+          'Horizontal: Tyvyta, Kû, Kuã, Py, Tî, Jyva, Ati\'y.',
+          'Vertical: Ajúra, Po, Nambi, Tãi, Akãrague, Tetyma, Tembe, Tague, Tesa, Áva, Pysã, Topea, Juru.',
+        ],
       },
       {
         type: 'solved',
-        title: 'Respuestas — Sopa de letras',
+        title: 'Clave — Ubicación en la sopa',
         intro:
-          'Ubicación de cada palabra en la grilla (fila/columna según los números del PDF). En la sopa, Kû aparece como KŨ y Tî como TĨ.',
+          'Fila/columna según los números de la grilla.',
         groups: [
           {
             title: 'Horizontal (→)',
