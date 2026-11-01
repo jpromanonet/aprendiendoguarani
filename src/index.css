@@ -303,6 +303,7 @@ body.nav-open {
   top: calc(100% + 0.55rem);
   right: 0;
   width: min(340px, calc(100vw - 2rem));
+  max-height: min(75vh, 580px);
   padding: 0.45rem;
   border-radius: 20px;
   background: #fff;
@@ -310,9 +311,23 @@ body.nav-open {
   box-shadow: var(--shadow);
   display: grid;
   gap: 0.55rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   transform-origin: top right;
   animation: menuIn 0.28s var(--ease-out);
   z-index: 50;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 77, 58, 0.35) transparent;
+}
+
+.nav-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nav-menu::-webkit-scrollbar-thumb {
+  background: rgba(15, 77, 58, 0.35);
+  border-radius: 999px;
 }
 
 .nav-menu[hidden] {
@@ -2608,12 +2623,14 @@ h3 {
   .site-nav .nav-menu {
     position: static;
     width: 100%;
+    max-height: none;
     margin-top: 0.45rem;
     padding: 0.35rem;
     box-shadow: none;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.9);
     animation: none;
+    overflow: visible;
   }
 
   .site-nav .nav-level-head {
