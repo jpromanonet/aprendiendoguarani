@@ -1691,6 +1691,127 @@ export const classes: ClassLesson[] = [
       },
     ],
   },
+  {
+    id: 9,
+    slug: 'clase-9',
+    title: 'Clase 9',
+    date: 'Lunes 26 de octubre de 2026',
+    subtitle: 'Tete rehegua — Partes del cuerpo',
+    summary:
+      'Vocabulario de las partes del cuerpo (tete rehegua), audio de pronunciación de la clase presencial, lámina para nombrar lo señalado y sopa de letras con las mismas palabras.',
+    themes: ['Cuerpo', 'Vocabulario', 'Tarea'],
+    sections: [
+      {
+        type: 'text',
+        title: 'Tete rehegua',
+        body: [
+          'En esta clase aprendemos las partes del cuerpo en guaraní. Escuchá el audio y practicá la pronunciación de cada palabra.',
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Partes del cuerpo — Audio de la clase',
+        audio: '/audio/partes-del-cuerpo.mp4',
+        items: [
+          { guaraní: 'Akã', español: 'cabeza' },
+          { guaraní: 'Ajúra', español: 'cuello' },
+          { guaraní: 'Nambi', español: 'oreja' },
+          { guaraní: 'Tãi', español: 'diente' },
+          { guaraní: 'Tyvyta', español: 'ceja' },
+          { guaraní: 'Tembe', español: 'labio' },
+          { guaraní: 'Kû', español: 'lengua' },
+          { guaraní: 'Tesa', español: 'ojo' },
+          { guaraní: 'Tî', español: 'nariz' },
+          { guaraní: 'Jyva', español: 'brazo' },
+          { guaraní: 'Tetyma', español: 'pierna' },
+          { guaraní: "Ati'y", español: 'hombro' },
+          { guaraní: 'Juru', español: 'boca' },
+          { guaraní: 'Py', español: 'pie' },
+          { guaraní: 'Áva / akãrague', español: 'cabello' },
+          { guaraní: 'Tague', español: 'pelo del cuerpo' },
+          { guaraní: 'Kuã', español: 'dedo de la mano' },
+          { guaraní: 'Pysã', español: 'dedo del pie' },
+          { guaraní: 'Po', español: 'mano' },
+          { guaraní: 'Topea', español: 'pestaña' },
+        ],
+      },
+      {
+        type: 'figure',
+        title: 'Tembiaporã 1 — Nombrá las partes señaladas',
+        image: '/clase9/tete-rehegua.jpg',
+        caption:
+          'Observá la imagen y nombrá en guaraní las partes del cuerpo que están señaladas.',
+        body: [
+          'Izquierda (arriba → abajo): Akã (cabeza), Tesa (ojo), Nambi (oreja), Po (mano), Kuã (dedo de la mano), Tetyma (pierna).',
+          'Derecha (arriba → abajo): Áva / akãrague (cabello), Tî (nariz), Tembe (labio), Juru (boca), Kû (lengua), Py (pie).',
+        ],
+      },
+      {
+        type: 'exercise',
+        title: 'Respuestas — Partes señaladas',
+        prompt: 'Completá cada casilla con la palabra en guaraní.',
+        items: [
+          { prompt: 'Cabeza', answer: 'Akã', hint: 'arriba a la izquierda' },
+          { prompt: 'Ojo', answer: 'Tesa' },
+          { prompt: 'Oreja', answer: 'Nambi' },
+          { prompt: 'Mano', answer: 'Po' },
+          { prompt: 'Dedo de la mano', answer: 'Kuã' },
+          { prompt: 'Pierna', answer: 'Tetyma' },
+          { prompt: 'Cabello', answer: 'Áva / akãrague', hint: 'arriba a la derecha' },
+          { prompt: 'Nariz', answer: 'Tî' },
+          { prompt: 'Labio', answer: 'Tembe' },
+          { prompt: 'Boca', answer: 'Juru' },
+          { prompt: 'Lengua', answer: 'Kû' },
+          { prompt: 'Pie', answer: 'Py' },
+        ],
+      },
+      {
+        type: 'figure',
+        title: 'Tembiaporã 2 — Sopa de letras',
+        image: '/clase9/sopa-de-letras.jpg',
+        caption:
+          'Encontrá las palabras de las partes del cuerpo. Solo aparecen en horizontal (→) o vertical (↓), nunca al revés ni en diagonal. Los números indican filas y columnas.',
+      },
+      {
+        type: 'solved',
+        title: 'Respuestas — Sopa de letras',
+        intro:
+          'Ubicación de cada palabra en la grilla (fila/columna según los números del PDF). En la sopa, Kû aparece como KŨ y Tî como TĨ.',
+        groups: [
+          {
+            title: 'Horizontal (→)',
+            items: [
+              { prompt: 'Tyvyta', answers: ['Fila 2, columnas 10–15'] },
+              { prompt: 'Kû (KŨ)', answers: ['Fila 5, columnas 9–10'] },
+              { prompt: 'Kuã', answers: ['Fila 9, columnas 2–4'] },
+              { prompt: 'Py', answers: ['Fila 9, columnas 10–11'] },
+              { prompt: 'Tî (TĨ)', answers: ['Fila 9, columnas 13–14'] },
+              { prompt: 'Jyva', answers: ['Fila 14, columnas 4–7'] },
+              { prompt: "Ati'y", answers: ['Fila 16, columnas 12–16'] },
+            ],
+          },
+          {
+            title: 'Vertical (↓)',
+            items: [
+              { prompt: 'Ajúra', answers: ['Columna 2, filas 2–6'] },
+              { prompt: 'Po', answers: ['Columna 3, filas 2–3'] },
+              { prompt: 'Nambi', answers: ['Columna 4, filas 3–7'] },
+              { prompt: 'Tãi', answers: ['Columna 5, filas 4–6'] },
+              { prompt: 'Akã / Akãrague', answers: ['Columna 6, filas 4–6 (Akã) y 4–11 (Akãrague)'] },
+              { prompt: 'Tetyma', answers: ['Columna 11, filas 6–11'] },
+              { prompt: 'Tembe', answers: ['Columna 9, filas 12–16'] },
+              { prompt: 'Tague', answers: ['Columna 2, filas 12–16'] },
+              { prompt: 'Tesa', answers: ['Columna 1, filas 11–14'] },
+              { prompt: 'Áva', answers: ['Columna 10, filas 13–15'] },
+              { prompt: 'Pysã', answers: ['Columna 15, filas 4–7'] },
+              { prompt: 'Topea', answers: ['Columna 15, filas 11–15'] },
+              { prompt: 'Juru', answers: ['Columna 16, filas 2–5'] },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ]
 
 export function getClassBySlug(slug: string) {

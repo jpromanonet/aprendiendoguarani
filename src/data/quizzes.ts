@@ -458,6 +458,74 @@ export const quizzes: Record<string, ClassQuiz> = {
       },
     ],
   },
+  'clase-9': {
+    classSlug: 'clase-9',
+    title: 'Autoevaluación — Clase 9',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c9-q1',
+        prompt: '¿Qué significa Tete rehegua?',
+        options: [
+          { id: 'a', label: 'Saludos del día' },
+          { id: 'b', label: 'Partes del cuerpo' },
+          { id: 'c', label: 'Vocabulario familiar' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c9-q2',
+        prompt: '¿Cómo se dice “cabeza” en guaraní?',
+        options: [
+          { id: 'a', label: 'Akã' },
+          { id: 'b', label: 'Tesa' },
+          { id: 'c', label: 'Po' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c9-q3',
+        prompt: '¿Qué significa Tesa?',
+        options: [
+          { id: 'a', label: 'Oreja' },
+          { id: 'b', label: 'Ojo' },
+          { id: 'c', label: 'Nariz' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c9-q4',
+        prompt: '¿Cómo se dice “mano”?',
+        options: [
+          { id: 'a', label: 'Py' },
+          { id: 'b', label: 'Jyva' },
+          { id: 'c', label: 'Po' },
+        ],
+        correctOptionId: 'c',
+      },
+      {
+        id: 'c9-q5',
+        prompt: '¿Qué es Kû?',
+        options: [
+          { id: 'a', label: 'Lengua' },
+          { id: 'b', label: 'Labio' },
+          { id: 'c', label: 'Diente' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c9-q6',
+        prompt: '¿Cómo se dice “dedo del pie”?',
+        options: [
+          { id: 'a', label: 'Kuã' },
+          { id: 'b', label: 'Pysã' },
+          { id: 'c', label: 'Topea' },
+        ],
+        correctOptionId: 'b',
+      },
+    ],
+  },
 }
 
 export function getQuiz(classSlug: string) {
