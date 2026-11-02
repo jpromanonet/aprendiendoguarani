@@ -253,7 +253,17 @@ export function SectionRenderer({ section }: { section: Section }) {
                     key={`${group.title}-${item.number}-${item.answers.join('|')}`}
                     className="solved-item"
                   >
-                    <p className="solved-number">Pregunta {item.number}</p>
+                    <p className="solved-cut">
+                      <span>Pregunta {item.number}</span>
+                      <span className="solved-cut-arrow" aria-hidden="true">
+                        →
+                      </span>
+                      <span>
+                        {item.answers.length > 1
+                          ? `Respuestas ${item.number}`
+                          : `Respuesta ${item.number}`}
+                      </span>
+                    </p>
                     <p className="solved-prompt">{item.prompt}</p>
                     {item.image ? (
                       <img
@@ -263,9 +273,6 @@ export function SectionRenderer({ section }: { section: Section }) {
                       />
                     ) : null}
                     <div className="solved-answers">
-                      <p className="solved-answers-label">
-                        {item.answers.length > 1 ? 'Respuestas' : 'Respuesta'}
-                      </p>
                       <ul>
                         {item.answers.map((answer) => (
                           <li key={answer}>{answer}</li>

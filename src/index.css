@@ -2014,78 +2014,14 @@ h3 {
   min-width: 0;
 }
 
-.exercise-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.8rem;
-  margin: 1rem 0;
+.exercise-block .solved-stack {
+  margin-top: 0.35rem;
 }
 
 .ghost-btn {
   background: rgba(7, 52, 40, 0.06);
   color: var(--bg-deep);
   border: 1px solid var(--line);
-}
-
-.exercise-progress {
-  color: var(--ink-soft);
-  font-size: 0.86rem;
-}
-
-.exercise-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.7rem;
-}
-
-.exercise-list li {
-  display: grid;
-  gap: 0.55rem;
-  padding: 0.95rem;
-  border-radius: 16px;
-  background: rgba(232, 242, 236, 0.85);
-  border: 1px solid rgba(7, 52, 40, 0.08);
-}
-
-.exercise-prompt {
-  display: flex;
-  gap: 0.7rem;
-  align-items: flex-start;
-  font-weight: 500;
-}
-
-.exercise-num {
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--bg-deep);
-  color: #f4fff8;
-  font-size: 0.75rem;
-  flex: 0 0 auto;
-}
-
-.answer-btn {
-  justify-self: start;
-  background: #fff;
-  border: 1px solid var(--line);
-  color: var(--ink-soft);
-}
-
-.answer-btn.open {
-  background: rgba(239, 195, 85, 0.18);
-  color: var(--ink);
-  border-color: rgba(239, 195, 85, 0.4);
-}
-
-.answer-btn em {
-  font-style: normal;
-  color: var(--ink-soft);
 }
 
 .class-pager {
@@ -3763,19 +3699,40 @@ h3 {
   border: 1px solid rgba(15, 77, 58, 0.1);
 }
 
-.solved-number {
+.solved-cut {
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.55rem;
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--river);
+}
+
+.solved-cut-arrow {
+  color: var(--sun);
+  font-size: 1.05rem;
+  letter-spacing: 0;
+  line-height: 1;
 }
 
 .solved-prompt {
   margin: 0;
   font-weight: 650;
   font-size: 1.05rem;
+}
+
+.solved-item::before {
+  content: '';
+  display: block;
+  width: 2.4rem;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--sun), rgba(239, 195, 85, 0.15));
+  margin-bottom: 0.15rem;
 }
 
 .solved-image {
@@ -3789,20 +3746,11 @@ h3 {
 .solved-answers {
   display: grid;
   gap: 0.35rem;
-}
-
-.solved-answers-label {
-  margin: 0;
-  display: inline-flex;
-  width: max-content;
-  padding: 0.12rem 0.5rem;
-  border-radius: 999px;
-  background: var(--sun);
-  color: #1d2a16;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  margin-top: 0.15rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.85rem;
+  background: rgba(239, 195, 85, 0.14);
+  border: 1px solid rgba(239, 195, 85, 0.35);
 }
 
 .solved-answers ul {

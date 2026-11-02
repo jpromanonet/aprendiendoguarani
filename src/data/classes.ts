@@ -1737,31 +1737,50 @@ export const classes: ClassLesson[] = [
       },
       {
         type: 'figure',
-        title: 'Tembiaporã 1 — Partes señaladas (resuelto)',
+        title: 'Tembiaporã 1 — Partes señaladas',
         image: '/clase9/tete-rehegua.jpg',
-        caption:
-          'Lámina completada: cada casilla tiene el nombre en guaraní de la parte señalada.',
-        body: [
-          'Izquierda (arriba → abajo): Akã (cabeza), Tesa (ojo), Nambi (oreja), Po (mano), Kuã (dedo de la mano), Tetyma (pierna).',
-          'Derecha (arriba → abajo): Áva (cabello), Tî (nariz), Tembe (labio), Tãi (diente), Kû (lengua), Py (pie).',
+        caption: 'Lámina de la clase: nombrá cada parte señalada.',
+      },
+      {
+        type: 'solved',
+        title: 'Tembiaporã 1 — Resuelto',
+        intro: 'Cada casilla de la lámina con su respuesta.',
+        groups: [
+          {
+            title: 'Izquierda (arriba → abajo)',
+            items: [
+              { prompt: 'Primera casilla', answers: ['Akã — cabeza'] },
+              { prompt: 'Segunda casilla', answers: ['Tesa — ojo'] },
+              { prompt: 'Tercera casilla', answers: ['Nambi — oreja'] },
+              { prompt: 'Cuarta casilla', answers: ['Po — mano'] },
+              { prompt: 'Quinta casilla', answers: ['Kuã — dedo de la mano'] },
+              { prompt: 'Sexta casilla', answers: ['Tetyma — pierna'] },
+            ],
+          },
+          {
+            title: 'Derecha (arriba → abajo)',
+            items: [
+              { prompt: 'Primera casilla', answers: ['Áva — cabello'] },
+              { prompt: 'Segunda casilla', answers: ['Tî — nariz'] },
+              { prompt: 'Tercera casilla', answers: ['Tembe — labio'] },
+              { prompt: 'Cuarta casilla', answers: ['Tãi — diente'] },
+              { prompt: 'Quinta casilla', answers: ['Kû — lengua'] },
+              { prompt: 'Sexta casilla', answers: ['Py — pie'] },
+            ],
+          },
         ],
       },
       {
         type: 'figure',
-        title: 'Tembiaporã 2 — Sopa de letras (resuelta)',
+        title: 'Tembiaporã 2 — Sopa de letras',
         image: '/clase9/sopa-de-letras.jpg',
         caption:
-          'Sopa completada: las palabras están marcadas en color. Solo aparecen en horizontal (→) o vertical (↓). En la grilla, Kû aparece como KŨ y Tî como TĨ.',
-        body: [
-          'Horizontal: Tyvyta, Kû, Kuã, Py, Tî, Jyva, Ati\'y.',
-          'Vertical: Ajúra, Po, Nambi, Tãi, Akãrague, Tetyma, Tembe, Tague, Tesa, Áva, Pysã, Topea, Juru.',
-        ],
+          'Sopa resuelta: las palabras están marcadas en color. Solo aparecen en horizontal (→) o vertical (↓). En la grilla, Kû aparece como KŨ y Tî como TĨ.',
       },
       {
         type: 'solved',
-        title: 'Clave — Ubicación en la sopa',
-        intro:
-          'Fila/columna según los números de la grilla.',
+        title: 'Tembiaporã 2 — Resuelto',
+        intro: 'Ubicación de cada palabra en la grilla.',
         groups: [
           {
             title: 'Horizontal (→)',
@@ -1782,7 +1801,10 @@ export const classes: ClassLesson[] = [
               { prompt: 'Po', answers: ['Columna 3, filas 2–3'] },
               { prompt: 'Nambi', answers: ['Columna 4, filas 3–7'] },
               { prompt: 'Tãi', answers: ['Columna 5, filas 4–6'] },
-              { prompt: 'Akã / Akãrague', answers: ['Columna 6, filas 4–6 (Akã) y 4–11 (Akãrague)'] },
+              {
+                prompt: 'Akã / Akãrague',
+                answers: ['Columna 6, filas 4–6 (Akã) y 4–11 (Akãrague)'],
+              },
               { prompt: 'Tetyma', answers: ['Columna 11, filas 6–11'] },
               { prompt: 'Tembe', answers: ['Columna 9, filas 12–16'] },
               { prompt: 'Tague', answers: ['Columna 2, filas 12–16'] },
