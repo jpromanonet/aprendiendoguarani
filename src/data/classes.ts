@@ -1737,14 +1737,19 @@ export const classes: ClassLesson[] = [
       },
       {
         type: 'figure',
-        title: 'Tembiaporã 1 — Partes señaladas',
+        title: 'Tembiaporã 1 — Partes señaladas (resuelto)',
         image: '/clase9/tete-rehegua.jpg',
-        caption: 'Lámina de la clase: nombrá cada parte señalada.',
+        caption:
+          'Lámina completada: cada casilla tiene el nombre en guaraní de la parte señalada.',
+        body: [
+          'Izquierda (arriba → abajo): Akã (cabeza), Tesa (ojo), Nambi (oreja), Po (mano), Kuã (dedo de la mano), Tetyma (pierna).',
+          'Derecha (arriba → abajo): Áva (cabello), Tî (nariz), Tembe (labio), Tãi (diente), Kû (lengua), Py (pie).',
+        ],
       },
       {
         type: 'solved',
-        title: 'Tembiaporã 1 — Resuelto',
-        intro: 'Cada casilla de la lámina con su respuesta.',
+        title: 'Tembiaporã 1 — Respuestas',
+        intro: 'Cada casilla de la lámina con el formato Pregunta → Respuesta.',
         groups: [
           {
             title: 'Izquierda (arriba → abajo)',
@@ -1772,15 +1777,19 @@ export const classes: ClassLesson[] = [
       },
       {
         type: 'figure',
-        title: 'Tembiaporã 2 — Sopa de letras',
+        title: 'Tembiaporã 2 — Sopa de letras (resuelta)',
         image: '/clase9/sopa-de-letras.jpg',
         caption:
-          'Sopa resuelta: las palabras están marcadas en color. Solo aparecen en horizontal (→) o vertical (↓). En la grilla, Kû aparece como KŨ y Tî como TĨ.',
+          'Sopa completada: las palabras están marcadas en color. Solo aparecen en horizontal (→) o vertical (↓). En la grilla, Kû aparece como KŨ y Tî como TĨ.',
+        body: [
+          "Horizontal: Tyvyta, Kû, Kuã, Py, Tî, Jyva, Ati'y.",
+          'Vertical: Ajúra, Po, Nambi, Tãi, Akãrague, Tetyma, Tembe, Tague, Tesa, Áva, Pysã, Topea, Juru.',
+        ],
       },
       {
         type: 'solved',
-        title: 'Tembiaporã 2 — Resuelto',
-        intro: 'Ubicación de cada palabra en la grilla.',
+        title: 'Tembiaporã 2 — Respuestas',
+        intro: 'Ubicación de cada palabra en la grilla, con formato Pregunta → Respuesta.',
         groups: [
           {
             title: 'Horizontal (→)',
