@@ -438,6 +438,52 @@ export const classNotes: Record<string, ClassNotes> = {
     ],
   },
 
+  'clase-10': {
+    classSlug: 'clase-10',
+    title: 'Apuntes de clase',
+    intro: 'Notas de la 10.ª clase (02/11/2026): práctica oral, posposiciones nuevas y oraciones.',
+    groups: [
+      {
+        title: 'Ronda oral',
+        items: [
+          'Preguntas que circulan: ¿qué hiciste hoy? (presente/pasado reciente), ¿qué hiciste ayer?, ¿qué vas a hacer?, ¿cómo te llamás?, ¿cuántos años tenés?, ¿con quién vivís?',
+          "Ejemplos escuchados: Che amba'apo…; Che amba'apo mbaraka ndive ha apurahéikuri.",
+          'Mbaraka (guitarra) y mbarakaja (gato) se relacionan por la idea del ruido / sonido.',
+          'Che réra… — me llamo…',
+        ],
+      },
+      {
+        title: 'Posposiciones y lugares',
+        items: [
+          'Para la comunidad guaraní la silla es muy importante: es de lo primero que se da a los niños (apyka = silla).',
+          'Repaso de gua: con español → guión (Buenos Aires-gua); con guaraní → pegado (Ka’aguasugua).',
+          'Aparecen guy, ári, gotyo, guive, peve / meve, rehe / re, rupi, hagua, etc.',
+          'rehe / re y rupi significan “por”, pero cambia el cómo se usa.',
+          'peve / meve se distinguen con la misma lógica que kuéra / nguéra (según nasalidad / terminación).',
+          'Si la posposición tiene dos sílabas suele ir separada; hay formas ya lexicalizadas juntas (ej. guype).',
+        ],
+      },
+      {
+        title: 'Oraciones para analizar',
+        items: [
+          "Ha'e oguapy apyka ári che kupepe — Él/ella se sienta sobre la silla detrás de mí.",
+          "Oguatakuri hikuái mbo'ehao gotyo — Ellos caminaron hacia la escuela.",
+          "Amba'apo ko'ẽ guive pyhare peve — Trabajo desde la mañana hasta la noche (ajustar peve/meve según la palabra).",
+          'El orden de los constituyentes es flexible: primero traducir palabra por palabra y después acomodar el sentido.',
+          "Amoĩma / formas de “poner” aparecen en la práctica de la clase.",
+        ],
+      },
+      {
+        title: 'Vocabulario nuevo',
+        items: [
+          'mesa (préstamo) / formas de la clase para muebles de casa',
+          'apyka — silla',
+          "ña'ẽmbe — plato (según lista de la clase)",
+          'La próxima clase es asincrónica.',
+        ],
+      },
+    ],
+  },
 }
 
 export function getClassNotes(classSlug: string) {

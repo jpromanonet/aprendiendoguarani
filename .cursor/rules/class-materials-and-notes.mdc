@@ -1,0 +1,26 @@
+---
+description: Cómo armar clases con PDF/audios del usuario y apuntes de clase
+alwaysApply: true
+---
+
+# Clases: materiales vs apuntes
+
+## Fuente del contenido formal
+
+- El cuerpo de cada clase (temario, vocabulario, reglas, tareas resueltas, audios, láminas, autoevaluación) se arma **solo** a partir del PDF y los audios que pase el usuario.
+- No inventar ni completar una clase “de cero” solo con apuntes.
+
+## Apuntes de clase
+
+- Cada vez que se lean apuntes de clase (Google Doc, notas, etc.), sumarlos a la clase que corresponda.
+- Hacerlo **aunque** esa clase todavía no tenga PDF ni audios.
+- Los apuntes van al final, en el bloque “Apuntes de clase” / `classNotes`.
+- No incluir datos personales de profesoras/staff si el usuario los excluye.
+
+## Clase sin materiales aún
+
+- Dejar la clase **activa** (visible en el nivel, navegable).
+- Contenido mínimo: aviso de que el PDF, tareas resueltas y audios se suman cuando el usuario los pase.
+- Debajo: los apuntes de esa clase.
+- No armar quiz, tareas resueltas ni secciones inventadas hasta tener PDF/audios.
+- Cuando lleguen los archivos, completar la clase y **conservar** los apuntes abajo.

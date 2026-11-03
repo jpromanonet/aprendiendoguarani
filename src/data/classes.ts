@@ -1832,6 +1832,26 @@ export const classes: ClassLesson[] = [
       },
     ],
   },
+  {
+    id: 10,
+    slug: 'clase-10',
+    title: 'Clase 10',
+    date: 'Lunes 2 de noviembre de 2026',
+    subtitle: 'Material de clase pendiente',
+    summary:
+      'Clase activa con apuntes. El PDF, las tareas resueltas y los audios se suman cuando estén disponibles.',
+    themes: ['Apuntes'],
+    sections: [
+      {
+        type: 'text',
+        title: 'Material de la clase',
+        body: [
+          'Esta clase ya está activa con los apuntes abajo.',
+          'El contenido formal (PDF, tareas resueltas y audios) se va a armar cuando estén esos archivos.',
+        ],
+      },
+    ],
+  },
 ]
 
 export function getClassBySlug(slug: string) {
