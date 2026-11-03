@@ -14,6 +14,7 @@ function sectionTitle(section: { type: string; title?: string }, index: number) 
 }
 
 const QUIZ_ANCHOR_ID = 'class-quiz'
+const NOTES_ANCHOR_ID = 'class-notes'
 
 export function ClassPage() {
   const { slug } = useParams()
@@ -24,19 +25,20 @@ export function ClassPage() {
   const { user } = useAuth()
   const nivel = levels[0]
   const quiz = lesson ? getQuiz(lesson.slug) : null
+  const notes = lesson ? getClassNotes(lesson.slug) : null
 
-  const sections = useMemo(() => {
-    if (!lesson) return [] as Section[]
-    const notes = getClassNotes(lesson.slug)
-    if (!notes) return lesson.sections
-    const notesSection: Section = {
+  const sections = useMemo(() => (lesson ? lesson.sections : ([] as Section[])), [lesson])
+
+  const notesSection = useMemo(() => {
+    if (!notes) return null
+    const section: Section = {
       type: 'notes',
       title: notes.title,
       intro: notes.intro,
       groups: notes.groups,
     }
-    return [...lesson.sections, notesSection]
-  }, [lesson])
+    return section
+  }, [notes])
 
   const toc = useMemo(
     () =>
@@ -60,7 +62,11 @@ export function ClassPage() {
 
   useEffect(() => {
     if (!lesson) return
-    const ids = [...toc.map((item) => item.id), ...(quiz ? [QUIZ_ANCHOR_ID] : [])]
+    const ids = [
+      ...toc.map((item) => item.id),
+      ...(notesSection ? [NOTES_ANCHOR_ID] : []),
+      ...(quiz ? [QUIZ_ANCHOR_ID] : []),
+    ]
     const nodes = ids
       .map((id) => document.getElementById(id))
       .filter((node): node is HTMLElement => Boolean(node))
@@ -78,7 +84,7 @@ export function ClassPage() {
 
     nodes.forEach((node) => observer.observe(node))
     return () => observer.disconnect()
-  }, [lesson, toc, quiz, sections])
+  }, [lesson, toc, quiz, notesSection])
 
   if (!lesson) {
     return <Navigate to="/nivel-1" replace />
@@ -160,6 +166,15 @@ export function ClassPage() {
               </li>
             ))}
           </ol>
+          {notesSection ? (
+            <a
+              href={`#${NOTES_ANCHOR_ID}`}
+              className={`toc-notes-btn ${activeId === NOTES_ANCHOR_ID ? 'active' : ''}`}
+              onClick={() => setActiveId(NOTES_ANCHOR_ID)}
+            >
+              Apuntes de clase
+            </a>
+          ) : null}
           {quiz ? (
             <a
               href={`#${QUIZ_ANCHOR_ID}`}
@@ -179,6 +194,12 @@ export function ClassPage() {
               <SectionRenderer section={section} />
             </div>
           ))}
+
+          {notesSection ? (
+            <div id={NOTES_ANCHOR_ID} className="section-anchor notes-anchor">
+              <SectionRenderer section={notesSection} />
+            </div>
+          ) : null}
 
           <div id={QUIZ_ANCHOR_ID} className="section-anchor quiz-anchor">
             <ClassQuiz classSlug={lesson.slug} />
