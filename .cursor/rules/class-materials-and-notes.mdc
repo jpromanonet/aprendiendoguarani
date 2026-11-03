@@ -1,26 +1,23 @@
 ---
-description: Cómo armar clases con PDF/audios del usuario y apuntes de clase
+description: Regla de oro — apuntes activan la clase; PDF/audios arman el contenido
 alwaysApply: true
 ---
 
-# Clases: materiales vs apuntes
+# Regla de oro: apuntes vs materiales
 
-## Fuente del contenido formal
+## Regla de oro
 
-- El cuerpo de cada clase (temario, vocabulario, reglas, tareas resueltas, audios, láminas, autoevaluación) se arma **solo** a partir del PDF y los audios que pase el usuario.
-- No inventar ni completar una clase “de cero” solo con apuntes.
+1. Si aparecen **apuntes de una clase** → activar/actualizar esa clase y dejar los apuntes abajo.
+2. El contenido formal de la clase se arma **solo** cuando el usuario pase **PDF y audios**.
+3. Hasta entonces: clase **activa**, aviso de material pendiente, **apuntes abajo**. Sin inventar temario, tareas resueltas, quiz ni audios.
 
-## Apuntes de clase
+## Cuando lleguen PDF y audios
 
-- Cada vez que se lean apuntes de clase (Google Doc, notas, etc.), sumarlos a la clase que corresponda.
-- Hacerlo **aunque** esa clase todavía no tenga PDF ni audios.
-- Los apuntes van al final, en el bloque “Apuntes de clase” / `classNotes`.
+- Armar la clase completa (temario, vocabulario, reglas, tareas resueltas, láminas, autoevaluación, audios).
+- **Conservar** los apuntes de clase al final.
+
+## Apuntes
+
+- Sumarlos siempre a la clase que corresponda, aunque aún no haya materiales.
+- Van en el bloque “Apuntes de clase” / `classNotes`.
 - No incluir datos personales de profesoras/staff si el usuario los excluye.
-
-## Clase sin materiales aún
-
-- Dejar la clase **activa** (visible en el nivel, navegable).
-- Contenido mínimo: aviso de que el PDF, tareas resueltas y audios se suman cuando el usuario los pase.
-- Debajo: los apuntes de esa clase.
-- No armar quiz, tareas resueltas ni secciones inventadas hasta tener PDF/audios.
-- Cuando lleguen los archivos, completar la clase y **conservar** los apuntes abajo.
