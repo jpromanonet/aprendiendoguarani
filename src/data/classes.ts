@@ -1780,7 +1780,7 @@ export const classes: ClassLesson[] = [
         title: 'Tembiaporã 2 — Sopa de letras (resuelta)',
         image: '/clase9/sopa-de-letras.jpg',
         caption:
-          'Sopa completada: las palabras están marcadas en color. Solo aparecen en horizontal (→) o vertical (↓). En la grilla, Kû aparece como KŨ y Tî como TĨ.',
+          'Solución oficial: las letras de las palabras están resaltadas en amarillo. Solo aparecen en horizontal (→) o vertical (↓). En la grilla, Kû aparece como KŨ y Tî como TĨ.',
         body: [
           "Horizontal: Tyvyta, Kû, Kuã, Py, Tî, Jyva, Ati'y.",
           'Vertical: Ajúra, Po, Nambi, Tãi, Akãrague, Tetyma, Tembe, Tague, Tesa, Áva, Pysã, Topea, Juru.',
@@ -1794,7 +1794,7 @@ export const classes: ClassLesson[] = [
           {
             title: 'Horizontal (→)',
             items: [
-              { prompt: 'Tyvyta', answers: ['Fila 2, columnas 10–15'] },
+              { prompt: 'Tyvyta', answers: ['Fila 1, columnas 10–15'] },
               { prompt: 'Kû (KŨ)', answers: ['Fila 5, columnas 9–10'] },
               { prompt: 'Kuã', answers: ['Fila 9, columnas 2–4'] },
               { prompt: 'Py', answers: ['Fila 9, columnas 10–11'] },
@@ -1806,9 +1806,9 @@ export const classes: ClassLesson[] = [
           {
             title: 'Vertical (↓)',
             items: [
-              { prompt: 'Ajúra', answers: ['Columna 2, filas 2–6'] },
+              { prompt: 'Ajúra', answers: ['Columna 2, filas 1–5'] },
               { prompt: 'Po', answers: ['Columna 3, filas 2–3'] },
-              { prompt: 'Nambi', answers: ['Columna 4, filas 3–7'] },
+              { prompt: 'Nambi', answers: ['Columna 4, filas 2–6'] },
               { prompt: 'Tãi', answers: ['Columna 5, filas 4–6'] },
               {
                 prompt: 'Akã / Akãrague',
