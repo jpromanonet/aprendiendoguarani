@@ -526,64 +526,6 @@ export const quizzes: Record<string, ClassQuiz> = {
       },
     ],
   },
-  'clase-10': {
-    classSlug: 'clase-10',
-    title: 'Autoevaluación — Clase 10',
-    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
-    passScore: QUIZ_PASS_SCORE,
-    questions: [
-      {
-        id: 'c10-q1',
-        prompt: '¿Qué es apyka?',
-        options: [
-          { id: 'a', label: 'Mesa' },
-          { id: 'b', label: 'Silla' },
-          { id: 'c', label: 'Cama' },
-        ],
-        correctOptionId: 'b',
-      },
-      {
-        id: 'c10-q2',
-        prompt: '¿Cómo se escribe el origen con una ciudad en español?',
-        options: [
-          { id: 'a', label: 'Buenos Airesgua' },
-          { id: 'b', label: 'Buenos Aires-gua' },
-          { id: 'c', label: 'Buenos Aires gua' },
-        ],
-        correctOptionId: 'b',
-      },
-      {
-        id: 'c10-q3',
-        prompt: '¿Qué indica gotyo?',
-        options: [
-          { id: 'a', label: 'Desde' },
-          { id: 'b', label: 'Hasta' },
-          { id: 'c', label: 'Hacia' },
-        ],
-        correctOptionId: 'c',
-      },
-      {
-        id: 'c10-q4',
-        prompt: "¿Qué significa mbo'ehao?",
-        options: [
-          { id: 'a', label: 'Iglesia' },
-          { id: 'b', label: 'Escuela' },
-          { id: 'c', label: 'Casa' },
-        ],
-        correctOptionId: 'b',
-      },
-      {
-        id: 'c10-q5',
-        prompt: '¿Qué relación hay entre mbaraka y mbarakaja en la clase?',
-        options: [
-          { id: 'a', label: 'Las dos significan gato' },
-          { id: 'b', label: 'Se relacionan por el ruido / sonido' },
-          { id: 'c', label: 'Son sinónimos de silla' },
-        ],
-        correctOptionId: 'b',
-      },
-    ],
-  },
 }
 
 export function getQuiz(classSlug: string) {
