@@ -1786,16 +1786,16 @@ export const classes: ClassLesson[] = [
         title: 'Tembiaporã 2 — Sopa de letras (resuelta)',
         image: '/clase9/sopa-de-letras.jpg',
         caption:
-          'Sopa completada: las palabras están marcadas en color. Solo aparecen en horizontal (→) o vertical (↓). En la grilla, Kû aparece como KŨ y Tî como TĨ.',
+          'Sopa completada (21 palabras): las palabras están marcadas en color. Solo aparecen en horizontal (→) o vertical (↓). En la grilla, Kû aparece como KŨ y Tî como TĨ. Akã va en naranja dentro de Akãrague.',
         body: [
           "Horizontal: Tyvyta, Kû, Kuã, Py, Tî, Jyva, Ati'y.",
-          'Vertical: Ajúra, Po, Nambi, Tãi, Akãrague, Tetyma, Tembe, Tague, Tesa, Áva, Pysã, Topea, Juru.',
+          'Vertical: Ajúra, Po, Nambi, Tãi, Akã, Akãrague, Tetyma, Tembe, Tague, Tesa, Áva, Pysã, Topea, Juru.',
         ],
       },
       {
         type: 'solved',
         title: 'Tembiaporã 2 — Respuestas',
-        intro: 'Ubicación de cada palabra en la grilla, con formato Pregunta → Respuesta.',
+        intro: 'Ubicación de cada una de las 21 palabras, con formato Pregunta → Respuesta.',
         groups: [
           {
             title: 'Horizontal (→)',
@@ -1816,10 +1816,8 @@ export const classes: ClassLesson[] = [
               { prompt: 'Po', answers: ['Columna 3, filas 2–3'] },
               { prompt: 'Nambi', answers: ['Columna 4, filas 3–7'] },
               { prompt: 'Tãi', answers: ['Columna 5, filas 4–6'] },
-              {
-                prompt: 'Akã / Akãrague',
-                answers: ['Columna 6, filas 4–6 (Akã) y 4–11 (Akãrague)'],
-              },
+              { prompt: 'Akã', answers: ['Columna 6, filas 4–6'] },
+              { prompt: 'Akãrague', answers: ['Columna 6, filas 4–11'] },
               { prompt: 'Tetyma', answers: ['Columna 11, filas 6–11'] },
               { prompt: 'Tembe', answers: ['Columna 9, filas 12–16'] },
               { prompt: 'Tague', answers: ['Columna 2, filas 12–16'] },
