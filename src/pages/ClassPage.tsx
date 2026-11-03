@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { classes, getClassBySlug, levels } from '../data/classes'
+import { classes, getClassBySlug, levels, type Section } from '../data/classes'
+import { getClassNotes } from '../data/classNotes'
 import { getQuiz } from '../data/quizzes'
 import { SectionRenderer } from '../components/SectionRenderer'
 import { ClassQuiz } from '../components/ClassQuiz'
@@ -24,13 +25,26 @@ export function ClassPage() {
   const nivel = levels[0]
   const quiz = lesson ? getQuiz(lesson.slug) : null
 
+  const sections = useMemo(() => {
+    if (!lesson) return [] as Section[]
+    const notes = getClassNotes(lesson.slug)
+    if (!notes) return lesson.sections
+    const notesSection: Section = {
+      type: 'notes',
+      title: notes.title,
+      intro: notes.intro,
+      groups: notes.groups,
+    }
+    return [...lesson.sections, notesSection]
+  }, [lesson])
+
   const toc = useMemo(
     () =>
-      lesson?.sections.map((section, index) => ({
+      sections.map((section, index) => ({
         id: `sec-${index}`,
         title: sectionTitle(section, index),
-      })) ?? [],
-    [lesson],
+      })),
+    [sections],
   )
 
   useEffect(() => {
@@ -64,7 +78,7 @@ export function ClassPage() {
 
     nodes.forEach((node) => observer.observe(node))
     return () => observer.disconnect()
-  }, [lesson, toc, quiz])
+  }, [lesson, toc, quiz, sections])
 
   if (!lesson) {
     return <Navigate to="/nivel-1" replace />
@@ -160,7 +174,7 @@ export function ClassPage() {
         </aside>
 
         <div className="class-body">
-          {lesson.sections.map((section, i) => (
+          {sections.map((section, i) => (
             <div key={`${section.type}-${i}`} id={`sec-${i}`} className="section-anchor">
               <SectionRenderer section={section} />
             </div>

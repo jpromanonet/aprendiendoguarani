@@ -39,6 +39,12 @@ export type Section =
       audio?: string
       body?: string[]
     }
+  | {
+      type: 'notes'
+      title: string
+      intro?: string
+      groups: { title: string; items: string[] }[]
+    }
 
 export type ClassLesson = {
   id: number
@@ -1823,6 +1829,79 @@ export const classes: ClassLesson[] = [
               { prompt: 'Topea', answers: ['Columna 15, filas 11–15'] },
               { prompt: 'Juru', answers: ['Columna 16, filas 2–5'] },
             ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 10,
+    slug: 'clase-10',
+    title: 'Clase 10',
+    date: 'Lunes 2 de noviembre de 2026',
+    subtitle: 'Práctica oral, posposiciones y oraciones',
+    summary:
+      'Ronda de preguntas en presente, pasado y futuro; repaso de gua y nuevas posposiciones (ári, guy, gotyo, peve/meve, rehe/rupi); análisis de oraciones y vocabulario de la casa.',
+    themes: ['Práctica oral', 'Posposiciones', 'Oraciones', 'Vocabulario'],
+    sections: [
+      {
+        type: 'text',
+        title: 'Práctica de la clase',
+        body: [
+          'La clase giró alrededor de hablar: qué hiciste hoy, qué hiciste ayer, qué vas a hacer, cómo te llamás, cuántos años tenés y con quién vivís.',
+          'También se repasaron posposiciones (gua, ári, guy, gotyo, peve/meve, rehe/rupi) y se analizaron oraciones completas.',
+          'La próxima clase es asincrónica.',
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Vocabulario de la sesión',
+        items: [
+          { guaraní: 'Apyka', español: 'silla' },
+          { guaraní: 'Mbaraka', español: 'guitarra' },
+          { guaraní: 'Mbarakaja', español: 'gato' },
+          { guaraní: "Mbo'ehao", español: 'escuela' },
+          { guaraní: 'Tupa', español: 'cama' },
+          { guaraní: "Ña'ẽmbe", español: 'plato' },
+        ],
+      },
+      {
+        type: 'rules',
+        title: 'Posposiciones vistas',
+        rules: [
+          {
+            title: 'gua',
+            body: 'Con palabras en español lleva guión (Buenos Aires-gua). Con palabras guaraníes va pegado (Ka’aguasugua) y es átono.',
+          },
+          {
+            title: 'ári / guy',
+            body: 'ári = sobre / encima. guy = debajo. Si la forma tiene más de una sílaba, suele ir separada.',
+          },
+          {
+            title: 'gotyo / guive / peve·meve',
+            body: 'gotyo = hacia. guive = desde. peve / meve = hasta (misma lógica nasal/oral que kuéra / nguéra).',
+          },
+          {
+            title: 'rehe·re / rupi',
+            body: 'Ambas pueden traducirse como “por”, pero cambia el modo de uso según el contexto.',
+          },
+        ],
+      },
+      {
+        type: 'examples',
+        title: 'Oraciones de la práctica',
+        items: [
+          {
+            guaraní: "Ha'e oguapy apyka ári che kupepe",
+            español: 'Él/ella se sienta sobre la silla detrás de mí',
+          },
+          {
+            guaraní: "Oguatakuri hikuái mbo'ehao gotyo",
+            español: 'Ellos/as caminaron hacia la escuela',
+          },
+          {
+            guaraní: "Amba'apo ko'ẽ guive pyhare peve",
+            español: 'Trabajo desde la mañana hasta la noche',
           },
         ],
       },

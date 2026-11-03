@@ -310,6 +310,29 @@ export function SectionRenderer({ section }: { section: Section }) {
         </section>
       )
 
+    case 'notes':
+      return (
+        <section className="section-block notes-block">
+          <div className="section-heading">
+            <p className="eyebrow">Desde el cuaderno</p>
+            <h2>{section.title}</h2>
+            {section.intro ? <p className="lede">{section.intro}</p> : null}
+          </div>
+          <div className="notes-stack">
+            {section.groups.map((group) => (
+              <article key={group.title} className="notes-card">
+                <h3 className="notes-card-title">{group.title}</h3>
+                <ul className="notes-list">
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+
     default:
       return null
   }
