@@ -526,6 +526,74 @@ export const quizzes: Record<string, ClassQuiz> = {
       },
     ],
   },
+  'clase-10': {
+    classSlug: 'clase-10',
+    title: 'Autoevaluación — Clase 10',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c10-q1',
+        prompt: '¿Cuándo va pegada una posposición?',
+        options: [
+          { id: 'a', label: 'Cuando tiene una sola sílaba' },
+          { id: 'b', label: 'Cuando tiene dos o más sílabas' },
+          { id: 'c', label: 'Siempre va separada' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c10-q2',
+        prompt: '¿Cuándo se usa me y no pe?',
+        options: [
+          { id: 'a', label: 'Con palabras orales, como óga' },
+          { id: 'b', label: 'Con palabra que termina en vocal o sílaba nasal' },
+          { id: 'c', label: 'Solo para decir “desde”' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c10-q3',
+        prompt: '¿Qué indica gua?',
+        options: [
+          { id: 'a', label: 'Origen o procedencia' },
+          { id: 'b', label: 'Debajo de' },
+          { id: 'c', label: 'Después de' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c10-q4',
+        prompt: '¿Cuál se usa con un verbo para decir “para”?',
+        options: [
+          { id: 'a', label: 'Guarã' },
+          { id: 'b', label: 'Haguã' },
+          { id: 'c', label: 'Rupi' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c10-q5',
+        prompt: "Aguata ka'aguy rupi destaca la idea de…",
+        options: [
+          { id: 'a', label: 'Atravesar el monte' },
+          { id: 'b', label: 'Estar debajo del monte' },
+          { id: 'c', label: 'Venir desde el monte' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c10-q6',
+        prompt: 'En la lámina, ¿qué es kypa?',
+        options: [
+          { id: 'a', label: 'Vaso' },
+          { id: 'b', label: 'Cuchillo' },
+          { id: 'c', label: 'Tenedor' },
+        ],
+        correctOptionId: 'c',
+      },
+    ],
+  },
 }
 
 export function getQuiz(classSlug: string) {
