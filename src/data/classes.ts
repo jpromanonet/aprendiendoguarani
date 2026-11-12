@@ -2025,6 +2025,197 @@ export const classes: ClassLesson[] = [
       },
     ],
   },
+  {
+    id: 11,
+    slug: 'clase-11',
+    title: 'Clase 11',
+    date: 'Lunes 9 de noviembre de 2026',
+    subtitle: 'Adverbios de negación y de afirmación',
+    summary:
+      'Clase asincrónica: adverbios para negar y afirmar la acción verbal, lámina del campo para nombrar sustantivos, oraciones con cantidad + adjetivo + verbo, traducciones y dictado. Incluye audios de la clase.',
+    themes: ['Negación', 'Afirmación', 'Adverbios', 'Tarea'],
+    sections: [
+      {
+        type: 'text',
+        title: 'Clase asincrónica',
+        body: [
+          'En esta clase trabajamos adverbios de negación y de afirmación: palabras que niegan o afirman la acción del verbo.',
+          'Después hay una tembiaporã con imagen, oraciones y un dictado.',
+        ],
+      },
+      {
+        type: 'rules',
+        title: 'Adverbio de negación',
+        rules: [
+          {
+            title: 'Qué es',
+            body: 'Palabra que se utiliza para negar la acción verbal. Ejemplo: Ani reke. (No duermas.)',
+          },
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Adverbios de negación',
+        audio: '/audio/adverbios-negacion.mp4',
+        items: [
+          { guaraní: 'Nahániri', español: 'no (negación simple)' },
+          { guaraní: 'Anichéne', español: 'no (dudoso)' },
+          { guaraní: 'Ani / anive', español: 'no (prohibitivo)' },
+          { guaraní: "Mba'evéicharõ", español: 'de ninguna manera' },
+          { guaraní: "Ne'ĩrã", español: 'todavía / aún no' },
+        ],
+      },
+      {
+        type: 'examples',
+        title: 'Ejemplo de negación',
+        items: [{ guaraní: 'Ani reke.', español: 'No duermas.', detail: 'Ani = prohibitivo' }],
+      },
+      {
+        type: 'rules',
+        title: 'Adverbio de afirmación',
+        rules: [
+          {
+            title: 'Qué es',
+            body: 'Palabra que se utiliza para afirmar la acción verbal.',
+          },
+        ],
+      },
+      {
+        type: 'vocab',
+        title: 'Adverbios de afirmación',
+        audio: '/audio/adverbios-afirmacion.mp4',
+        items: [
+          { guaraní: 'Héê', español: 'sí' },
+          { guaraní: 'Néi', español: 'bueno / acepto' },
+          { guaraní: 'Ikatu', español: 'puede ser' },
+          { guaraní: 'Upéicha', español: 'así es' },
+          { guaraní: 'Avei', español: 'sí / también' },
+          { guaraní: 'Oĩma', español: 'de acuerdo' },
+          { guaraní: 'Añete', español: 'es verdad' },
+        ],
+      },
+      {
+        type: 'figure',
+        title: 'Tembiaporã 1 — Imagen del campo',
+        image: '/clase11/campo.jpg',
+        caption: 'Observá la imagen y nombrá los sustantivos señalados.',
+      },
+      {
+        type: 'solved',
+        title: 'Tembiaporã 1 — Resuelto',
+        intro: 'Sustantivos de la lámina, con formato Pregunta → Respuesta.',
+        groups: [
+          {
+            title: 'Sustantivos de la imagen',
+            items: [
+              { prompt: 'Árbol', answers: ['Yvyra'] },
+              { prompt: 'Mariposas', answers: ['Panambi'] },
+              { prompt: 'Nube', answers: ['Arai'] },
+              { prompt: 'Sol', answers: ['Kuarahy'] },
+              { prompt: 'Caballos', answers: ['Kavaju'] },
+              { prompt: 'Vacas', answers: ['Vaka'] },
+              { prompt: 'Perros', answers: ['Jagua'] },
+              { prompt: 'Cerdos / chanchos', answers: ['Kure'] },
+              { prompt: 'Flores', answers: ['Yvoty'] },
+              { prompt: 'Agua / charco', answers: ['Y'] },
+              { prompt: 'Nenúfares / flores de agua', answers: ['Yrupẽ'] },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'solved',
+        title: 'Tembiaporã 2 — Resuelto',
+        intro:
+          'Con cada especie de animal o insecto: cuántos son, cómo son (adjetivo) y qué hacen / harán (verbo conjugado).',
+        groups: [
+          {
+            title: 'Oraciones',
+            items: [
+              {
+                prompt: 'Ejemplo del PDF',
+                answers: ['Mbohapy panambi porã oveve.'],
+                note: 'Tres mariposas hermosas vuelan.',
+              },
+              {
+                prompt: 'Caballos',
+                answers: ['Po kavaju morotĩ oñani.'],
+                note: 'Cinco caballos blancos corren.',
+              },
+              {
+                prompt: 'Vacas',
+                answers: ['Po vaka tuicha okaru.'],
+                note: 'Cinco vacas grandes comen.',
+              },
+              {
+                prompt: 'Cerdos',
+                answers: ['Irundy kure kyra oke.'],
+                note: 'Cuatro cerdos gordos duermen.',
+              },
+              {
+                prompt: 'Perros',
+                answers: ["Mokõi jagua sa'yju oñaní / oñani."],
+                note: 'Dos perros amarillos corren.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'exercise',
+        title: 'Tembiaporã 3 — Traducir al español',
+        prompt: 'Leé las oraciones y traducilas al español.',
+        items: [
+          {
+            prompt: "Ore romba'apose che ru ndive.",
+            answer: 'Nosotros/as (excl.) queremos trabajar con mi padre.',
+            hint: 'ore + -se + ndive',
+          },
+          {
+            prompt: 'Peteĩ mbarakaja oke porãkuri mesa ári.',
+            answer: 'Un gato durmió / había dormido bien sobre la mesa.',
+            hint: 'porã modifica el verbo; kuri = pasado reciente',
+          },
+        ],
+      },
+      {
+        type: 'exercise',
+        title: 'Tembiaporã 4 — Traducir al guaraní',
+        prompt: 'Leé las oraciones y traducilas al guaraní.',
+        items: [
+          {
+            prompt: 'Los gatos blancos suben sobre la cama.',
+            answer: 'Mbarakajakuéra morotĩ ojupi tupa ári.',
+            hint: 'el adjetivo no se pluraliza',
+          },
+          {
+            prompt: 'María se sienta sobre la silla en la mesa para comer.',
+            answer: 'María oguapy apyka ári mesape okaru haguã.',
+            hint: 'apyka ári + mesape + haguã',
+          },
+          {
+            prompt: '¿Con quién vivís?',
+            answer: 'Mávandipa reiko.',
+            hint: 'pregunta personal de la clase 8',
+          },
+        ],
+      },
+      {
+        type: 'exercise',
+        title: 'Tembiaporã 5 — Dictado',
+        prompt:
+          'Escuchá los audios de la clase, copiá las palabras y buscá el significado. Clave con los adverbios trabajados:',
+        items: [
+          { prompt: '1', answer: 'Nahániri — no (negación simple)' },
+          { prompt: '2', answer: 'Ani / anive — no (prohibitivo)' },
+          { prompt: '3', answer: "Ne'ĩrã — todavía / aún no" },
+          { prompt: '4', answer: 'Héê — sí' },
+          { prompt: '5', answer: 'Ikatu — puede ser' },
+          { prompt: '6', answer: 'Añete — es verdad' },
+        ],
+      },
+    ],
+  },
 ]
 
 export function getClassBySlug(slug: string) {

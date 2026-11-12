@@ -593,7 +593,85 @@ export const quizzes: Record<string, ClassQuiz> = {
         correctOptionId: 'c',
       },
     ],
-  },
+  },,
+  'clase-11': {
+    classSlug: 'clase-11',
+    title: 'Autoevaluación — Clase 11',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c11-q1',
+        prompt: '¿Qué es un adverbio de negación?',
+        options: [
+          { id: 'a', label: 'Una palabra que afirma la acción verbal' },
+          { id: 'b', label: 'Una palabra que niega la acción verbal' },
+          { id: 'c', label: 'Un adjetivo que va antes del sustantivo' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c11-q2',
+        prompt: '¿Qué significa “Ani reke”?',
+        options: [
+          { id: 'a', label: 'Todavía no duermo' },
+          { id: 'b', label: 'No duermas' },
+          { id: 'c', label: 'Puede ser que duerma' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c11-q3',
+        prompt: '¿Cuál es la negación simple “no”?',
+        options: [
+          { id: 'a', label: 'Nahániri' },
+          { id: 'b', label: 'Héê' },
+          { id: 'c', label: 'Upéicha' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c11-q4',
+        prompt: '¿Qué significa Héê?',
+        options: [
+          { id: 'a', label: 'De ninguna manera' },
+          { id: 'b', label: 'Sí' },
+          { id: 'c', label: 'Todavía no' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c11-q5',
+        prompt: '¿Qué expresa Ikatu?',
+        options: [
+          { id: 'a', label: 'Puede ser' },
+          { id: 'b', label: 'Es verdad' },
+          { id: 'c', label: 'No (prohibitivo)' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c11-q6',
+        prompt: "¿Cómo se traduce “Ore romba'apose che ru ndive”?",
+        options: [
+          { id: 'a', label: 'Yo quiero trabajar con mi padre' },
+          { id: 'b', label: 'Nosotros/as (excl.) queremos trabajar con mi padre' },
+          { id: 'c', label: 'Ustedes trabajan con mi padre' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c11-q7',
+        prompt: '¿Cómo se dice “¿Con quién vivís?”?',
+        options: [
+          { id: 'a', label: 'Moõpa reiko' },
+          { id: 'b', label: 'Mávandipa reiko' },
+          { id: 'c', label: "Mba'éichapa nderéra" },
+        ],
+        correctOptionId: 'b',
+      },
+    ],
+  }
 }
 
 export function getQuiz(classSlug: string) {
