@@ -593,7 +593,7 @@ export const quizzes: Record<string, ClassQuiz> = {
         correctOptionId: 'c',
       },
     ],
-  },,
+  },
   'clase-11': {
     classSlug: 'clase-11',
     title: 'Autoevaluación — Clase 11',
