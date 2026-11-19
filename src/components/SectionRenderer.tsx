@@ -333,6 +333,44 @@ export function SectionRenderer({ section }: { section: Section }) {
         </section>
       )
 
+    case 'cards':
+      return (
+        <section className="section-block cards-block">
+          <div className="section-heading">
+            <h2>{section.title}</h2>
+            {section.intro ? <p className="lede">{section.intro}</p> : null}
+          </div>
+          <div className="info-cards">
+            {section.items.map((card, index) => (
+              <article
+                key={`${card.title ?? 'card'}-${index}`}
+                className={`info-card tone-${card.tone ?? 'mint'}`}
+              >
+                {card.title ? <h3>{card.title}</h3> : null}
+                {card.body ? <p>{card.body}</p> : null}
+                {card.parts && card.parts.length > 0 ? (
+                  <div className="info-card-parts">
+                    {card.parts.map((part) => (
+                      <div key={`${part.label}-${part.detail}`} className={`info-part tone-${part.tone ?? 'river'}`}>
+                        <strong>{part.label}</strong>
+                        <span>{part.detail}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+                {card.items && card.items.length > 0 ? (
+                  <ul>
+                    {card.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+
     default:
       return null
   }

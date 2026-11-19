@@ -45,6 +45,18 @@ export type Section =
       intro?: string
       groups: { title: string; items: string[] }[]
     }
+  | {
+      type: 'cards'
+      title: string
+      intro?: string
+      items: {
+        title?: string
+        body?: string
+        items?: string[]
+        tone?: 'mint' | 'sun' | 'leaf' | 'rose' | 'violet' | 'river' | 'cream'
+        parts?: { label: string; detail: string; tone?: 'river' | 'rose' | 'violet' | 'leaf' | 'sun' }[]
+      }[]
+    }
 
 export type ClassLesson = {
   id: number
@@ -2044,12 +2056,68 @@ export const classes: ClassLesson[] = [
         ],
       },
       {
-        type: 'rules',
-        title: 'Adverbio de negación',
-        rules: [
+        type: 'cards',
+        title: 'Adverbios en guaraní',
+        intro: 'Negación y afirmación — resumen en cards.',
+        items: [
           {
-            title: 'Qué es',
-            body: 'Palabra que se utiliza para negar la acción verbal. Ejemplo: Ani reke. (No duermas.)',
+            title: 'Definición',
+            body: 'Adverbio = palabra que se utiliza para NEGAR o AFIRMAR la acción verbal.',
+            tone: 'violet',
+          },
+          {
+            title: 'Adverbio de negación',
+            tone: 'rose',
+            items: [
+              'Nahániri — no (negación simple)',
+              'Anichéne — no (dudoso)',
+              'Ani / Anive — no (prohibitivo)',
+              "Mba'evéicharõ — de ninguna manera",
+              "Ne'ĩrã — todavía / aún no",
+            ],
+          },
+          {
+            title: 'Adverbio de afirmación',
+            tone: 'leaf',
+            items: [
+              'Héẽ — sí',
+              'Néi — bueno / acepto',
+              'Ikatu — puede ser',
+              'Upéicha — así es',
+              'Aveí — sí / también',
+              'Oĩma — de acuerdo',
+              'Añete — es verdad',
+            ],
+          },
+          {
+            title: 'Ejemplo del libro',
+            body: 'Ani reke. = No duermas.',
+            tone: 'cream',
+          },
+          {
+            title: 'Para recordar',
+            tone: 'sun',
+            items: [
+              'Ani = NO, no lo hagas',
+              'Héẽ = SÍ',
+              'Nahániri = NO simple',
+            ],
+          },
+          {
+            title: 'Tembiaporã 1 — Sustantivos de la imagen',
+            tone: 'mint',
+            items: [
+              'Yvyra = árbol',
+              'Panambi = mariposa',
+              'Arai = nube',
+              'Kuarahy = sol',
+              'Kavaju = caballo',
+              'Vaka = vaca',
+              'Kure = cerdo',
+              'Jagua = perro',
+              'Yvoty = flor',
+              'Y / Ypa = agua / laguna',
+            ],
           },
         ],
       },
@@ -2071,25 +2139,15 @@ export const classes: ClassLesson[] = [
         items: [{ guaraní: 'Ani reke.', español: 'No duermas.', detail: 'Ani = prohibitivo' }],
       },
       {
-        type: 'rules',
-        title: 'Adverbio de afirmación',
-        rules: [
-          {
-            title: 'Qué es',
-            body: 'Palabra que se utiliza para afirmar la acción verbal.',
-          },
-        ],
-      },
-      {
         type: 'vocab',
         title: 'Adverbios de afirmación',
         audio: '/audio/adverbios-afirmacion.mp4',
         items: [
-          { guaraní: 'Héê', español: 'sí' },
+          { guaraní: 'Héẽ / Héê', español: 'sí' },
           { guaraní: 'Néi', español: 'bueno / acepto' },
           { guaraní: 'Ikatu', español: 'puede ser' },
           { guaraní: 'Upéicha', español: 'así es' },
-          { guaraní: 'Avei', español: 'sí / también' },
+          { guaraní: 'Aveí / Avei', español: 'sí / también' },
           { guaraní: 'Oĩma', español: 'de acuerdo' },
           { guaraní: 'Añete', español: 'es verdad' },
         ],
@@ -2117,8 +2175,7 @@ export const classes: ClassLesson[] = [
               { prompt: 'Perros', answers: ['Jagua'] },
               { prompt: 'Cerdos / chanchos', answers: ['Kure'] },
               { prompt: 'Flores', answers: ['Yvoty'] },
-              { prompt: 'Agua / charco', answers: ['Y'] },
-              { prompt: 'Nenúfares / flores de agua', answers: ['Yrupẽ'] },
+              { prompt: 'Agua / laguna', answers: ['Y / Ypa'] },
             ],
           },
         ],
@@ -2209,9 +2266,152 @@ export const classes: ClassLesson[] = [
           { prompt: '1', answer: 'Nahániri — no (negación simple)' },
           { prompt: '2', answer: 'Ani / anive — no (prohibitivo)' },
           { prompt: '3', answer: "Ne'ĩrã — todavía / aún no" },
-          { prompt: '4', answer: 'Héê — sí' },
+          { prompt: '4', answer: 'Héẽ / Héê — sí' },
           { prompt: '5', answer: 'Ikatu — puede ser' },
           { prompt: '6', answer: 'Añete — es verdad' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 12,
+    slug: 'clase-12',
+    title: 'Clase 12',
+    date: 'Lunes 16 de noviembre de 2026',
+    subtitle: 'Repaso de posposiciones y el sintagma',
+    summary:
+      'Clase presencial: analizamos y traducimos la tarea de la clase 10, leemos un texto narrativo y estudiamos el sintagma (función y mutabilidad) en guaraní y castellano.',
+    themes: ['Posposiciones', 'Traducción', 'Sintagma', 'Mutabilidad'],
+    sections: [
+      {
+        type: 'text',
+        title: 'Clase presencial',
+        body: [
+          'Analizamos la tarea de la clase 10: oraciones con posposiciones y un texto para traducir.',
+          'Después trabajamos el sintagma: unidad con función dentro de la oración y capacidad de cambiar de posición (mutabilidad).',
+        ],
+      },
+      {
+        type: 'figure',
+        title: 'Material de clase — página 1',
+        image: '/clase12/page-1.png',
+        caption: 'PDF presencial: oraciones y texto Justina Romero.',
+      },
+      {
+        type: 'exercise',
+        title: 'a) Oraciones de la clase 10 — traducidas',
+        prompt: 'Analizá atentamente las oraciones y traducilas al español.',
+        items: [
+          {
+            prompt: "Ha'e oguapy apyka ári che kupépe",
+            answer: 'Él se sienta sobre la silla detrás de mí.',
+          },
+          {
+            prompt: "Ajahu akaru hãguã che memby ndive.",
+            answer: 'Me baño para comer / almorzar con mi hijo/a.',
+          },
+          {
+            prompt: "Oguatákuri hikuái mbo'ehao gotyo.",
+            answer: 'Ellos caminaron hacia la escuela.',
+          },
+          {
+            prompt: "Amba'apo ko'ẽ guive pytũ meve.",
+            answer: 'Trabajo desde el amanecer hasta la noche.',
+          },
+          {
+            prompt: "Mbarakaja oke tupa ári ha jagua oñeno yvyraguýpe",
+            answer: 'El gato duerme sobre la cama y el perro se acuesta debajo del árbol.',
+          },
+          {
+            prompt: 'Jaguarete ojupi yvyráre.',
+            answer: 'El yaguareté sube por el árbol.',
+          },
+          {
+            prompt: 'Che ru ou tape rupi.',
+            answer: 'Mi padre viene por el camino.',
+          },
+        ],
+      },
+      {
+        type: 'solved',
+        title: 'b) Texto — traducido',
+        intro: 'Leé el texto, analizalo y traducilo al español. Respuesta del PDF:',
+        groups: [
+          {
+            title: 'Texto en guaraní',
+            items: [
+              {
+                prompt: 'Original',
+                answers: [
+                  "Che cheréra Justina ha che rerajoapy Romero. Che areko 45 ary. Che Córdoba-gua ha aiko Quilmes-pe, che membykuña, che membykuimba'e ha che ména ndive. Kuehe amba'apo heta rire, aguapy yvyraguýpe. Ko árape ajapóta tembi'u akaru hağua mitãnguérandi. Mesa ári amoĩma kypa, kyse ha ña'ẽmbe ha avei ajapóta chipa che sýpe ğuarã. Upéi asẽta aguata plaza gotyo. Ka'aru putũme amoĩta y tata ári akay'u hãguã pyhare peve.",
+                ],
+              },
+              {
+                prompt: 'Traducción',
+                answers: [
+                  'Yo me llamo Justina y mi apellido es Romero. Yo tengo 45 años. Soy de Córdoba y vivo en Quilmes, con mi hija, mi hijo y mi marido. Ayer después de trabajar mucho, me senté debajo del árbol. Hoy / en este día haré comida para comer con los niños. Sobre la mesa ya puse el tenedor, el cuchillo y el plato y también haré chipa para mi madre. Luego saldré a caminar hacia la plaza. Al anochecer pondré agua sobre el fuego para tomar mate hasta la noche.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'figure',
+        title: 'Material de clase — página 2',
+        image: '/clase12/page-2.png',
+        caption: 'Traducción del texto y teoría del sintagma.',
+      },
+      {
+        type: 'cards',
+        title: 'El sintagma',
+        intro: 'En guaraní y en castellano — resumen en cards.',
+        items: [
+          {
+            title: 'Definición',
+            body: 'Es una palabra o un conjunto de palabras que cumple una FUNCIÓN específica dentro de una oración.',
+            tone: 'mint',
+          },
+          {
+            title: 'Mutabilidad',
+            body: 'Los sintagmas pueden CAMBIAR DE POSICIÓN dentro de la oración SIN cambiar el significado ni la función. A esto se lo llama MUTABILIDAD.',
+            tone: 'sun',
+          },
+          {
+            title: 'Ejemplo: María okaru ógape.',
+            body: 'María come en casa. En esta oración identificamos tres sintagmas:',
+            tone: 'cream',
+            parts: [
+              { label: 'María', detail: "Téra (nombre) — SUSTANTIVO", tone: 'river' },
+              { label: 'Okaru', detail: "Ñe'ẽtéva — VERBO", tone: 'rose' },
+              { label: 'Ógape', detail: 'Moĩmbaha — COMPLEMENTO', tone: 'violet' },
+            ],
+          },
+          {
+            title: 'Podemos cambiar el orden y sigue diciendo lo mismo',
+            tone: 'leaf',
+            items: [
+              'María okaru ógape',
+              'Okaru ógape María',
+              'María ógape okaru',
+              'Ógape María okaru',
+              'Okaru María ógape',
+              'Ógape okaru María',
+            ],
+          },
+          {
+            title: 'Para recordar',
+            body: 'Los sintagmas tienen autonomía y pueden cambiar de posición sin alterar el mensaje.',
+            tone: 'mint',
+          },
+          {
+            title: 'Glosario rápido',
+            tone: 'cream',
+            items: [
+              'Sintagma = palabra o grupo con una función',
+              'Mutabilidad = puedo moverlo',
+            ],
+          },
         ],
       },
     ],

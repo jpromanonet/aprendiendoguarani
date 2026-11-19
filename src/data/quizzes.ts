@@ -671,7 +671,85 @@ export const quizzes: Record<string, ClassQuiz> = {
         correctOptionId: 'b',
       },
     ],
-  }
+  },
+  'clase-12': {
+    classSlug: 'clase-12',
+    title: 'Autoevaluación — Clase 12',
+    maxAttempts: DEFAULT_QUIZ_MAX_ATTEMPTS,
+    passScore: QUIZ_PASS_SCORE,
+    questions: [
+      {
+        id: 'c12-q1',
+        prompt: '¿Qué es un sintagma?',
+        options: [
+          { id: 'a', label: 'Solo un verbo conjugado' },
+          { id: 'b', label: 'Una palabra o conjunto de palabras con una función específica en la oración' },
+          { id: 'c', label: 'Una letra del alfabeto guaraní' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c12-q2',
+        prompt: '¿Qué es la mutabilidad de los sintagmas?',
+        options: [
+          { id: 'a', label: 'Cambiar el significado al mover las palabras' },
+          { id: 'b', label: 'Poder cambiar de posición sin cambiar el significado ni la función' },
+          { id: 'c', label: 'Eliminar el complemento de la oración' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c12-q3',
+        prompt: 'En “María okaru ógape”, ¿qué función cumple Okaru?',
+        options: [
+          { id: 'a', label: 'Sustantivo (téra)' },
+          { id: 'b', label: 'Verbo (ñe’ẽtéva)' },
+          { id: 'c', label: 'Complemento (moĩmbaha)' },
+        ],
+        correctOptionId: 'b',
+      },
+      {
+        id: 'c12-q4',
+        prompt: '¿Qué significa “Ógape” en el ejemplo?',
+        options: [
+          { id: 'a', label: 'Complemento — en casa' },
+          { id: 'b', label: 'Verbo — comer' },
+          { id: 'c', label: 'Sustantivo — María' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c12-q5',
+        prompt: "¿Cómo se traduce “Ha'e oguapy apyka ári che kupépe”?",
+        options: [
+          { id: 'a', label: 'Él se sienta sobre la silla detrás de mí.' },
+          { id: 'b', label: 'Yo me baño con mi hijo.' },
+          { id: 'c', label: 'El gato duerme sobre la cama.' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c12-q6',
+        prompt: '¿Cuál de estas oraciones conserva el mismo significado que “María okaru ógape”?',
+        options: [
+          { id: 'a', label: 'Ógape okaru María' },
+          { id: 'b', label: 'María ndokarúi ógape' },
+          { id: 'c', label: 'María oke ógape' },
+        ],
+        correctOptionId: 'a',
+      },
+      {
+        id: 'c12-q7',
+        prompt: 'En el texto de Justina, ¿dónde vive?',
+        options: [
+          { id: 'a', label: 'En Córdoba con su madre' },
+          { id: 'b', label: 'En Quilmes con su hija, su hijo y su marido' },
+          { id: 'c', label: 'En la plaza hasta la noche' },
+        ],
+        correctOptionId: 'b',
+      },
+    ],
+  },
 }
 
 export function getQuiz(classSlug: string) {
