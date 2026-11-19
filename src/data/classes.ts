@@ -2285,7 +2285,7 @@ export const classes: ClassLesson[] = [
     sections: [
       {
         type: 'text',
-        title: 'Clase presencial',
+        title: 'Clase 12',
         body: [
           'Analizamos la tarea de la clase 10: oraciones con posposiciones y un texto para traducir.',
           'Después trabajamos el sintagma: unidad con función dentro de la oración y capacidad de cambiar de posición (mutabilidad).',
