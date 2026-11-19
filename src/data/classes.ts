@@ -2048,14 +2048,6 @@ export const classes: ClassLesson[] = [
     themes: ['Negación', 'Afirmación', 'Adverbios', 'Tarea'],
     sections: [
       {
-        type: 'text',
-        title: 'Clase asincrónica',
-        body: [
-          'En esta clase trabajamos adverbios de negación y de afirmación: palabras que niegan o afirman la acción del verbo.',
-          'Después hay una tembiaporã con imagen, oraciones y un dictado.',
-        ],
-      },
-      {
         type: 'cards',
         title: 'Adverbios en guaraní',
         intro: 'Negación y afirmación — resumen en cards.',
@@ -2283,14 +2275,6 @@ export const classes: ClassLesson[] = [
       'Clase presencial: analizamos y traducimos la tarea de la clase 10, leemos un texto narrativo y estudiamos el sintagma (función y mutabilidad) en guaraní y castellano.',
     themes: ['Posposiciones', 'Traducción', 'Sintagma', 'Mutabilidad'],
     sections: [
-      {
-        type: 'text',
-        title: 'Clase 12',
-        body: [
-          'Analizamos la tarea de la clase 10: oraciones con posposiciones y un texto para traducir.',
-          'Después trabajamos el sintagma: unidad con función dentro de la oración y capacidad de cambiar de posición (mutabilidad).',
-        ],
-      },
       {
         type: 'text',
         title: 'Analizamos la tarea de la clase 10',
