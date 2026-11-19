@@ -2292,15 +2292,16 @@ export const classes: ClassLesson[] = [
         ],
       },
       {
-        type: 'figure',
-        title: 'Material de clase — página 1',
-        image: '/clase12/page-1.png',
-        caption: 'PDF presencial: oraciones y texto Justina Romero.',
+        type: 'text',
+        title: 'Analizamos la tarea de la clase 10',
+        body: [
+          'Leé atentamente cada oración en guaraní y su traducción al español. Reforzamos las posposiciones vistas en la clase anterior.',
+        ],
       },
       {
         type: 'exercise',
-        title: 'a) Oraciones de la clase 10 — traducidas',
-        prompt: 'Analizá atentamente las oraciones y traducilas al español.',
+        title: 'a) Oraciones — traducidas',
+        prompt: 'Analizá las oraciones y traducilas al español.',
         items: [
           {
             prompt: "Ha'e oguapy apyka ári che kupépe",
@@ -2333,39 +2334,29 @@ export const classes: ClassLesson[] = [
         ],
       },
       {
-        type: 'solved',
-        title: 'b) Texto — traducido',
-        intro: 'Leé el texto, analizalo y traducilo al español. Respuesta del PDF:',
-        groups: [
+        type: 'text',
+        title: 'b) Texto para reforzar',
+        body: [
+          "Che cheréra Justina ha che rerajoapy Romero. Che areko 45 ary. Che Córdoba-gua ha aiko Quilmes-pe, che membykuña, che membykuimba'e ha che ména ndive. Kuehe amba'apo heta rire, aguapy yvyraguýpe.",
+          "Ko árape ajapóta tembi'u akaru hağua mitãnguérandi. Mesa ári amoĩma kypa, kyse ha ña'ẽmbe ha avei ajapóta chipa che sýpe ğuarã. Upéi asẽta aguata plaza gotyo. Ka'aru putũme amoĩta y tata ári akay'u hãguã pyhare peve.",
+        ],
+      },
+      {
+        type: 'exercise',
+        title: 'b) Traducción del texto',
+        prompt: 'Leé el texto, analizalo y traducilo al español.',
+        items: [
           {
-            title: 'Texto en guaraní',
-            items: [
-              {
-                prompt: 'Original',
-                answers: [
-                  "Che cheréra Justina ha che rerajoapy Romero. Che areko 45 ary. Che Córdoba-gua ha aiko Quilmes-pe, che membykuña, che membykuimba'e ha che ména ndive. Kuehe amba'apo heta rire, aguapy yvyraguýpe. Ko árape ajapóta tembi'u akaru hağua mitãnguérandi. Mesa ári amoĩma kypa, kyse ha ña'ẽmbe ha avei ajapóta chipa che sýpe ğuarã. Upéi asẽta aguata plaza gotyo. Ka'aru putũme amoĩta y tata ári akay'u hãguã pyhare peve.",
-                ],
-              },
-              {
-                prompt: 'Traducción',
-                answers: [
-                  'Yo me llamo Justina y mi apellido es Romero. Yo tengo 45 años. Soy de Córdoba y vivo en Quilmes, con mi hija, mi hijo y mi marido. Ayer después de trabajar mucho, me senté debajo del árbol. Hoy / en este día haré comida para comer con los niños. Sobre la mesa ya puse el tenedor, el cuchillo y el plato y también haré chipa para mi madre. Luego saldré a caminar hacia la plaza. Al anochecer pondré agua sobre el fuego para tomar mate hasta la noche.',
-                ],
-              },
-            ],
+            prompt: 'Traducción completa',
+            answer:
+              'Yo me llamo Justina y mi apellido es Romero. Yo tengo 45 años. Soy de Córdoba y vivo en Quilmes, con mi hija, mi hijo y mi marido. Ayer después de trabajar mucho, me senté debajo del árbol. Hoy / en este día haré comida para comer con los niños. Sobre la mesa ya puse el tenedor, el cuchillo y el plato y también haré chipa para mi madre. Luego saldré a caminar hacia la plaza. Al anochecer pondré agua sobre el fuego para tomar mate hasta la noche.',
           },
         ],
       },
       {
-        type: 'figure',
-        title: 'Material de clase — página 2',
-        image: '/clase12/page-2.png',
-        caption: 'Traducción del texto y teoría del sintagma.',
-      },
-      {
         type: 'cards',
         title: 'El sintagma',
-        intro: 'En guaraní y en castellano — resumen en cards.',
+        intro: 'En guaraní y en castellano.',
         items: [
           {
             title: 'Definición',
